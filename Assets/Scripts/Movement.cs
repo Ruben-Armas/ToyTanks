@@ -20,11 +20,11 @@ public class Movement : MonoBehaviour
     private void FixedUpdate()
     {
         // MOVIMIENTO DEL PERSONAJE
-        /* Mueve hacia delante, no al forward del objeto
+        //Mueve hacia delante, no al forward del objeto
             //Para convertir a Vector2
             Vector3 velocity = new Vector3(desiredMovement.x, 0, desiredMovement.y);
-            _rigidbody.velocity = velocity * (maxSpeed * Time.fixedDeltaTime);*/
-
+            _rigidbody.velocity = velocity * (maxSpeed * Time.fixedDeltaTime);
+ /*
         // Movimiento hacia delante (forward)
         Vector3 forwardVelocity = _rigidbody.transform.forward * desiredMovement.y;
         // Movimiento lateral
@@ -32,6 +32,6 @@ public class Movement : MonoBehaviour
         // Sumamos los vectores (normalizados para que no vaya más rápido en diagonal)
         //  -> dará el vector|dirección resultante
         _rigidbody.velocity = (forwardVelocity + strafeVelocity).normalized * (maxSpeed * Time.fixedDeltaTime);
-
+*/
     }
 }
