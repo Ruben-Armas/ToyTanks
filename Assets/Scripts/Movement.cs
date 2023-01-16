@@ -6,10 +6,12 @@ using UnityEngine;
 public class Movement : MonoBehaviour
 {
     public float maxSpeed;
+    public float rotationSpeed;
     public Vector2 desiredMovement;
 
     private Rigidbody _rigidbody;
     private float _rotationY;
+    private Quaternion _lastRotation;
 
     //También funcionaría con Awake, pero puede hacer que al inicio de la partida se para un momento mientras se configura todo
     void OnValidate()
@@ -17,21 +19,53 @@ public class Movement : MonoBehaviour
         _rigidbody = GetComponent<Rigidbody>();
     }
 
+    private void Start()
+    {
+        //Soluciona que el centro de masas no está centrado en el rigidbody
+        _rigidbody.centerOfMass = Vector3.zero;
+        _rigidbody.inertiaTensorRotation = Quaternion.identity;
+    }
+
     private void FixedUpdate()
     {
         // MOVIMIENTO DEL PERSONAJE
-        //Mueve hacia delante, no al forward del objeto
-            //Para convertir a Vector2
-            Vector3 velocity = new Vector3(desiredMovement.x, 0, desiredMovement.y);
-            _rigidbody.velocity = velocity * (maxSpeed * Time.fixedDeltaTime);
- /*
-        // Movimiento hacia delante (forward)
-        Vector3 forwardVelocity = _rigidbody.transform.forward * desiredMovement.y;
-        // Movimiento lateral
-        Vector3 strafeVelocity = _rigidbody.transform.right * desiredMovement.x;
-        // Sumamos los vectores (normalizados para que no vaya más rápido en diagonal)
-        //  -> dará el vector|dirección resultante
-        _rigidbody.velocity = (forwardVelocity + strafeVelocity).normalized * (maxSpeed * Time.fixedDeltaTime);
-*/
+        //Mueve hacia delante, no al forward del objeto            
+        Vector3 velocity = new Vector3(desiredMovement.x, 0, desiredMovement.y);    //Para convertir a Vector2
+        Vector3 vel = velocity.normalized * (maxSpeed * Time.fixedDeltaTime);
+        _rigidbody.velocity = vel;
+
+        
+        //Rota el tanque al forward de la dirección del movimiento
+        //Vector3 targetOrientation = _rigidbody.velocity.normalized;
+        Quaternion targetRotation = Quaternion.LookRotation(vel);
+
+        Debug.Log("vel -->" + vel.normalized);
+        Debug.Log("rot -->" + _rigidbody.rotation);
+
+        //Solo rota cuando te mueves
+        if (vel.magnitude != 0)
+        {
+            _rigidbody.rotation = Quaternion.RotateTowards(
+            _rigidbody.rotation, targetRotation, rotationSpeed * Time.deltaTime);
+            
+            if (_rigidbody.rotation.Equals(vel))
+            {
+                _rigidbody.velocity = vel;
+            }
+        }
+        
+        //Instantáneo
+        //_rigidbody.rotation = Quaternion.LookRotation(velocity);
+
+
+        /*
+               // Movimiento hacia delante (forward)
+               Vector3 forwardVelocity = _rigidbody.transform.forward * desiredMovement.y;
+               // Movimiento lateral
+               Vector3 strafeVelocity = _rigidbody.transform.right * desiredMovement.x;
+               // Sumamos los vectores (normalizados para que no vaya más rápido en diagonal)
+               //  -> dará el vector|dirección resultante
+               _rigidbody.velocity = (forwardVelocity + strafeVelocity).normalized * (maxSpeed * Time.fixedDeltaTime);
+       */
     }
 }
