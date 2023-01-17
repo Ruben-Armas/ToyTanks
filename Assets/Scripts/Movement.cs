@@ -29,26 +29,25 @@ public class Movement : MonoBehaviour
     private void FixedUpdate()
     {
         // MOVIMIENTO DEL PERSONAJE
-        //Mueve hacia delante, no al forward del objeto            
+        //Mueve según el mundo, no al forward del objeto            
         Vector3 velocity = new Vector3(desiredMovement.x, 0, desiredMovement.y);    //Para convertir a Vector2
         Vector3 vel = velocity.normalized * (maxSpeed * Time.fixedDeltaTime);
-        _rigidbody.velocity = vel;
 
         
         //Rota el tanque al forward de la dirección del movimiento
         //Vector3 targetOrientation = _rigidbody.velocity.normalized;
         Quaternion targetRotation = Quaternion.LookRotation(vel);
 
-        Debug.Log("vel -->" + vel.normalized);
-        Debug.Log("rot -->" + _rigidbody.rotation);
-
-        //Solo rota cuando te mueves
+        //Solo rota cuando te mueves y no se reinicia la rotación
         if (vel.magnitude != 0)
         {
+            //Roto en la dirección de la velocidad
             _rigidbody.rotation = Quaternion.RotateTowards(
-            _rigidbody.rotation, targetRotation, rotationSpeed * Time.deltaTime);
-            
-            if (_rigidbody.rotation.Equals(vel))
+                _rigidbody.rotation, targetRotation, rotationSpeed * Time.deltaTime);
+
+            //Muevo si - (rotación)el forward y la dirección a la que se mueve(velocidad) están alineados - dentro de un rango 
+            float dot = Vector3.Dot(transform.forward, velocity.normalized);
+            if (dot > 0.9f)
             {
                 _rigidbody.velocity = vel;
             }
