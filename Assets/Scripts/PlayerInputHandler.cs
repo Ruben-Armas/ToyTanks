@@ -4,19 +4,19 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 
 [RequireComponent(typeof(Movement))]
-//[RequireComponent(typeof(HeadRotation))]
+[RequireComponent(typeof(Aim))]
 public class PlayerInputHandler : MonoBehaviour
 {
-    //public float turnSensitivity;
+    public float turnSensitivity;
     //public Weapon weapon;
 
     private Movement _movement;
-    //private HeadRotation _headRotation;
+    private Aim _aim;
 
     private void OnValidate()
     {
         _movement = GetComponent<Movement>();
-        //_headRotation = GetComponent<HeadRotation>();
+        _aim = GetComponent<Aim>();
     }
     /*
     private void Awake()
@@ -41,14 +41,10 @@ public class PlayerInputHandler : MonoBehaviour
         //Debug.Log($"Walk{movement}");
     }
 
-    /*
     public void OnLook(InputValue value)
     {
         Vector2 look = value.Get<Vector2>();
-        _movement.desiredLook = look * turnSensitivity;     // Mira derecha|izquierda
-        _headRotation.desiredLook = look * turnSensitivity; // Mira arriba|abajo
+        _aim.desiredLook = look * turnSensitivity;     // Mira derecha|izquierda
         //Debug.Log($"Look{look}");
     }
-    */
 }
-//3:26
