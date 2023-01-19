@@ -8,7 +8,7 @@ using UnityEngine.InputSystem;
 public class PlayerInputHandler : MonoBehaviour
 {
     public float turnSensitivity;
-    //public Weapon weapon;
+    public Weapon weapon;
     public Transform turret;
     public float lookSpeed;
     public Vector3 desiredLook;
@@ -29,16 +29,16 @@ public class PlayerInputHandler : MonoBehaviour
         Cursor.lockState = CursorLockMode.Locked;
     }
     */
-    /*
+    
     public void OnFire(InputValue value)
     {
         if (weapon != null)
         {
             weapon.Fire();
-            Debug.Log("PewPew");
+            //Debug.Log("PewPew");
         }
     }
-    */
+
     public void OnMove(InputValue value)
     {
         Vector2 movement = value.Get<Vector2>();
@@ -55,7 +55,7 @@ public class PlayerInputHandler : MonoBehaviour
         Vector2 towardsMouse = (mousePosition - tankScreenPosition).normalized;
         //Apunta el forward en los ejes X Z
         turret.forward = new Vector3 (towardsMouse.x, 0, towardsMouse.y);     // Mira derecha|izquierda
-        Debug.Log($"Look{mousePosition}");
+        //Debug.Log($"Look{mousePosition}");
     }
 
     public void OnLookJoystick(InputValue value)
