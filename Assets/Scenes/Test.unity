@@ -5657,6 +5657,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   turnSensitivity: 10
+  turret: {fileID: 1129607179}
+  _movement: {fileID: 567745482}
+  _aim: {fileID: 0}
 --- !u!114 &567745482
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5677,20 +5680,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 1676515232765691307, guid: ae98f3b2f9fb19e4dba07742ad8d6f4d, type: 3}
   m_PrefabInstance: {fileID: 567745467}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &567745488
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 567745473}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 45217d4333fb47840ae0c03ff450ef07, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  desiredLook: {x: 0, y: 0}
-  rotationSpeed: 100
 --- !u!1 &571872902
 GameObject:
   m_ObjectHideFlags: 0
@@ -11119,25 +11108,11 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1123577097}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
---- !u!1 &1129607174 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 2059808664247669003, guid: ae98f3b2f9fb19e4dba07742ad8d6f4d, type: 3}
+--- !u!4 &1129607179 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 2461871828900276643, guid: ae98f3b2f9fb19e4dba07742ad8d6f4d, type: 3}
   m_PrefabInstance: {fileID: 567745467}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &1129607178
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1129607174}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 45217d4333fb47840ae0c03ff450ef07, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  desiredLook: {x: 0, y: 0}
-  rotationSpeed: 100
 --- !u!1 &1141893972
 GameObject:
   m_ObjectHideFlags: 0

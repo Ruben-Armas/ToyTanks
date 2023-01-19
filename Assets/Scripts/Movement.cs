@@ -36,11 +36,11 @@ public class Movement : MonoBehaviour
         
         //Rota el tanque al forward de la dirección del movimiento
         //Vector3 targetOrientation = _rigidbody.velocity.normalized;
-        Quaternion targetRotation = Quaternion.LookRotation(vel);
 
         //Solo rota cuando te mueves y no se reinicia la rotación
         if (vel.magnitude != 0)
         {
+            Quaternion targetRotation = Quaternion.LookRotation(vel);
             //Roto en la dirección de la velocidad
             _rigidbody.rotation = Quaternion.RotateTowards(
                 _rigidbody.rotation, targetRotation, rotationSpeed * Time.deltaTime);
@@ -51,8 +51,7 @@ public class Movement : MonoBehaviour
             {
                 _rigidbody.velocity = vel;
             }
-        }
-        
+        }        
         //Instantáneo
         //_rigidbody.rotation = Quaternion.LookRotation(velocity);
 
