@@ -23,7 +23,9 @@ public class Bullet : MonoBehaviour
     private void OnCollisionEnter(Collision collision)
     {
         // Comprueba si la colisión es con una pared
-        if (collision.gameObject.CompareTag("Wall"))
+        //if (collision.collider.tag == "Wall") //Evitamos usar los Tags
+        //if (collision.gameObject.CompareTag("Wall"))
+        if (collision.collider.GetComponent<Wall>() != null)
         {
             Debug.Log("Rebote");
             // Calcular la dirección de rebote
@@ -35,4 +37,17 @@ public class Bullet : MonoBehaviour
         }
         Debug.Log("NO  Rebote");
     }
+
+    /*
+    private void OnCollisionEnter(Collision collision)
+    {
+        //if (collision.collider.tag == "Player") //Evitamos usar los Tags
+
+        if (collision.collider.IsPlayer())   //Método de extensión
+        //if (collision.collider.GetComponent<PeggleBall>() != null)    //Lo mismo que el anterior
+        {
+            if (!isActive)
+                Activate();
+        }
+    }*/
 }
