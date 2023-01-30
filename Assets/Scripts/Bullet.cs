@@ -25,7 +25,8 @@ public class Bullet : MonoBehaviour
         // Comprueba si la colisión es con una pared
         //if (collision.collider.tag == "Wall") //Evitamos usar los Tags
         //if (collision.gameObject.CompareTag("Wall"))
-        if (collision.collider.GetComponent<Wall>() != null)
+        if (collision.collider.GetComponentInParent<Wall>() != null)
+        //if (collision.collider.GetComponent<Wall>() != null)
         {
             Debug.Log("Rebote");
             // Calcular la dirección de rebote
@@ -35,7 +36,7 @@ public class Bullet : MonoBehaviour
             //rigidbody.AddForce(reflection * bounciness, ForceMode.Impulse);
             rigidbody.velocity = reflection * speed;
         }
-        Debug.Log("NO  Rebote");
+        //Debug.Log("NO  Rebote");
     }
 
     /*

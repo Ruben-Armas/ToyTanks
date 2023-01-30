@@ -178,7 +178,6 @@ GameObject:
   - component: {fileID: 870269047198334279}
   - component: {fileID: 6529369819607183798}
   - component: {fileID: 9185978711490273645}
-  - component: {fileID: 9067837405951388383}
   - component: {fileID: 1970321189821872273}
   m_Layer: 0
   m_Name: TankFree_Yel
@@ -253,26 +252,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!95 &9067837405951388383
-Animator:
-  serializedVersion: 4
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1533329969548708598}
-  m_Enabled: 0
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 90b88b72b71a8554cbd91e91d91ba5c5, type: 2}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_StabilizeFeet: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!64 &1970321189821872273
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -509,7 +488,7 @@ Transform:
   - {fileID: 2447267017990963970}
   - {fileID: 1970321188507996016}
   m_Father: {fileID: 0}
-  m_RootOrder: 14
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1970321189013645877
 MonoBehaviour:

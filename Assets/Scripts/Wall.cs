@@ -4,5 +4,6 @@ using UnityEngine;
 
 public class Wall : MonoBehaviour
 {
-    public Rigidbody rb;
+    //public Rigidbody rb;
+    public BoxCollider bc;
 }

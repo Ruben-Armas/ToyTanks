@@ -53,7 +53,7 @@ public class Movement : MonoBehaviour
             //--Muevo si - (rotación)el forward y la dirección a la que se mueve(velocidad) están alineados - dentro de un rango 
             float dot = Vector3.Dot(transform.forward, velocity.normalized);    // 1 forward y velocidad alineada | 0 perpendicular
             float dotRight = Vector3.Dot(transform.right, velocity.normalized); // + derecha | - izquierda
-            Debug.Log($"dotR --> {dotRight}");
+            //Debug.Log($"dotR --> {dotRight}");
             if (dot > 0.9f)
             {
                 _rigidbody.velocity = vel;  //--MUEVE--
