@@ -343,6 +343,7 @@ GameObject:
   - component: {fileID: 5908275326837260196}
   - component: {fileID: 2791984520688850710}
   - component: {fileID: 2485194830561986595}
+  - component: {fileID: 3992228515418520011}
   m_Layer: 0
   m_Name: TankFree_Tower
   m_TagString: Untagged
@@ -429,7 +430,21 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   muzzle: {fileID: 7484836543809522953}
-  bulletPrefab: {fileID: 1277677172309477101, guid: f00bf2b00abdb7d49a13f9252ecb8d93, type: 3}
+  bulletPrefab: {fileID: 648091011080755866, guid: a4988ce98215dcd4fbda7bff588026b7, type: 3}
+--- !u!64 &3992228515418520011
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4897477919216371861}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 4
+  m_Convex: 1
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 2212350337115244503, guid: 3d210b2be9d4b9144b53828dfc2e73e3, type: 3}
 --- !u!1 &5306381852953226410
 GameObject:
   m_ObjectHideFlags: 0
@@ -722,6 +737,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7874106867515088689}
   - component: {fileID: 4752680150627253953}
+  - component: {fileID: 2416239678762388833}
   - component: {fileID: 8219523026102138254}
   - component: {fileID: 6318309912132976801}
   - component: {fileID: 6561282904529590435}
@@ -751,7 +767,7 @@ Transform:
   - {fileID: 5484082336098759925}
   - {fileID: 7332761677044605552}
   m_Father: {fileID: 0}
-  m_RootOrder: 15
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 270, z: 0}
 --- !u!114 &4752680150627253953
 MonoBehaviour:
@@ -760,7 +776,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7874106867515088688}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 62899f850307741f2a39c98a8b639597, type: 3}
   m_Name: 
@@ -783,6 +799,20 @@ MonoBehaviour:
   m_DefaultActionMap: Player
   m_SplitScreenIndex: -1
   m_Camera: {fileID: 0}
+--- !u!114 &2416239678762388833
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7874106867515088688}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1d5bfe87a33939d43816a21bef7f5094, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  weapon: {fileID: 2485194830561986595}
+  _movement: {fileID: 6561282904529590435}
 --- !u!54 &8219523026102138254
 Rigidbody:
   m_ObjectHideFlags: 0

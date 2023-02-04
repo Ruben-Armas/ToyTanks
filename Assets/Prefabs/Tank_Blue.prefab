@@ -205,6 +205,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4692021368254950583}
+  - component: {fileID: 6189103940258629117}
   - component: {fileID: 4692021368254950582}
   - component: {fileID: 4692021368254950581}
   - component: {fileID: 4692021368254950580}
@@ -235,8 +236,20 @@ Transform:
   - {fileID: 5509190882975565164}
   - {fileID: 7326512007327912937}
   m_Father: {fileID: 0}
-  m_RootOrder: 14
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 90, z: 0}
+--- !u!114 &6189103940258629117
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4692021368254950577}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dae6ad86eda697d42b3f8858e69bd0a9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &4692021368254950582
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -484,6 +497,7 @@ GameObject:
   - component: {fileID: 5877660564258000445}
   - component: {fileID: 2796967496139220623}
   - component: {fileID: 6563164340684473567}
+  - component: {fileID: 8228445955903058209}
   m_Layer: 0
   m_Name: TankFree_Tower
   m_TagString: Untagged
@@ -571,6 +585,20 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   muzzle: {fileID: 493751662717031613}
   bulletPrefab: {fileID: 1277677172309477101, guid: f00bf2b00abdb7d49a13f9252ecb8d93, type: 3}
+--- !u!64 &8228445955903058209
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4870812353325398284}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 4
+  m_Convex: 1
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 2212350337115244503, guid: 3d210b2be9d4b9144b53828dfc2e73e3, type: 3}
 --- !u!1 &5317557164022586675
 GameObject:
   m_ObjectHideFlags: 0

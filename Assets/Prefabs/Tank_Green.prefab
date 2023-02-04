@@ -294,6 +294,7 @@ GameObject:
   - component: {fileID: 1052251359731922600}
   - component: {fileID: 8780663796229512730}
   - component: {fileID: 3518284541389887990}
+  - component: {fileID: 6772620933391782118}
   m_Layer: 0
   m_Name: TankFree_Tower
   m_TagString: Untagged
@@ -380,7 +381,21 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   muzzle: {fileID: 4978779378767860111}
-  bulletPrefab: {fileID: 1277677172309477101, guid: f00bf2b00abdb7d49a13f9252ecb8d93, type: 3}
+  bulletPrefab: {fileID: 648091011080755866, guid: a4988ce98215dcd4fbda7bff588026b7, type: 3}
+--- !u!64 &6772620933391782118
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2059101786595049881}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 4
+  m_Convex: 1
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 2212350337115244503, guid: 3d210b2be9d4b9144b53828dfc2e73e3, type: 3}
 --- !u!1 &3545744666067763286
 GameObject:
   m_ObjectHideFlags: 0
@@ -751,7 +766,7 @@ Transform:
   - {fileID: 1404964506270039545}
   - {fileID: 4226351136359033724}
   m_Father: {fileID: 0}
-  m_RootOrder: 14
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 90, z: 0}
 --- !u!114 &2076495924976718312
 MonoBehaviour:
