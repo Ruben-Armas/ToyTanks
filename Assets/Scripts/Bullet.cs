@@ -64,8 +64,9 @@ public class Bullet : MonoBehaviour
                 Debug.Log($"contact -> {contact}");
 
                 // Calcula la dirección de rebote
-                Vector3 reflectedDirection = Vector3.Reflect(rigidbody.velocity, contact);
-                //Debug.Log($"reflection -> {reflectedDirection}");
+                //Vector3 reflectedDirection = Vector3.Reflect(rigidbody.velocity, contact);
+                Vector3 reflectedDirection = Vector3.Reflect(rigidbody.velocity, Vector3.up);
+                Debug.Log($"reflectedDirection -> {reflectedDirection}");
 
                 // Gira a la nueva dirección
                 transform.forward = reflectedDirection.normalized;
