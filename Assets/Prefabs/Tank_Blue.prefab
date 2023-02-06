@@ -288,7 +288,7 @@ SphereCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3677319378024859608}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
   m_Radius: 0.50000024
@@ -335,7 +335,7 @@ Transform:
   - {fileID: 7326512007327912937}
   - {fileID: 6199984533746728782}
   m_Father: {fileID: 0}
-  m_RootOrder: 0
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 90, z: 0}
 --- !u!114 &6189103940258629117
 MonoBehaviour:
@@ -697,7 +697,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   muzzle: {fileID: 493751662717031613}
-  bulletPrefab: {fileID: 1277677172309477101, guid: f00bf2b00abdb7d49a13f9252ecb8d93, type: 3}
+  bulletPrefab: {fileID: 648091011080755866, guid: a4988ce98215dcd4fbda7bff588026b7, type: 3}
 --- !u!64 &8228445955903058209
 MeshCollider:
   m_ObjectHideFlags: 0

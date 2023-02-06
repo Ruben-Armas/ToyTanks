@@ -17,11 +17,11 @@ public class Shield : MonoBehaviour
             renderer.enabled = false;
     }
 
-    private void activateShield()
+    public void activateShield()
     {
         shield = true;
     }
-    private void deactivateShield()
+    public void deactivateShield()
     {
         shield = false;
     }

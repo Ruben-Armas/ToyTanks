@@ -53,20 +53,22 @@ public class Bullet : MonoBehaviour
     {        
         // Comprueba si la colisión es con una pared
         if (collision.collider.GetComponentInParent<Wall>() != null)
-        //if (collision.collider.GetComponent<Wall>() != null)
         {
+            //Comprobar si cuando choca no está dentro del cubo (moverlo al punto de contacto)
             //Debug.Log("Rebote");
             if (checkIfSelfDestroy() == false)
             {
                 // Calcula la normal de la superficie de la pared con la que chocando
-                Vector3 contact = collision.contacts[0].normal;
+                Vector3 normal = collision.contacts[0].normal;
+                //Vector3 normal = 2 * (Vector3.Dot(rigidbody.velocity.normalized))
                 //ContactPoint contact = collision.GetContact(0).normal;
-                Debug.Log($"contact -> {contact}");
+                Debug.Log($"contact -> {normal}");
 
                 // Calcula la dirección de rebote
-                //Vector3 reflectedDirection = Vector3.Reflect(rigidbody.velocity, contact);
-                Vector3 reflectedDirection = Vector3.Reflect(rigidbody.velocity, Vector3.up);
+                Vector3 reflectedDirection = Vector3.Reflect(transform.forward, normal);
                 Debug.Log($"reflectedDirection -> {reflectedDirection}");
+                Debug.DrawLine(collision.contacts[0].point, collision.contacts[0].point + normal *10, Color.red, 5);
+                Debug.DrawLine(collision.contacts[0].point, collision.contacts[0].point + reflectedDirection *10, Color.blue, 5);
 
                 // Gira a la nueva dirección
                 transform.forward = reflectedDirection.normalized;
