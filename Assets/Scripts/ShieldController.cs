@@ -15,12 +15,12 @@ public class ShieldController : MonoBehaviour
 
     private void OnTriggerEnter(Collider collision)
     {
-        Debug.Log("Escudo!!");
         shield = collision.GetComponentInParent<Shield>();
         if (shield != null)
         {
-            Debug.Log("Escudo!!");
-            shield.activateShield();
+            //Debug.Log("Escudo!!");
+            shield.activateShield();    //Activar escudo
+            Destroy(gameObject);        //Quitar escudo recogido del mapa
         }
     }
 }

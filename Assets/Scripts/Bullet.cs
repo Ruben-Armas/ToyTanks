@@ -12,6 +12,7 @@ public class Bullet : MonoBehaviour
 
     private EnemyController enemy;
     private Player player;
+    private Shield currentShield;
 
     /*Si lo pongo en el FixedUpdate estaría siempre aplicando esa velocidad
      * por lo que no caería por la gravedad
@@ -47,14 +48,13 @@ public class Bullet : MonoBehaviour
         rigidbody.velocity = transform.forward * speed;
     }*/
 
-    //Hacer que cuente los choques y que se destruya al segundo choque
-    //Hacer que rebote cuando choca con la pared
     private void OnCollisionEnter(Collision collision)
     {        
         // Comprueba si la colisión es con una pared
         if (collision.collider.GetComponentInParent<Wall>() != null)
         {
-            //Comprobar si cuando choca no está dentro del cubo (moverlo al punto de contacto)
+            //COMPROBAR si cuando choca no está dentro del cubo (moverlo al punto de contacto)
+            
             //Debug.Log("Rebote");
             if (checkIfSelfDestroy() == false)
             {
@@ -88,13 +88,23 @@ public class Bullet : MonoBehaviour
         if (enemy != null)
         {
             Debug.Log("CONTACTO");
-            enemy.SetDestroyed();
+            enemy.SetDestroyed();   //Destruye al impactado
             Destroy(gameObject);    //La bala se autodestruye
         }
         if (player != null)
         {
-            Debug.Log("CONTACTO");
-            player.SetDestroyed();
+            //Debug.Log("CONTACTO");
+            currentShield = player.GetComponent<Shield>();
+            bool haveShield = currentShield.getShield();
+            Debug.Log(haveShield);
+            if (currentShield != null && currentShield.getShield())   //Si tiene escudo
+            {
+                currentShield.deactivateShield();   //Lo desactivo           
+                Debug.Log("Escudo Rotooo!!");
+            }
+            else   
+                player.SetDestroyed();  //Destruye al impactado
+
             Destroy(gameObject);    //La bala se autodestruye
         }
         //checkIfcollisionDestroy(enemy);
@@ -120,14 +130,6 @@ public class Bullet : MonoBehaviour
         }
         return false;
     }
-
-
-    /*
-    //REBOTE POR CODIGO
-    Vector3 towardsMe = transform.position - collision.transform.position;
-    //Si lo normalizamos, podremos añadir siempre el mismo impulso sin importar la distancia o tamaño de la bola
-    towardsMe = towardsMe.normalized;
-    Debug.DrawLine(collision.transform.position, collision.transform.position + towardsMe, Color.red, 2);
-    rigidbody.AddForce(towardsMe, ForceMode.Impulse);
-    */
 }
+
+//LA BALA EMPUJA AL TANQUE CUANDO SE ROMPE EL ESCUDO    ¿arreglarlo?

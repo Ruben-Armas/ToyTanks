@@ -5,24 +5,28 @@ using UnityEngine;
 public class Shield : MonoBehaviour
 {
     public MeshRenderer renderer;
-    public bool shield;
+    private bool _shield;
 
     private void Update()
     {
         //Activa o desactiva el render según si es invulnerable o no
         //renderer.enabled = destructibleEntity.IsInvulnerable();
-        if (shield)
+        if (_shield)
             renderer.enabled = true;
         else
             renderer.enabled = false;
     }
 
+    public bool getShield()
+    {
+        return _shield;
+    }
     public void activateShield()
     {
-        shield = true;
+        _shield = true;
     }
     public void deactivateShield()
     {
-        shield = false;
+        _shield = false;
     }
 }
