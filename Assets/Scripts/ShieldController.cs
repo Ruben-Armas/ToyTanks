@@ -24,8 +24,3 @@ public class ShieldController : MonoBehaviour
         }
     }
 }
-
-/*
- * HACER QUE EL ESCUDO DESAPAREZCA AL COGERLO
- * HACER QUE EL ESCUDO SE ROMPA CUANDO TE IMPACTAN
-*/ 
