@@ -13,6 +13,7 @@ public class Bullet : MonoBehaviour
 
     private EnemyController enemy;
     private Player player;
+    private Bullet bullet;
     private Shield currentShield;
 
 
@@ -64,20 +65,21 @@ public class Bullet : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
-        // Comprueba si la colisión es con un jugador o un enemigo
+        // Comprueba si la colisión es con un jugador, un enemigo o una bala
         enemy = collision.collider.GetComponentInParent<EnemyController>();
         player = collision.collider.GetComponentInParent<Player>();
+        bullet = collision.collider.GetComponentInParent<Bullet>();
 
         if (enemy != null)
         {
-            Debug.Log("CONTACTO");
+            Debug.Log("Contact ENEMY");
             enemy.SetDestroyed();   //Destruye al impactado
             Destroy(gameObject);    //La bala se autodestruye
         }
 
         if (player != null)
         {
-            //Debug.Log("CONTACTO");
+            //Debug.Log("Contact PLAYER");
             currentShield = player.GetComponent<Shield>();
             bool haveShield = currentShield.getShield();
             Debug.Log(haveShield);
@@ -89,6 +91,13 @@ public class Bullet : MonoBehaviour
             else   
                 player.SetDestroyed();  //Destruye al impactado
 
+            Destroy(gameObject);    //La bala se autodestruye
+        }
+
+        if (bullet != null)
+        {
+            Debug.Log("Contact BULLET");
+            bullet.SetDestroyed();   //Destruye al impactado
             Destroy(gameObject);    //La bala se autodestruye
         }
     }
@@ -103,6 +112,12 @@ public class Bullet : MonoBehaviour
             return true;
         }
         return false;
+    }
+
+    public void SetDestroyed()
+    {
+        //invulnerabilityTime = time;
+        Destroy(gameObject);
     }
 }
 

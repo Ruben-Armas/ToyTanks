@@ -273,7 +273,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 870d67a4d2eebef4ca18bbba4549e285, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 5
+  speed: 10
   rigidbody: {fileID: 7337640511938777106}
   numBounces: 3
 --- !u!114 &2671474021758684970
