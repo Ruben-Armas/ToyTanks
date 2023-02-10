@@ -67,7 +67,7 @@ public class Bullet : MonoBehaviour
     {
         // Comprueba si la colisión es con un jugador, un enemigo o una bala
         enemy = collision.collider.GetComponentInParent<EnemyController>();
-        player = collision.collider.GetComponentInParent<Player>();
+        player = collision.collider.GetComponent<Player>();
         bullet = collision.collider.GetComponentInParent<Bullet>();
 
         if (enemy != null)

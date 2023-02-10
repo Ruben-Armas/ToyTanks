@@ -11,6 +11,8 @@ public class EnemyController : MonoBehaviour
     //private Movement _movement;
     //private Player _player;
 
+    private Vector3 _initialPosition;
+
     //IA
     private NavMeshAgent _navMeshAgent;
     private Transform _target;
@@ -24,6 +26,8 @@ public class EnemyController : MonoBehaviour
     {
         _navMeshAgent = GetComponent<NavMeshAgent>();
         Debug.Log($"_navMeshAgent -- {_navMeshAgent}");
+
+        _initialPosition = gameObject.transform.position;
     }
 
     private void Update()
@@ -40,8 +44,11 @@ public class EnemyController : MonoBehaviour
             }
         }
 
-        if (_target != null) { }
+        if (_target != null && _target.position != null)
             _navMeshAgent.SetDestination(_target.position);
+        else
+            _navMeshAgent.SetDestination(_initialPosition);
+
     }
     
 

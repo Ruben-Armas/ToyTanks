@@ -93,7 +93,7 @@ MeshCollider:
   m_GameObject: {fileID: 638747355331956638}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 4
   m_Convex: 1
   m_CookingOptions: 30
@@ -191,7 +191,7 @@ MeshCollider:
   m_GameObject: {fileID: 3168403239478598797}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 4
   m_Convex: 1
   m_CookingOptions: 30
@@ -214,7 +214,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &6053305884761079134
 Transform:
   m_ObjectHideFlags: 0
@@ -402,7 +402,7 @@ MeshCollider:
   m_GameObject: {fileID: 4725391685194873628}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 4
   m_Convex: 1
   m_CookingOptions: 30
@@ -558,6 +558,8 @@ GameObject:
   - component: {fileID: 4834055819713867427}
   - component: {fileID: 8493150913795461049}
   - component: {fileID: 4834055819713867426}
+  - component: {fileID: 6551045167796720749}
+  - component: {fileID: 1344706459509168133}
   m_Layer: 0
   m_Name: Tank_Blue
   m_TagString: Player
@@ -712,6 +714,33 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!65 &6551045167796720749
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4834055819713867425}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 0
+  serializedVersion: 2
+  m_Size: {x: 2, y: 2, z: 2.5}
+  m_Center: {x: 0, y: 1, z: 0}
+--- !u!136 &1344706459509168133
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4834055819713867425}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 0
+  m_Radius: 0.96
+  m_Height: 2.7
+  m_Direction: 2
+  m_Center: {x: 0, y: 1, z: 0}
 --- !u!1 &5458554775982497571
 GameObject:
   m_ObjectHideFlags: 0
@@ -890,7 +919,7 @@ MeshCollider:
   m_GameObject: {fileID: 5797088063517918101}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 4
   m_Convex: 1
   m_CookingOptions: 30
@@ -989,7 +1018,7 @@ MeshCollider:
   m_GameObject: {fileID: 5987140395395864589}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 4
   m_Convex: 1
   m_CookingOptions: 30
@@ -1118,7 +1147,7 @@ MeshCollider:
   m_GameObject: {fileID: 7797300392197733075}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 4
   m_Convex: 1
   m_CookingOptions: 30
