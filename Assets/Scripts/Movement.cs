@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [RequireComponent(typeof(Rigidbody))]
+[RequireComponent(typeof(Animator))]
 public class Movement : MonoBehaviour
 {
     public float maxSpeed;
@@ -16,7 +17,7 @@ public class Movement : MonoBehaviour
     private Animator _animator;
 
     //También funcionaría con Awake, pero puede hacer que al inicio de la partida se para un momento mientras se configura todo
-    void OnValidate()
+    void Awake()
     {
         _rigidbody = GetComponent<Rigidbody>();
         _animator = GetComponent<Animator>();

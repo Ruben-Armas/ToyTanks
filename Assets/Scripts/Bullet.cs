@@ -7,12 +7,14 @@ public class Bullet : MonoBehaviour
     public float speed;
 
     public Rigidbody rigidbody;
-    public int numRebotes;
-    private int contRebotes;
+    public int numBounces;
+    private int contBounces;
+    private bool canDetectCollision = true;
 
     private EnemyController enemy;
     private Player player;
     private Shield currentShield;
+
 
     /*Si lo pongo en el FixedUpdate estaría siempre aplicando esa velocidad
      * por lo que no caería por la gravedad
@@ -21,76 +23,58 @@ public class Bullet : MonoBehaviour
     public void Start()
     {//No hace falta el deltaTime porque solo se usa cuando "se suma"
         rigidbody.velocity = transform.forward * speed;
-        contRebotes = 0;
+        contBounces = 0;
     }
 
-    private void Update()
+    private void FixedUpdate()
     {
-        Debug.DrawLine(rigidbody.velocity, transform.forward, Color.black);
-        /*
+        //Debug.DrawLine(rigidbody.velocity, transform.forward, Color.black);
+       
         RaycastHit hit;
         if (Physics.Raycast(transform.position, rigidbody.velocity, out hit, 1)) // Comprueba si choca
         {
+            // Comprueba si la colisión es con una pared
             if (hit.collider.GetComponentInParent<Wall>() != null)
             {
-                // Calcula la dirección de rebote
-                Vector3 reflectionDirection = Vector3.Reflect(rigidbody.velocity, hit.normal);
-                transform.forward = reflectionDirection;            // Gira a la nueva dirección
-                rigidbody.velocity = transform.forward * speed;     // Mueve la bala
-                Debug.Log($"reflection -> {hit.normal}");
+                Debug.Log("Wall");
+                if (checkIfSelfDestroy() == false)
+                {
+                    // Calcula la normal de la superficie de la pared con la que chocando
+                    Vector3 normal = hit.normal;
+                    Debug.Log($"contact hit normal -> {normal}");
+
+                    // Calcula la dirección de rebote
+                    Vector3 reflectedDirection = Vector3.Reflect(rigidbody.velocity, hit.normal);
+                    //Debug.Log($"reflectedDirection -> {reflectedDirection}");
+                    Debug.DrawLine(hit.point, hit.point + normal * 10, Color.red, 5);
+                    Debug.DrawLine(hit.point, hit.point + reflectedDirection * 10, Color.blue, 5);
+
+                    // Gira a la nueva dirección
+                    transform.forward = reflectedDirection;
+
+                    //Reinicio la inercia
+                    //rigidbody.velocity = Vector3.zero;
+
+                    // Mueve la bala
+                    rigidbody.velocity = transform.forward * speed;
+                }
             }
         }
-        */
     }
-    /*Bala con velocidad constante (siempre aplicando esa velocidad)
-    private void FixedUpdate()
-    {
-        rigidbody.velocity = transform.forward * speed;
-    }*/
 
     private void OnCollisionEnter(Collision collision)
-    {        
-        // Comprueba si la colisión es con una pared
-        if (collision.collider.GetComponentInParent<Wall>() != null)
-        {
-            //COMPROBAR si cuando choca no está dentro del cubo (moverlo al punto de contacto)
-            
-            //Debug.Log("Rebote");
-            if (checkIfSelfDestroy() == false)
-            {
-                // Calcula la normal de la superficie de la pared con la que chocando
-                Vector3 normal = collision.contacts[0].normal;
-                //Vector3 normal = 2 * (Vector3.Dot(rigidbody.velocity.normalized))
-                //ContactPoint contact = collision.GetContact(0).normal;
-                Debug.Log($"contact -> {normal}");
-
-                // Calcula la dirección de rebote
-                Vector3 reflectedDirection = Vector3.Reflect(transform.forward, normal);
-                Debug.Log($"reflectedDirection -> {reflectedDirection}");
-                Debug.DrawLine(collision.contacts[0].point, collision.contacts[0].point + normal *10, Color.red, 5);
-                Debug.DrawLine(collision.contacts[0].point, collision.contacts[0].point + reflectedDirection *10, Color.blue, 5);
-
-                // Gira a la nueva dirección
-                transform.forward = reflectedDirection.normalized;
-
-                //Reinicio la inercia
-                //rigidbody.velocity = Vector3.zero;
-
-                // Mueve la bala
-                //rigidbody.velocity = reflectedDirection;
-                rigidbody.velocity = transform.forward * speed;
-            }
-        }
-        //Debug.Log("NO Rebota");
-
+    {
+        // Comprueba si la colisión es con un jugador o un enemigo
         enemy = collision.collider.GetComponentInParent<EnemyController>();
         player = collision.collider.GetComponentInParent<Player>();
+
         if (enemy != null)
         {
             Debug.Log("CONTACTO");
             enemy.SetDestroyed();   //Destruye al impactado
             Destroy(gameObject);    //La bala se autodestruye
         }
+
         if (player != null)
         {
             //Debug.Log("CONTACTO");
@@ -107,23 +91,13 @@ public class Bullet : MonoBehaviour
 
             Destroy(gameObject);    //La bala se autodestruye
         }
-        //checkIfcollisionDestroy(enemy);
     }
-    /*
-    private void checkIfcollisionDestroy(Object collisioned)
-    {
-        if (collisioned != null)
-        {
-            Debug.Log("CONTACTO");
-            collisioned.SetDestroyed();
-            Destroy(gameObject);
-        }
-    }
-    */
+
+
     private bool checkIfSelfDestroy()
     {
-        contRebotes++;
-        if (contRebotes >= numRebotes)
+        contBounces++;
+        if (contBounces >= numBounces)
         {
             Destroy(gameObject);
             return true;

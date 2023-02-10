@@ -791,7 +791,7 @@ GameObject:
   - component: {fileID: 1515344541779600972}
   - component: {fileID: 3657200478503351674}
   m_Layer: 0
-  m_Name: Tank_Red
+  m_Name: Enemy_Red
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -950,7 +950,7 @@ NavMeshAgent:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8665461898255977889}
   m_Enabled: 1
-  m_AgentTypeID: -1372625422
+  m_AgentTypeID: 0
   m_Radius: 1.3
   m_Speed: 3.5
   m_Acceleration: 8

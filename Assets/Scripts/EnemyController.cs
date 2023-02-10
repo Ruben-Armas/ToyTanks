@@ -41,7 +41,7 @@ public class EnemyController : MonoBehaviour
         }
 
         if (_target != null) { }
-            //_navMeshAgent.SetDestination(_target.position);
+            _navMeshAgent.SetDestination(_target.position);
     }
     
 
