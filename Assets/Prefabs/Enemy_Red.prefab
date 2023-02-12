@@ -11,7 +11,6 @@ GameObject:
   - component: {fileID: 8125802354841678049}
   - component: {fileID: 8507174820875445433}
   - component: {fileID: 5991544192265170980}
-  - component: {fileID: 6774688456413756349}
   m_Layer: 0
   m_Name: TankFree_Wheel_f_right
   m_TagString: Untagged
@@ -84,20 +83,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!64 &6774688456413756349
-MeshCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2287402047452507782}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 0
-  serializedVersion: 4
-  m_Convex: 1
-  m_CookingOptions: 30
-  m_Mesh: {fileID: -540154670459094798, guid: 3d210b2be9d4b9144b53828dfc2e73e3, type: 3}
 --- !u!1 &2381187993823119524
 GameObject:
   m_ObjectHideFlags: 0
@@ -244,7 +229,6 @@ GameObject:
   - component: {fileID: 842330214712261363}
   - component: {fileID: 1936114498189708157}
   - component: {fileID: 3007286179370793617}
-  - component: {fileID: 8498631587579929456}
   m_Layer: 0
   m_Name: TankFree_Wheel_b_right
   m_TagString: Untagged
@@ -317,20 +301,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!64 &8498631587579929456
-MeshCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4367181756293578133}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 0
-  serializedVersion: 4
-  m_Convex: 1
-  m_CookingOptions: 30
-  m_Mesh: {fileID: 2424742389688573532, guid: 3d210b2be9d4b9144b53828dfc2e73e3, type: 3}
 --- !u!1 &4933039359413074197
 GameObject:
   m_ObjectHideFlags: 0
@@ -342,7 +312,6 @@ GameObject:
   - component: {fileID: 6710652912424013476}
   - component: {fileID: 841659741173760597}
   - component: {fileID: 3335461592552886926}
-  - component: {fileID: 5528745059779658182}
   m_Layer: 0
   m_Name: TankFree_Red
   m_TagString: Untagged
@@ -416,20 +385,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!64 &5528745059779658182
-MeshCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4933039359413074197}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 0
-  serializedVersion: 4
-  m_Convex: 0
-  m_CookingOptions: 30
-  m_Mesh: {fileID: -8964106073494916162, guid: 3d210b2be9d4b9144b53828dfc2e73e3, type: 3}
 --- !u!1 &5120682661303870093
 GameObject:
   m_ObjectHideFlags: 0
@@ -441,7 +396,6 @@ GameObject:
   - component: {fileID: 6421229275837408868}
   - component: {fileID: 6285947334819510951}
   - component: {fileID: 1313137654466035584}
-  - component: {fileID: 1317242516166431066}
   m_Layer: 0
   m_Name: TankFree_Wheel_f_left
   m_TagString: Untagged
@@ -514,20 +468,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!64 &1317242516166431066
-MeshCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5120682661303870093}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 0
-  serializedVersion: 4
-  m_Convex: 1
-  m_CookingOptions: 30
-  m_Mesh: {fileID: 4136487858768642163, guid: 3d210b2be9d4b9144b53828dfc2e73e3, type: 3}
 --- !u!1 &6264722505617873412
 GameObject:
   m_ObjectHideFlags: 0
@@ -540,8 +480,6 @@ GameObject:
   - component: {fileID: 4970281626662563125}
   - component: {fileID: 3726881474298103175}
   - component: {fileID: 3997712529932507826}
-  - component: {fileID: 2477168342612126554}
-  - component: {fileID: 1515344542054064180}
   m_Layer: 0
   m_Name: TankFree_Tower
   m_TagString: Untagged
@@ -629,34 +567,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   muzzle: {fileID: 8275627078677208984}
   bulletPrefab: {fileID: 648091011080755866, guid: a4988ce98215dcd4fbda7bff588026b7, type: 3}
---- !u!64 &2477168342612126554
-MeshCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6264722505617873412}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 0
-  serializedVersion: 4
-  m_Convex: 1
-  m_CookingOptions: 30
-  m_Mesh: {fileID: 2212350337115244503, guid: 3d210b2be9d4b9144b53828dfc2e73e3, type: 3}
---- !u!64 &1515344542054064180
-MeshCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6264722505617873412}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 0
-  serializedVersion: 4
-  m_Convex: 1
-  m_CookingOptions: 30
-  m_Mesh: {fileID: 2212350337115244503, guid: 3d210b2be9d4b9144b53828dfc2e73e3, type: 3}
 --- !u!1 &6675350575943695931
 GameObject:
   m_ObjectHideFlags: 0
@@ -817,7 +727,7 @@ Transform:
   - {fileID: 8125802354841678049}
   - {fileID: 7411284849877297034}
   m_Father: {fileID: 0}
-  m_RootOrder: 11
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 270, z: 0}
 --- !u!114 &6121373482344672336
 MonoBehaviour:
@@ -989,7 +899,6 @@ GameObject:
   - component: {fileID: 5084398984580021661}
   - component: {fileID: 3407042108714553254}
   - component: {fileID: 364079885318266852}
-  - component: {fileID: 3889449237840470426}
   m_Layer: 0
   m_Name: TankFree_Wheel_b_left
   m_TagString: Untagged
@@ -1062,20 +971,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!64 &3889449237840470426
-MeshCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8887473690432101323}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 0
-  serializedVersion: 4
-  m_Convex: 1
-  m_CookingOptions: 30
-  m_Mesh: {fileID: -3475840021303997981, guid: 3d210b2be9d4b9144b53828dfc2e73e3, type: 3}
 --- !u!1001 &1225093315164689739
 PrefabInstance:
   m_ObjectHideFlags: 0

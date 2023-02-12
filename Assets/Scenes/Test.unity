@@ -117,7 +117,7 @@ NavMeshSettings:
     cellSize: 0.4333333
     manualTileSize: 0
     tileSize: 256
-    accuratePlacement: 1
+    accuratePlacement: 0
     maxJobWorkers: 0
     preserveTilesOutsideBounds: 0
     debug:
@@ -12809,10 +12809,6 @@ PrefabInstance:
     - target: {fileID: 4834055819713867425, guid: e037ca1509ab48940b258ffeea11e0c0, type: 3}
       propertyPath: m_Name
       value: Tank_Blue
-      objectReference: {fileID: 0}
-    - target: {fileID: 4834055819713867425, guid: e037ca1509ab48940b258ffeea11e0c0, type: 3}
-      propertyPath: m_IsActive
-      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4834055819713867431, guid: e037ca1509ab48940b258ffeea11e0c0, type: 3}
       propertyPath: m_RootOrder

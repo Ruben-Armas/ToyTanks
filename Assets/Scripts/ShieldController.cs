@@ -15,7 +15,7 @@ public class ShieldController : MonoBehaviour
 
     private void OnTriggerEnter(Collider collision)
     {
-        shield = collision.GetComponentInParent<Shield>();
+        shield = collision.GetComponent<Shield>();
         if (shield != null)
         {
             //Debug.Log("Escudo!!");
