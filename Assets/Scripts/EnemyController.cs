@@ -25,7 +25,7 @@ public class EnemyController : MonoBehaviour
     private void Awake()
     {
         _navMeshAgent = GetComponent<NavMeshAgent>();
-        Debug.Log($"_navMeshAgent -- {_navMeshAgent}");
+        //  Debug.Log($"_navMeshAgent -- {_navMeshAgent}");
 
         _initialPosition = gameObject.transform.position;
     }
@@ -40,7 +40,7 @@ public class EnemyController : MonoBehaviour
             if (go != null)
             {
                 _target = go.transform;
-                Debug.Log($"target --> {_target}");
+                //Debug.Log($"target --> {_target}");
             }
         }
 

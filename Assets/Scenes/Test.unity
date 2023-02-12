@@ -12869,10 +12869,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Tank_Green
       objectReference: {fileID: 0}
-    - target: {fileID: 2818086229701906832, guid: a88587617d2cb54448de14c18100cf80, type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 6098996147223238775, guid: a88587617d2cb54448de14c18100cf80, type: 3}
       propertyPath: m_RootOrder
       value: 8
@@ -12916,6 +12912,14 @@ PrefabInstance:
     - target: {fileID: 6098996147223238775, guid: a88587617d2cb54448de14c18100cf80, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6176679785786796561, guid: a88587617d2cb54448de14c18100cf80, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6320811530867665003, guid: a88587617d2cb54448de14c18100cf80, type: 3}
+      propertyPath: m_Enabled
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_AddedGameObjects: []
