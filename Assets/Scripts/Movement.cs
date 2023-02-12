@@ -39,6 +39,7 @@ public class Movement : MonoBehaviour
         Vector3 velocity = new Vector3(desiredMovement.x, 0, desiredMovement.y);    //Para convertir a Vector2
         Vector3 vel = velocity.normalized * (maxSpeed * Time.fixedDeltaTime);
 
+        //Debug.Log($"Vel {vel}");
 
         //Rota el tanque al forward de la dirección del movimiento
         //Vector3 targetOrientation = _rigidbody.velocity.normalized;
@@ -58,6 +59,7 @@ public class Movement : MonoBehaviour
             if (dot > 0.9f)
             {
                 _rigidbody.velocity = vel;  //--MUEVE--
+                Debug.Log($"Vel {_rigidbody.velocity}");
 
                 //Animación Forward     (todo lo de abajo es para controlar la animación)
                 _animator.SetBool("Forward", true);

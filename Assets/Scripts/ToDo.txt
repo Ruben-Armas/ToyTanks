@@ -1,0 +1,119 @@
+1. Jugadores:
+
+O Diferenciar los inputs para 2 jugadores
+X ratón y teclado -> movimiento
+X ratón y teclado -> apuntado
+X gamepad -> movimiento
+X gamepad -> apuntado
+X disparar
+X Cada jugador tiene una vida por nivel, es decir, será destruido si le alcanzan.
+O soltar minas
+
+
+2. Enemigos:
+
+O Tipos
+	O Normal
+	O Solo minas
+	O Balas lentas con más rebotes
+O Los enemigos se mueven y disparan aleatoriamente, o hacia el jugador más cercano.
+O Hay de distintos tipos, unos solo disparan y otros ponen minas.
+O Máquina de estados
+	X Rotar
+	O Moverse
+	O Disparar
+	O 
+
+
+3. Balas:
+
+X Son disparadas tanto por los jugadores como por los enemigos.
+X Pueden destruir a los jugadores, enemigos y a otras balas.
+O			... minas	
+X Se destruyen al impactar con algo que no sea una pared
+X Pueden rebotar X veces en la pared, al siguiente impacto se destruyen.
+
+
+4. Minas: 
+
+O Crear Prefab
+O Asiganr botón player input
+O Rango de explosión
+
+O Pueden ser colocadas por los jugadores y los enemigos.
+O Es un objeto estático que se queda en el suelo.
+O Pueden ser destruidas por las balas y el contacto de un jugador o enemigo.
+O Se destruyen automáticamente al paso de 30 segundos.
+O Tiene un rango de explosión que alcanza a lo que esté cerca.
+
+
+5. Escudo:
+
+X Es un objeto que pueden recoger los jugadores del juego.
+X Tiene un movimiento Hover
+X Se activa automáticamente al recogerlo
+X Resiste un disparo.
+X Al ser golpeado se desactiva.
+O Resiste una Mina.
+
+
+6. Partida:
+
+O Guarda la puntuación récord.
+O Empieza con los contadores de puntuación a cero. 
+O Empieza con una vida.
+O Se termina cuando pierdes un nivel y no te quedan vidas.
+
+
+7. Nivel:
+
+O Spawner 
+	izquierda - players
+	derecha - enemigos
+	en el medio - escudo
+O Generación Procedural
+O Cada nivel tiene su disposición de obstáculos, enemigos, escudos (si los hay) y a los jugadores.
+O Al comenzar el nivel, si uno de los dos jugadores estaba destruido, reaparece.
+O Cada dos niveles superados se añade una vida.
+O Al no superar el nivel se quita una vida.
+
+
+8. UI:
+
+O Menú iniciar partida
+O Game Over 
+O Reiniciar partida
+
+O Indicador de nivel actual.
+O Nª de enemigos eliminados por el jugador 1.
+O Nª de enemigos eliminados por el jugador 2.
+O Vidas restantes para reintentar niveles cuando eliminan a todos los jugadores.
+
+
+9. FX (partículas)
+O Al disparar la bala
+O Al rebotar la bala
+X Trail de la bala
+
+O Al morir/explotar un tanque
+
+O Explosión de una mina
+
+
+10. UFX (sonidos)
+O Al disparar la bala
+O Al rebotar la bala
+O Exploxión de bala
+
+O Al morir/explotar un tanque
+ 
+O Al colocar una mina
+O Al explotar una mina
+
+
+11. Puntuación
+
+O Total= Total + ContActual * nº nivel
+O   ContActual = puntos tanques enemigos
+O   Valor enemigo   ¿10?
+O pierdes una vida --> -5% ??

@@ -696,9 +696,6 @@ GameObject:
   - component: {fileID: 1834323697}
   - component: {fileID: 3787422810958176240}
   - component: {fileID: 3657200478503351674}
-  - component: {fileID: 6121373482344672336}
-  - component: {fileID: 4803283301945938480}
-  - component: {fileID: 5623247559278316082}
   - component: {fileID: 6987738626326265616}
   m_Layer: 0
   m_Name: Enemy_Red
@@ -726,7 +723,7 @@ Transform:
   - {fileID: 8125802354841678049}
   - {fileID: 7411284849877297034}
   m_Father: {fileID: 0}
-  m_RootOrder: 0
+  m_RootOrder: 12
   m_LocalEulerAnglesHint: {x: 0, y: 270, z: 0}
 --- !u!54 &7428135019761084191
 Rigidbody:
@@ -742,7 +739,7 @@ Rigidbody:
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 80
+  m_Constraints: 84
   m_CollisionDetection: 0
 --- !u!65 &1834323697
 BoxCollider:
@@ -755,8 +752,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 2, y: 2, z: 2.5}
-  m_Center: {x: 0, y: 1, z: -0.08}
+  m_Size: {x: 2, y: 2.2, z: 2.5}
+  m_Center: {x: 0, y: 0.9, z: -0.08}
 --- !u!114 &3787422810958176240
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -769,6 +766,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1d5bfe87a33939d43816a21bef7f5094, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  weapon: {fileID: 0}
+  turret: {fileID: 0}
+  desiredMovement: {x: 0, y: 0}
+  movementSpeed: 3
+  rotationSpeed: 100
+  precisionRotate: 9.7
 --- !u!195 &3657200478503351674
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -778,7 +781,7 @@ NavMeshAgent:
   m_GameObject: {fileID: 8665461898255977889}
   m_Enabled: 1
   m_AgentTypeID: 0
-  m_Radius: 1.3
+  m_Radius: 1.5
   m_Speed: 3.5
   m_Acceleration: 8
   avoidancePriority: 50
@@ -791,70 +794,6 @@ NavMeshAgent:
   m_BaseOffset: 0
   m_WalkableMask: 1
   m_ObstacleAvoidanceType: 4
---- !u!114 &6121373482344672336
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8665461898255977889}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 62899f850307741f2a39c98a8b639597, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Actions: {fileID: -944628639613478452, guid: 152c579b50b98d34688282686b84d993, type: 3}
-  m_NotificationBehavior: 0
-  m_UIInputModule: {fileID: 0}
-  m_DeviceLostEvent:
-    m_PersistentCalls:
-      m_Calls: []
-  m_DeviceRegainedEvent:
-    m_PersistentCalls:
-      m_Calls: []
-  m_ControlsChangedEvent:
-    m_PersistentCalls:
-      m_Calls: []
-  m_ActionEvents: []
-  m_NeverAutoSwitchControlSchemes: 0
-  m_DefaultControlScheme: 
-  m_DefaultActionMap: Player
-  m_SplitScreenIndex: -1
-  m_Camera: {fileID: 0}
---- !u!114 &4803283301945938480
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8665461898255977889}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ccd2c5de84167c849825af86e5208eed, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  turnSensitivity: 10
-  weapon: {fileID: 3997712529932507826}
-  turret: {fileID: 7516360026212721324}
-  lookSpeed: 10
-  desiredLook: {x: 0, y: 0, z: 0}
-  _movement: {fileID: 5623247559278316082}
-  _aim: {fileID: 0}
---- !u!114 &5623247559278316082
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8665461898255977889}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8d0ff113183c6b541bd5cb277bbac8cc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  maxSpeed: 250
-  rotationSpeed: 150
-  desiredMovement: {x: 0, y: 0}
 --- !u!95 &6987738626326265616
 Animator:
   serializedVersion: 4
@@ -863,7 +802,7 @@ Animator:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8665461898255977889}
-  m_Enabled: 0
+  m_Enabled: 1
   m_Avatar: {fileID: 0}
   m_Controller: {fileID: 9100000, guid: 316cd6ce7c607da49a63b6df347346be, type: 2}
   m_CullingMode: 0
