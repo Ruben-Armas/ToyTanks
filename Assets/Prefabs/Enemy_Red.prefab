@@ -771,7 +771,7 @@ MonoBehaviour:
   movementSpeed: 3
   rotationSpeed: 100
   precisionRotate: 0.97
-  cooldownFireRate: 5
+  cooldownFireRate: 3
   precisionFire: 0.97
 --- !u!195 &3657200478503351674
 NavMeshAgent:

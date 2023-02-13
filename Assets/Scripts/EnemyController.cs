@@ -131,19 +131,22 @@ public class EnemyController : MonoBehaviour
                     _navMeshAgent.SetDestination(_initialPosition);
 
                 //MOVER TORRETA
-
-                //DISPARA
                 //ChangeState(State.Aim);
                 Vector3 towardsTarget = _currentTarget.position - transform.position;
                 _weapon.transform.forward =
                     Vector3.Lerp(_weapon.transform.forward, towardsTarget.normalized, Time.deltaTime);
                 //_weapon.transform.LookAt(_currentTarget);   //Instantáneo
 
+                //DISPARA
                 bool canShoot = Vector3.Dot(_weapon.transform.forward, towardsTarget.normalized) > precisionFire;
                 if (canShoot && canFire)
-                {//-----Lanzar un rayo para comprobar si hay un muro delante-----
-                    _weapon.Fire();
-                    StartCoroutine(CooldownFireRate());
+                {//-----Lanzar un rayo para comprobar si hay un muro muy cerca-----
+                    if (CheckFreeShoot(towardsTarget))
+                    {
+                        Debug.Log("DISPAROOO!!");
+                        _weapon.Fire();
+                        StartCoroutine(CooldownFireRate());
+                    }                       
                 }
             }
             else
@@ -237,7 +240,7 @@ public class EnemyController : MonoBehaviour
     IEnumerator CooldownFireRate()
     {
         //Punto de entrada
-        Debug.Log("Entrando en FireRate...");
+        //Debug.Log("Entrando en FireRate...");
 
         //Ejecución del estado
         canFire = false;
@@ -245,7 +248,36 @@ public class EnemyController : MonoBehaviour
         canFire = true;
 
         //Punto de salida
-        Debug.Log("Saliendo de FireRate...");
+        //Debug.Log("Saliendo de FireRate...");
+    }
+    private bool CheckFreeShoot(Vector3 towardsTarget)
+    {
+        bool freeShoot = false;
+        bool freeWall = true;
+        bool freeEnemy = true;
+        RaycastHit hitWall;
+        RaycastHit hitEnemy;
+        if (Physics.Raycast(_weapon.transform.position, towardsTarget, out hitWall, 10)) // Comprueba si choca
+        {
+            // Comprueba si la colisión es con una pared
+            if (hitWall.collider.GetComponentInParent<Wall>() != null)
+            {
+                freeWall = false;
+            }
+        }
+        if (Physics.Raycast(_weapon.transform.position, towardsTarget, out hitEnemy, 30)) // Comprueba si choca
+        {
+            // Comprueba si la colisión es con un enemigo
+            if (hitEnemy.collider.GetComponent<EnemyController>() != null)
+            {
+                freeEnemy = false;
+            }
+        }
+
+        if (freeWall == true && freeEnemy == true)
+            freeShoot = true;
+
+        return freeShoot;
     }
     private GameObject FindClosestPlayer()
     {
@@ -341,43 +373,6 @@ public class EnemyController : MonoBehaviour
             _navMeshAgent.speed = 0f;
         }
     }
-    /*
-    private void Update()
-    {
-        //Si no tiene target, el enemigo busca al target (si existe)
-        if (_currentTarget == null)
-        {
-            GameObject go = GameObject.FindGameObjectWithTag("Player");
-            //_player = GetComponent<Player>();
-            if (go != null)
-            {
-                _currentTarget = go.transform;
-                //Debug.Log($"target --> {_target}");
-            }
-        }
-
-        if (_currentTarget != null && _currentTarget.position != null)
-            _navMeshAgent.SetDestination(_currentTarget.position);
-        else
-            _navMeshAgent.SetDestination(_initialPosition);
-
-    }
-    */
-
-    /*
-    // Update is called once per frame
-    void FixedUpdate()
-    {
-        //Vector2 movement = value.Get<Vector2>();
-        Vector2 movement = new Vector2(20,20);
-        _movement.desiredMovement = movement;
-
-        if (weapon != null)
-        {
-            //weapon.Fire();
-            //Debug.Log("PewPew");
-        }
-    }*/
     
 
     public void SetDestroyed()
