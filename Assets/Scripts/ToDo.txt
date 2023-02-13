@@ -20,9 +20,12 @@ O Los enemigos se mueven y disparan aleatoriamente, o hacia el jugador más cerca
 O Hay de distintos tipos, unos solo disparan y otros ponen minas.
 O Máquina de estados
 	X Rotar
-	O Moverse
-	O Disparar
-	O 
+	X Moverse
+	X Mover Torreta
+		O Lanzar un rayo para comprobar si hay un muro delante
+	X Disparar
+	X Cooldown
+		O Rotar torreta a modo de búsqueda
 
 
 3. Balas:

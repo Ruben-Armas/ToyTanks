@@ -11,7 +11,9 @@ public class EnemyController : MonoBehaviour
 
     public float movementSpeed = 3;
     public float rotationSpeed = 80;
-    public float precisionRotate = 0.97f;
+    public float precisionRotate;
+    public float cooldownFireRate;
+    public float precisionFire;
 
     private Animator _animator;
     private Weapon _weapon;
@@ -19,6 +21,7 @@ public class EnemyController : MonoBehaviour
     private Vector3 _initialPosition;
     private Vector3 _towardsDirection;
     private NavMeshPath _path;
+    private bool canFire = true;
 
     //Maq Estados
     public enum State
@@ -107,8 +110,8 @@ public class EnemyController : MonoBehaviour
             bool hasTarget = _currentTarget != null;
             if (hasTarget)
             {
+                //MOVIMIENTO
                 //ChangeState(State.Move);
-                //Movimiento
                 if (_currentTarget != null && _currentTarget.position != null)
                 {
                     //_navMeshAgent.SetDestination(_currentTarget.position);
@@ -127,15 +130,21 @@ public class EnemyController : MonoBehaviour
                 else
                     _navMeshAgent.SetDestination(_initialPosition);
 
+                //MOVER TORRETA
+
                 //DISPARA
+                //ChangeState(State.Aim);
                 Vector3 towardsTarget = _currentTarget.position - transform.position;
                 _weapon.transform.forward =
                     Vector3.Lerp(_weapon.transform.forward, towardsTarget.normalized, Time.deltaTime);
                 //_weapon.transform.LookAt(_currentTarget);   //Instantáneo
 
-                bool canShoot = Vector3.Dot(_weapon.transform.forward, towardsTarget.normalized) > 0.99;
-                if (canShoot)
+                bool canShoot = Vector3.Dot(_weapon.transform.forward, towardsTarget.normalized) > precisionFire;
+                if (canShoot && canFire)
+                {//-----Lanzar un rayo para comprobar si hay un muro delante-----
                     _weapon.Fire();
+                    StartCoroutine(CooldownFireRate());
+                }
             }
             else
                 ChangeState(State.Cooldown);
@@ -225,6 +234,19 @@ public class EnemyController : MonoBehaviour
     }
     //----------------Maq.Estados
 
+    IEnumerator CooldownFireRate()
+    {
+        //Punto de entrada
+        Debug.Log("Entrando en FireRate...");
+
+        //Ejecución del estado
+        canFire = false;
+        yield return new WaitForSeconds(cooldownFireRate);
+        canFire = true;
+
+        //Punto de salida
+        Debug.Log("Saliendo de FireRate...");
+    }
     private GameObject FindClosestPlayer()
     {
         GameObject[] players = GameObject.FindGameObjectsWithTag("Player");
