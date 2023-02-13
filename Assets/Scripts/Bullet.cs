@@ -42,11 +42,11 @@ public class Bullet : MonoBehaviour
                 {
                     // Calcula la normal de la superficie de la pared con la que chocando
                     Vector3 normal = hit.normal;
-                    Debug.Log($"contact hit normal -> {normal}");
+                    //Debug.Log($"contact hit normal -> {normal}");
 
                     // Calcula la dirección de rebote
                     Vector3 reflectedDirection = Vector3.Reflect(rigidbody.velocity, hit.normal);
-                    //Debug.Log($"reflectedDirection -> {reflectedDirection}");
+                    Debug.Log($"reflectedDirection -> {reflectedDirection}");
                     Debug.DrawLine(hit.point, hit.point + normal * 10, Color.red, 5);
                     Debug.DrawLine(hit.point, hit.point + reflectedDirection * 10, Color.blue, 5);
 

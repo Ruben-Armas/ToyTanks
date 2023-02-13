@@ -121,3 +121,8 @@ O Total= Total + ContActual * nº nivel
 O   ContActual = puntos tanques enemigos
 O   Valor enemigo   ¿10?
 O pierdes una vida --> -5% ??
+
+
+
+## BUGS ##
+O Hay ángulos en los que la bala choca contra la pared, en los que no rebota

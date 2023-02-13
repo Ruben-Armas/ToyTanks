@@ -219,7 +219,6 @@ public class EnemyController : MonoBehaviour
         Debug.Log("Entrando en Cooldown...");
         float coolDownTime = 5f;
         float elapsedTime = 0;
-        //Vector3 restDirection = _weapon.transform.forward + Vector3.down * 2;
 
         _animator.SetBool("Forward", false);
         _animator.SetBool("Right", false);
@@ -228,8 +227,9 @@ public class EnemyController : MonoBehaviour
         //Ejecución del estado
         while (elapsedTime < coolDownTime)
         {
-            _navMeshAgent.velocity = Vector3.zero;
-            //PointTowards(restDirection);
+            _navMeshAgent.velocity = Vector3.zero;  //Para el tanque
+            //Giro de la torreta a modo de radar
+            _weapon.transform.Rotate(Vector3.up, rotationSpeed * Time.deltaTime);
             elapsedTime += Time.deltaTime;
             yield return 0;
         }
