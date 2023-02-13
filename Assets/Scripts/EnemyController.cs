@@ -221,6 +221,10 @@ public class EnemyController : MonoBehaviour
         float elapsedTime = 0;
         //Vector3 restDirection = _weapon.transform.forward + Vector3.down * 2;
 
+        _animator.SetBool("Forward", false);
+        _animator.SetBool("Right", false);
+        _animator.SetBool("Left", false);
+
         //Ejecución del estado
         while (elapsedTime < coolDownTime)
         {

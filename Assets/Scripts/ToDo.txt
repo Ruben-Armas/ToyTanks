@@ -22,8 +22,9 @@ O Máquina de estados
 	X Rotar
 	X Moverse
 	X Mover Torreta
-		O Lanzar un rayo para comprobar si hay un muro delante
+		X Lanzar un rayo para comprobar si hay un muro o enemy cerca
 	X Disparar
+		X Cooldown fireRate
 	X Cooldown
 		O Rotar torreta a modo de búsqueda
 
