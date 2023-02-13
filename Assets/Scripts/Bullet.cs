@@ -74,7 +74,7 @@ public class Bullet : MonoBehaviour
         {
             Debug.Log("Contact ENEMY");
             enemy.SetDestroyed();   //Destruye al impactado
-            Destroy(gameObject);    //La bala se autodestruye
+            SetDestroyed();         //La bala se autodestruye
         }
 
         if (player != null)
@@ -91,15 +91,26 @@ public class Bullet : MonoBehaviour
             else   
                 player.SetDestroyed();  //Destruye al impactado
 
-            Destroy(gameObject);    //La bala se autodestruye
+            SetDestroyed();         //La bala se autodestruye
         }
 
         if (bullet != null)
         {
             Debug.Log("Contact BULLET");
-            bullet.SetDestroyed();   //Destruye al impactado
-            Destroy(gameObject);    //La bala se autodestruye
+            bullet.SetDestroyed();  //Destruye al impactado
+            SetDestroyed();         //La bala se autodestruye
         }
+    }
+    private void OnTriggerEnter(Collider other)
+    {
+        bullet = other.GetComponentInParent<Bullet>();
+        if (bullet != null)
+        {
+            Debug.Log("Contact BULLET");
+            bullet.SetDestroyed();  //Destruye al impactado
+            SetDestroyed();         //La bala se autodestruye
+        }
+
     }
 
 
@@ -117,7 +128,7 @@ public class Bullet : MonoBehaviour
     public void SetDestroyed()
     {
         //invulnerabilityTime = time;
-        Destroy(gameObject);
+        Destroy(gameObject);         //La bala se autodestruye
     }
 }
 
