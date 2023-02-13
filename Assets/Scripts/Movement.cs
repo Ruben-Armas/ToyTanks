@@ -59,7 +59,6 @@ public class Movement : MonoBehaviour
             if (dot > 0.9f)
             {
                 _rigidbody.velocity = vel;  //--MUEVE--
-                Debug.Log($"Vel {_rigidbody.velocity}");
 
                 //Animación Forward     (todo lo de abajo es para controlar la animación)
                 _animator.SetBool("Forward", true);

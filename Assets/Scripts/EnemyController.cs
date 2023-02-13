@@ -6,15 +6,15 @@ using UnityEngine.AI;
 [RequireComponent(typeof(Animator))]
 public class EnemyController : MonoBehaviour
 {
-    public Weapon weapon;
     public Transform turret;
     public Vector2 desiredMovement;
 
     public float movementSpeed = 3;
-    public float rotationSpeed = 10;
-    public float precisionRotate = 9.7f;
+    public float rotationSpeed = 80;
+    public float precisionRotate = 0.97f;
 
     private Animator _animator;
+    private Weapon _weapon;
 
     private Vector3 _initialPosition;
     private Vector3 _towardsDirection;
@@ -26,7 +26,7 @@ public class EnemyController : MonoBehaviour
         Idle,
         TrackingTarget,
         Cooldown,
-        Moving,
+        Move,
         Aim,
         Shoot,
         ReturnHome
@@ -46,6 +46,7 @@ public class EnemyController : MonoBehaviour
     {
         _navMeshAgent = GetComponent<NavMeshAgent>();
         _animator = GetComponent<Animator>();
+        _weapon = gameObject.GetComponentInChildren<Weapon>();
 
         _initialPosition = gameObject.transform.position;
 
@@ -54,7 +55,7 @@ public class EnemyController : MonoBehaviour
         StartCoroutine(FSM());
     }
 
-    //Mac.Estados------------
+    //Maq.Estados------------
     void ChangeState(State nextState)
     {
         _currentState = nextState;
@@ -106,6 +107,7 @@ public class EnemyController : MonoBehaviour
             bool hasTarget = _currentTarget != null;
             if (hasTarget)
             {
+                //ChangeState(State.Move);
                 //Movimiento
                 if (_currentTarget != null && _currentTarget.position != null)
                 {
@@ -114,17 +116,26 @@ public class EnemyController : MonoBehaviour
                     //_movement.desiredMovement = desiredMovement;
 
                     RotateToMesh(); //Rota
-                    MoveForward();  //Avanza
-                }
 
+                    float distance = Vector3.Distance(transform.position, _currentTarget.transform.position);
+                    if (distance > 5)   //Si no está pegado al target
+                    {
+                        MoveForward();  //Avanza
+                    }
+
+                }
                 else
                     _navMeshAgent.SetDestination(_initialPosition);
 
-                /*DISPARA
+                //DISPARA
+                Vector3 towardsTarget = _currentTarget.position - transform.position;
+                _weapon.transform.forward =
+                    Vector3.Lerp(_weapon.transform.forward, towardsTarget.normalized, Time.deltaTime);
+                //_weapon.transform.LookAt(_currentTarget);   //Instantáneo
+
                 bool canShoot = Vector3.Dot(_weapon.transform.forward, towardsTarget.normalized) > 0.99;
                 if (canShoot)
                     _weapon.Fire();
-                */
             }
             else
                 ChangeState(State.Cooldown);
@@ -135,6 +146,61 @@ public class EnemyController : MonoBehaviour
         //Punto de salida
         Debug.Log("Saliendo de Tracking...");
     }
+    /*
+    IEnumerator Move()
+    {
+        //Punto de entrada
+        Debug.Log("Entrando en Move...");
+
+        //Ejecución del estado
+        while (_currentState == State.Move)
+        {
+            //Movimiento
+            if (_currentTarget != null && _currentTarget.position != null)
+            {
+                //_navMeshAgent.SetDestination(_currentTarget.position);
+                desiredMovement = new Vector2(_currentTarget.position.x, _currentTarget.position.z);
+                //_movement.desiredMovement = desiredMovement;
+
+                RotateToMesh(); //Rota
+
+                float distance = Vector3.Distance(transform.position, _currentTarget.transform.position);
+                if (distance > 5)   //Si no está pegado al target
+                {
+                    MoveForward();  //Avanza
+                }
+
+            }
+            else
+                _navMeshAgent.SetDestination(_initialPosition);
+
+            ChangeState(State.TrackingTarget);
+
+            yield return 0;
+        }
+
+        //Punto de salida
+        Debug.Log("Saliendo de Move...");
+    }*/
+    /*
+    IEnumerator Aim()
+    {
+        //Punto de entrada
+        Debug.Log("Entrando en Aim...");
+
+        //Ejecución del estado
+        while (_currentState == State.Aim)
+        {
+            
+
+            ChangeState(State.TrackingTarget);
+
+            yield return 0;
+        }
+
+        //Punto de salida
+        Debug.Log("Saliendo de Aim...");
+    }*/
     IEnumerator Cooldown()
     {
         //Punto de entrada
@@ -157,7 +223,7 @@ public class EnemyController : MonoBehaviour
         //ChangeState(State.Idle);
         ChangeState(State.TrackingTarget);
     }
-    //----------------Mac.Estados
+    //----------------Maq.Estados
 
     private GameObject FindClosestPlayer()
     {
@@ -198,54 +264,59 @@ public class EnemyController : MonoBehaviour
     private void RotateToMesh()
     {
         _path = new NavMeshPath();
-        Vector3 direction;
+        _animator.SetBool("Forward", false);
         if (_navMeshAgent.CalculatePath(_currentTarget.position, _path))
         {
             if (_path.corners.Length > 1)
             {
                 //Dirección a seguir en la malla
-                direction = (_path.corners[1] - transform.position).normalized;
+                _towardsDirection = (_path.corners[1] - transform.position).normalized;
                 //transform.rotation = Quaternion.LookRotation(direction);
 
                 //ROTAR
-                Quaternion targetRotation = Quaternion.LookRotation(direction);
+                Quaternion targetRotation = Quaternion.LookRotation(_towardsDirection);
                 transform.rotation = Quaternion.RotateTowards(
                     transform.rotation, targetRotation, rotationSpeed * Time.deltaTime);
+
+
+                //Compruebo si el tanque está rotando a la derecha o a la izquierda
+                float dotRight = Vector3.Dot(_navMeshAgent.transform.right, _towardsDirection); // + derecha | - izquierda
+                if (dotRight > 0)
+                {
+                    //Animación de rotación a la derecha
+                    _animator.SetBool("Right", true);
+                    _animator.SetBool("Left", false);
+                }
+                else
+                {
+                    //Animación de rotación a la izquierda
+                    _animator.SetBool("Right", false);
+                    _animator.SetBool("Left", true);
+                }
             }
         }
+        //Paro las animaciones
+        _animator.SetBool("Forward", false);
+        _animator.SetBool("Left", false);
+        _animator.SetBool("Right", false);
     }
     private void MoveForward()
     {
         _towardsDirection = (_path.corners[1] - transform.position).normalized;
+        _animator.SetBool("Right", false);
+        _animator.SetBool("Left", false);
 
         //AVANZA si está en el forward
-        if (Vector3.Dot(_navMeshAgent.transform.forward, _towardsDirection) > 0.95f)
+        if (Vector3.Dot(_navMeshAgent.transform.forward, _towardsDirection) > precisionRotate)
         {
             _navMeshAgent.Move(transform.forward * movementSpeed * Time.deltaTime);
 
             //Animación Forward     (todo lo de abajo es para controlar la animación)
             _animator.SetBool("Forward", true);
-            _animator.SetBool("Right", false);
-            _animator.SetBool("Left", false);
         }
         else
         {
             _navMeshAgent.speed = 0f;
-
-            //Compruebo si el tanque está rotando a la derecha o a la izquierda
-            float dotRight = Vector3.Dot(_navMeshAgent.transform.right, _towardsDirection); // + derecha | - izquierda
-            if (dotRight > 0)
-            {
-                //Animación de rotación a la derecha
-                _animator.SetBool("Right", true);
-                _animator.SetBool("Left", false);
-            }
-            else
-            {
-                //Animación de rotación a la izquierda
-                _animator.SetBool("Right", false);
-                _animator.SetBool("Left", true);
-            }
         }
     }
     /*
@@ -285,6 +356,7 @@ public class EnemyController : MonoBehaviour
             //Debug.Log("PewPew");
         }
     }*/
+    
 
     public void SetDestroyed()
     {
