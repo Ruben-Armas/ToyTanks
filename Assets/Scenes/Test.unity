@@ -9044,6 +9044,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Enemy_Red (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 8665461898255977889, guid: b457d6d0f852573488c50e39475d7e4b, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_AddedGameObjects: []
   m_SourcePrefab: {fileID: 100100000, guid: b457d6d0f852573488c50e39475d7e4b, type: 3}
@@ -12897,25 +12901,13 @@ PrefabInstance:
       propertyPath: m_Name
       value: Tank_Blue
       objectReference: {fileID: 0}
-    - target: {fileID: 4834055819713867425, guid: e037ca1509ab48940b258ffeea11e0c0, type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4834055819713867425, guid: e037ca1509ab48940b258ffeea11e0c0, type: 3}
-      propertyPath: m_TagString
-      value: Player
-      objectReference: {fileID: 0}
-    - target: {fileID: 4834055819713867427, guid: e037ca1509ab48940b258ffeea11e0c0, type: 3}
-      propertyPath: m_Enabled
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 4834055819713867431, guid: e037ca1509ab48940b258ffeea11e0c0, type: 3}
       propertyPath: m_RootOrder
       value: 9
       objectReference: {fileID: 0}
     - target: {fileID: 4834055819713867431, guid: e037ca1509ab48940b258ffeea11e0c0, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -2.04
+      value: 3.72
       objectReference: {fileID: 0}
     - target: {fileID: 4834055819713867431, guid: e037ca1509ab48940b258ffeea11e0c0, type: 3}
       propertyPath: m_LocalPosition.y
@@ -12923,7 +12915,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4834055819713867431, guid: e037ca1509ab48940b258ffeea11e0c0, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 5
+      value: 5.73
       objectReference: {fileID: 0}
     - target: {fileID: 4834055819713867431, guid: e037ca1509ab48940b258ffeea11e0c0, type: 3}
       propertyPath: m_LocalRotation.w
@@ -13077,7 +13069,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4862822824241569333, guid: b93b299e9ea2d6943abd32394768d469, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_AddedGameObjects: []
