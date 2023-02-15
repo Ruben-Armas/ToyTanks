@@ -37,7 +37,7 @@ public class Bullet : MonoBehaviour
             // Comprueba si la colisión es con una pared
             if (hit.collider.GetComponentInParent<Wall>() != null)
             {
-                Debug.Log("Wall");
+                //Debug.Log("Wall");
                 if (checkIfSelfDestroy() == false)
                 {
                     // Calcula la normal de la superficie de la pared con la que chocando
@@ -46,7 +46,7 @@ public class Bullet : MonoBehaviour
 
                     // Calcula la dirección de rebote
                     Vector3 reflectedDirection = Vector3.Reflect(rigidbody.velocity, hit.normal);
-                    Debug.Log($"reflectedDirection -> {reflectedDirection}");
+                    //Debug.Log($"reflectedDirection -> {reflectedDirection}");
                     Debug.DrawLine(hit.point, hit.point + normal * 10, Color.red, 5);
                     Debug.DrawLine(hit.point, hit.point + reflectedDirection * 10, Color.blue, 5);
 
@@ -72,7 +72,7 @@ public class Bullet : MonoBehaviour
 
         if (enemy != null)
         {
-            Debug.Log("Contact ENEMY");
+            //Debug.Log("Contact ENEMY");
             enemy.SetDestroyed();   //Destruye al impactado
             SetDestroyed();         //La bala se autodestruye
         }
@@ -82,11 +82,11 @@ public class Bullet : MonoBehaviour
             //Debug.Log("Contact PLAYER");
             currentShield = player.GetComponent<Shield>();
             bool haveShield = currentShield.getShield();
-            Debug.Log(haveShield);
+            //Debug.Log($"Escudo -> {haveShield}");
             if (currentShield != null && currentShield.getShield())   //Si tiene escudo
             {
                 currentShield.deactivateShield();   //Lo desactivo           
-                Debug.Log("Escudo Rotooo!!");
+                //Debug.Log("Escudo Rotooo!!");
             }
             else   
                 player.SetDestroyed();  //Destruye al impactado
@@ -96,7 +96,7 @@ public class Bullet : MonoBehaviour
 
         if (bullet != null)
         {
-            Debug.Log("Contact BULLET");
+            //Debug.Log("Contact BULLET");
             bullet.SetDestroyed();  //Destruye al impactado
             SetDestroyed();         //La bala se autodestruye
         }
@@ -106,7 +106,7 @@ public class Bullet : MonoBehaviour
         bullet = other.GetComponentInParent<Bullet>();
         if (bullet != null)
         {
-            Debug.Log("Contact BULLET");
+            //Debug.Log("Contact BULLET");
             bullet.SetDestroyed();  //Destruye al impactado
             SetDestroyed();         //La bala se autodestruye
         }

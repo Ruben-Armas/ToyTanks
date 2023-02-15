@@ -4,21 +4,26 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    //EVENTO (DELEGADO)   --> características a las que llama
+    public delegate void PlayerCreated(Player player, Vector3 position);
+    public static event PlayerCreated onPlayerCreated;        //(EVENTO)
+    //EVENTO (DELEGADO)   --> características a las que llama
+    public delegate void PlayerDestroyed(Player player, Vector3 position);
+    public static event PlayerDestroyed onPlayerDestroyed;    //(EVENTO)
 
-    // Update is called once per frame
-    void Update()
+    private void Awake()
     {
-        
+        //Evento
+        if (onPlayerCreated != null)
+            onPlayerCreated(this, transform.position);
     }
 
     public void SetDestroyed()
     {
         //invulnerabilityTime = time;
+        //Evento
+        if (onPlayerDestroyed != null)
+            onPlayerDestroyed(this, transform.position);
         Destroy(gameObject);
     }
 }

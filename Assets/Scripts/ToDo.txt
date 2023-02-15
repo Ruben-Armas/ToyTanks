@@ -8,6 +8,7 @@ X gamepad -> apuntado
 X disparar
 X Cada jugador tiene una vida por nivel, es decir, será destruido si le alcanzan.
 O soltar minas
+X Trail de las orugas
 
 
 2. Enemigos:
@@ -16,9 +17,8 @@ O Tipos
 	O Normal
 	O Solo minas
 	O Balas lentas con más rebotes
-O Los enemigos se mueven y disparan aleatoriamente, o hacia el jugador más cercano.
-O Hay de distintos tipos, unos solo disparan y otros ponen minas.
-O Máquina de estados
+- Los enemigos se mueven y disparan aleatoriamente, o hacia el jugador más cercano.
+- Máquina de estados
 	X Rotar
 	X Moverse
 	X Mover Torreta
@@ -26,7 +26,7 @@ O Máquina de estados
 	X Disparar
 		X Cooldown fireRate
 	X Cooldown
-		O Rotar torreta a modo de búsqueda
+		X Rotar torreta a modo de búsqueda
 
 
 3. Balas:
@@ -67,6 +67,18 @@ O Guarda la puntuación récord.
 O Empieza con los contadores de puntuación a cero. 
 O Empieza con una vida.
 O Se termina cuando pierdes un nivel y no te quedan vidas.
+
+O Lista de players
+	O Eventos
+X Lista de enemigos
+	X Eventos
+	O Refactorizar clases Enemy y EnemyController
+
+O OnRoundEnds
+	O Limpiar las listas de enemigos/jugadores
+	O Guardar puntuación
+	O ¿deshabilitar inputs de tanque?
+	O ¿eliminar tanques?
 
 
 7. Nivel:
@@ -116,6 +128,8 @@ O Al explotar una mina
 
 
 11. Puntuación
+
+O Ronda máx
 
 O Total= Total + ContActual * nº nivel
 O   ContActual = puntos tanques enemigos

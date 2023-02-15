@@ -6,22 +6,32 @@ using UnityEngine.AI;
 [RequireComponent(typeof(Animator))]
 public class EnemyController : MonoBehaviour
 {
-    public Transform turret;
-    public Vector2 desiredMovement;
+    //EVENTO (DELEGADO)   --> características a las que llama
+    public delegate void EnemyCreated(EnemyController enemyController, Vector3 position);
+    public static event EnemyCreated onEnemyCreated;        //(EVENTO)
+    //EVENTO (DELEGADO)   --> características a las que llama
+    public delegate void EnemyDestroyed(EnemyController enemyController, Vector3 position);    
+    public static event EnemyDestroyed onEnemyDestroyed;    //(EVENTO)
 
+
+    public Transform turret;
+
+    [Header("Movement")]
     public float movementSpeed = 3;
     public float rotationSpeed = 80;
     public float precisionRotate;
+    [Header("Fire")]
     public float cooldownFireRate;
     public float precisionFire;
 
     private Animator _animator;
     private Weapon _weapon;
 
+    private Vector2 _desiredMovement;
     private Vector3 _initialPosition;
     private Vector3 _towardsDirection;
     private NavMeshPath _path;
-    private bool canFire = true;
+    private bool _canFire = true;
 
     //Maq Estados
     public enum State
@@ -52,6 +62,10 @@ public class EnemyController : MonoBehaviour
         _weapon = gameObject.GetComponentInChildren<Weapon>();
 
         _initialPosition = gameObject.transform.position;
+
+        //Evento
+        if (onEnemyCreated != null)
+            onEnemyCreated(this, transform.position);
 
         //Maq.Estados-----------
         ChangeState(State.TrackingTarget);
@@ -115,8 +129,8 @@ public class EnemyController : MonoBehaviour
                 if (_currentTarget != null && _currentTarget.position != null)
                 {
                     //_navMeshAgent.SetDestination(_currentTarget.position);
-                    desiredMovement = new Vector2(_currentTarget.position.x, _currentTarget.position.z);
-                    //_movement.desiredMovement = desiredMovement;
+                    _desiredMovement = new Vector2(_currentTarget.position.x, _currentTarget.position.z);
+                    //_movement._desiredMovement = _desiredMovement;
 
                     RotateToMesh(); //Rota
 
@@ -139,7 +153,7 @@ public class EnemyController : MonoBehaviour
 
                 //DISPARA
                 bool canShoot = Vector3.Dot(_weapon.transform.forward, towardsTarget.normalized) > precisionFire;
-                if (canShoot && canFire)
+                if (canShoot && _canFire)
                 {//-----Lanzar un rayo para comprobar si hay un muro muy cerca-----
                     if (CheckFreeShoot(towardsTarget))
                     {
@@ -171,8 +185,8 @@ public class EnemyController : MonoBehaviour
             if (_currentTarget != null && _currentTarget.position != null)
             {
                 //_navMeshAgent.SetDestination(_currentTarget.position);
-                desiredMovement = new Vector2(_currentTarget.position.x, _currentTarget.position.z);
-                //_movement.desiredMovement = desiredMovement;
+                _desiredMovement = new Vector2(_currentTarget.position.x, _currentTarget.position.z);
+                //_movement._desiredMovement = _desiredMovement;
 
                 RotateToMesh(); //Rota
 
@@ -247,9 +261,9 @@ public class EnemyController : MonoBehaviour
         //Debug.Log("Entrando en FireRate...");
 
         //Ejecución del estado
-        canFire = false;
+        _canFire = false;
         yield return new WaitForSeconds(cooldownFireRate);
-        canFire = true;
+        _canFire = true;
 
         //Punto de salida
         //Debug.Log("Saliendo de FireRate...");
@@ -382,6 +396,9 @@ public class EnemyController : MonoBehaviour
     public void SetDestroyed()
     {
         //invulnerabilityTime = time;
+        //Evento
+        if (onEnemyDestroyed != null)
+            onEnemyDestroyed(this, transform.position);
         Destroy(gameObject);
     }
 }
