@@ -9,6 +9,10 @@ public class GameManager : MonoBehaviour
     public GameObject enemyPrefab;
     public GameObject shieldPrefab;
 
+    [Header("Enemigos")]
+    public int minimumAmount;
+    public int maximumAmount;
+
     private Vector3 _playerStartPosition;
     private Vector3 _enemyStartPosition;
     private Vector3 _shieldStartPosition;
@@ -142,10 +146,7 @@ public class GameManager : MonoBehaviour
         }
         else
         {
-            //CreateEnemies()
-            //Vector3 nestStartPosition = stageGenerator.GetEnemyNestPosition(playerStartPosition);
-            Instantiate(enemyPrefab, _enemyStartPosition, Quaternion.Euler(0, 270, 0));
-            Instantiate(enemyPrefab, _enemyStartPosition, Quaternion.Euler(0, 270, 0));
+            CreateEnemies();
         }
     }
 
@@ -191,5 +192,12 @@ public class GameManager : MonoBehaviour
         listOfPlayers.Clear();
         listOfEnemies.Clear();
 
+    }
+
+    void CreateEnemies()
+    {
+        //Vector3 nestStartPosition = stageGenerator.GetEnemyNestPosition(playerStartPosition);
+        Instantiate(enemyPrefab, _enemyStartPosition, Quaternion.Euler(0, 270, 0));
+        Instantiate(enemyPrefab, _enemyStartPosition, Quaternion.Euler(0, 270, 0));
     }
 }

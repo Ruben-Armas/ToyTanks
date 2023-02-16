@@ -6,8 +6,11 @@ using UnityEngine;
 [RequireComponent(typeof(Animator))]
 public class Movement : MonoBehaviour
 {
-    public float maxSpeed;
-    public float rotationSpeed;
+    [Header("Movimiento")]
+    [Range(0f, 350f)]
+    public float maxSpeed = 250;
+    [Range(0f, 200f)]
+    public float rotationSpeed = 150;
     public Vector2 desiredMovement;
 
     private Rigidbody _rigidbody;

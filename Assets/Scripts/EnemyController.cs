@@ -6,15 +6,19 @@ using UnityEngine.AI;
 [RequireComponent(typeof(Animator))]
 public class EnemyController : MonoBehaviour
 {
-    public Transform turret;
-
     [Header("Movement")]
+    [Range(0f, 5f)]
     public float movementSpeed = 3;
-    public float rotationSpeed = 80;
-    public float precisionRotate;
+    [Range(0f, 100f)]
+    public float rotationSpeed = 100;
+    [Range(0.1f, 1f)]
+    public float precisionRotate = 0.97f;
+
     [Header("Fire")]
-    public float cooldownFireRate;
-    public float precisionFire;
+    [Range(0.1f, 10f)]
+    public float cooldownFireRate = 3;
+    [Range(0.1f, 1f)]
+    public float precisionFire = 0.97f;
 
     public enum SelectedTraking
     {

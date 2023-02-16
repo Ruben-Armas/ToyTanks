@@ -7,21 +7,25 @@ using UnityEngine.InputSystem;
 //[RequireComponent(typeof(Aim))]
 public class PlayerInputHandler : MonoBehaviour
 {
-    public float turnSensitivity;
     public Weapon weapon;
     public Transform turret;
-    public float lookSpeed;
-    public Vector3 desiredLook;
+    [Header("Torreta")]
+    [Range(0f, 20f)]
+    public float turnSensitivity = 10;
+    [Range(0f, 20f)]
+    public float lookSpeed = 10;
+
+    private Vector3 _desiredLook;
 
     [SerializeField]
     private Movement _movement;
-    [SerializeField]
-    private Aim _aim;
+    //[SerializeField]
+    //private Aim _aim;
 
     private void OnValidate()
     {
         _movement = GetComponent<Movement>();
-        _aim = GetComponent<Aim>();
+        //_aim = GetComponent<Aim>();
     }
     /*
     private void Awake()
@@ -69,11 +73,11 @@ public class PlayerInputHandler : MonoBehaviour
 
 
             /*//GRADUAL??
-            desiredLook = new Vector3(joystickLook.x, 0, joystickLook.y);
+            _desiredLook = new Vector3(joystickLook.x, 0, joystickLook.y);
 
-            //turret.forward = Vector3.Lerp(turret.forward, desiredLook, lookSpeed * Time.deltaTime);
+            //turret.forward = Vector3.Lerp(turret.forward, _desiredLook, lookSpeed * Time.deltaTime);
 
-            Quaternion targetRotation = Quaternion.LookRotation(desiredLook, Vector3.up);
+            Quaternion targetRotation = Quaternion.LookRotation(_desiredLook, Vector3.up);
 
             //turret.rotation = Quaternion.Lerp(turret.rotation, targetRotation, lookSpeed * Time.deltaTime);
             turret.rotation = Quaternion.RotateTowards(turret.rotation, targetRotation, Time.deltaTime * lookSpeed);
@@ -86,18 +90,18 @@ public class PlayerInputHandler : MonoBehaviour
             Debug.Log($"Look{joystickLook}");
             Debug.Log($"x{joystickLook.x} y{joystickLook.y}");
 
-            desiredLook = new Vector3(joystickLook.x, 0, joystickLook.y);
-            Debug.Log($"dLook{desiredLook}");
-            Quaternion targetRotation = Quaternion.LookRotation(desiredLook);
+            _desiredLook = new Vector3(joystickLook.x, 0, joystickLook.y);
+            Debug.Log($"dLook{_desiredLook}");
+            Quaternion targetRotation = Quaternion.LookRotation(_desiredLook);
             turret.rotation = targetRotation;
             //turret.rotation = Quaternion.Lerp(turret.rotation.normalized, targetRotation.normalized, lookSpeed * Time.deltaTime);
             Debug.Log($"tR{targetRotation}");
-            //turret.forward = Vector3.Lerp(turret.forward, desiredLook, lookSpeed * Time.deltaTime);
+            //turret.forward = Vector3.Lerp(turret.forward, _desiredLook, lookSpeed * Time.deltaTime);
             ----*/
 
 
             /*
-            //_rotationY += desiredLook.x * rotationSpeed * Time.fixedDeltaTime;
+            //_rotationY += _desiredLook.x * rotationSpeed * Time.fixedDeltaTime;
             turret.rotation = Quaternion.Euler(
                 turret.rotation.eulerAngles.x,
                 joystickLook.x * lookSpeed * Time.fixedDeltaTime,
@@ -105,5 +109,6 @@ public class PlayerInputHandler : MonoBehaviour
             */
         }
 
-        
-    }}
+
+    }
+}
