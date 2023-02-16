@@ -16,6 +16,15 @@ public class EnemyController : MonoBehaviour
     public float cooldownFireRate;
     public float precisionFire;
 
+    public enum SelectedTraking
+    {
+        FindClosestPlayer,
+        FocusTarget
+    }
+    [Header("Type Of Traking")]
+    [SerializeField]
+    private SelectedTraking traking;
+
     private Animator _animator;
     private Weapon _weapon;
 
@@ -24,6 +33,7 @@ public class EnemyController : MonoBehaviour
     private Vector3 _towardsDirection;
     private NavMeshPath _path;
     private bool _canFire = true;
+    private GameObject goTarget;
 
     //Maq Estados
     public enum State
@@ -76,7 +86,7 @@ public class EnemyController : MonoBehaviour
     IEnumerator Idle()
     {
         //Punto de entrada
-        Debug.Log("Entrando en Idle...");
+        //Debug.Log("Entrando en Idle...");
 
         //Ejecución del estado
         while (_currentState == State.Idle)
@@ -88,17 +98,24 @@ public class EnemyController : MonoBehaviour
         }
 
         //Punto de salida
-        Debug.Log("Saliendo de Idle...");
+        //Debug.Log("Saliendo de Idle...");
     }
     IEnumerator TrackingTarget()
     {
         //Punto de entrada
-        Debug.Log("Entrando en Tracking...");
+        //Debug.Log("Entrando en Tracking...");
 
-        // Busca todo el rato el target más cercano
-        //GameObject goTarget = FindClosestPlayer();
-        // FIJA un Taget
-        GameObject goTarget = Focustarget();
+        if (traking == SelectedTraking.FindClosestPlayer)
+        {
+            // Busca todo el rato el target más cercano
+            goTarget = FindClosestPlayer();
+            Debug.Log("CLOSEST");
+        }else if(traking == SelectedTraking.FocusTarget)
+        {
+            // FIJA un Taget
+            goTarget = FocusTarget();
+            Debug.Log("FOCUES");
+        }        
 
         //Ejecución del estado
         while (_currentState == State.TrackingTarget)
@@ -158,7 +175,7 @@ public class EnemyController : MonoBehaviour
         }
 
         //Punto de salida
-        Debug.Log("Saliendo de Tracking...");
+        //Debug.Log("Saliendo de Tracking...");
     }
     /*
     IEnumerator Move()
@@ -218,7 +235,7 @@ public class EnemyController : MonoBehaviour
     IEnumerator Cooldown()
     {
         //Punto de entrada
-        Debug.Log("Entrando en Cooldown...");
+        //Debug.Log("Entrando en Cooldown...");
         float coolDownTime = 5f;
         float elapsedTime = 0;
 
@@ -237,7 +254,7 @@ public class EnemyController : MonoBehaviour
         }
 
         //Punto de salida
-        Debug.Log("Saliendo de Cooldown...");
+        //Debug.Log("Saliendo de Cooldown...");
         //ChangeState(State.Idle);
         ChangeState(State.TrackingTarget);
     }
@@ -273,7 +290,7 @@ public class EnemyController : MonoBehaviour
         }
         if (Physics.Raycast(_weapon.transform.position, towardsTarget, out hitEnemy, 30)) // Comprueba si choca
         {
-            // Comprueba si la colisión es con un enemigo
+            // Comprueba si la colisión es con un enemigo "Aliado"
             if (hitEnemy.collider.GetComponent<EnemyController>() != null)
             {
                 freeEnemy = false;
@@ -302,11 +319,11 @@ public class EnemyController : MonoBehaviour
                     closestPlayer = player;
                 }
             }
-            Debug.Log($"Objetivo {closestPlayer.name}");
+            //Debug.Log($"Objetivo {closestPlayer.name}");
         }
         return closestPlayer;
     }
-    private GameObject Focustarget()
+    private GameObject FocusTarget()
     {
         GameObject goFocus = null;
         //Si no tiene target, el enemigo busca al target (si existe)
@@ -315,8 +332,8 @@ public class EnemyController : MonoBehaviour
             if (GameObject.FindGameObjectWithTag("Player") != null)
             {
                 goFocus = GameObject.FindGameObjectWithTag("Player");
-                Debug.Log("Fijando Objetivo...");
-                Debug.Log($"Objetivo {goFocus.name}");
+                //Debug.Log("Fijando Objetivo...");
+                //Debug.Log($"Objetivo {goFocus.name}");
             }
         }
         return goFocus;
