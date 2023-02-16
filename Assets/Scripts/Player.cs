@@ -11,8 +11,12 @@ public class Player : MonoBehaviour
     public delegate void PlayerDestroyed(Player player, Vector3 position);
     public static event PlayerDestroyed onPlayerDestroyed;    //(EVENTO)
 
+    public Vector3 startPosition { get; private set; }
+
     private void Awake()
     {
+        startPosition = transform.position;
+
         //Evento
         if (onPlayerCreated != null)
             onPlayerCreated(this, transform.position);

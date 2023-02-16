@@ -9,7 +9,7 @@ public class Weapon : MonoBehaviour
 
     public void Fire()
     {
-        Debug.Log(muzzle.position);
+        //Debug.Log(muzzle.position);
         Instantiate(
             bulletPrefab,
             muzzle.position,

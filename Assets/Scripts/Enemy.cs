@@ -11,9 +11,12 @@ public class Enemy : MonoBehaviour
     public delegate void EnemyDestroyed(Enemy enemyDestroyed, Vector3 position);
     public static event EnemyDestroyed onEnemyDestroyed;    //(EVENTO)
 
+    public Vector3 startPosition { get; private set; }
 
     private void Awake()
     {
+        startPosition = transform.position;
+
         //Evento
         if (onEnemyCreated != null)
             onEnemyCreated(this, transform.position);

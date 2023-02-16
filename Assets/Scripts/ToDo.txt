@@ -17,6 +17,7 @@ O Tipos
 	O Solo minas
 	O Balas lentas con más rebotes
 - Los enemigos se mueven y disparan aleatoriamente, o hacia el jugador más cercano.
+X Selector de tipo de traking
 - Máquina de estados
 	X Rotar
 	X Moverse
@@ -68,20 +69,34 @@ O Empieza con una vida.
 O Se termina cuando pierdes un nivel y no te quedan vidas.
 
 O BeginGame()
-	O Comprobar si hay una lista de enemigos, sino crearlos (nº aleatorio)
+	X Comprobar si hay una lista de enemigos, sino crearlos (nº aleatorio)
+		O Crearlos en Posición y cantidad aleatoria
+	X Comprobar si hay una lista de jugadores, sino crearlos
+		X Si tienes compañero y ha muerto, que vuelva a spawnear
 
 X Lista de players
 	X Eventos
 X Lista de enemigos
 	X Eventos
-	O Refactorizar clases Enemy y EnemyController
+	X Refactorizar clases Enemy y EnemyController
 
 O OnRoundEnds
 	O Limpiar las listas de enemigos/jugadores
 	O Guardar puntuación
 	O ¿deshabilitar inputs de tanque?
 	O ¿eliminar tanques?
+O OnPlayerRoundEnds
+	X Si no hay vidas -> OnGameOver()
+	X Quitar una vida
+O OnEnemyRoundEnds
+	O NextLevel()
 
+O NextLevel()
+	O ClearScene()
+
+O OnGameOver()
+	O Pantalla de GameOver UI
+	O Cambiar controles a UI
 
 7. Nivel:
 

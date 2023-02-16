@@ -109,12 +109,10 @@ public class EnemyController : MonoBehaviour
         {
             // Busca todo el rato el target más cercano
             goTarget = FindClosestPlayer();
-            Debug.Log("CLOSEST");
         }else if(traking == SelectedTraking.FocusTarget)
         {
             // FIJA un Taget
             goTarget = FocusTarget();
-            Debug.Log("FOCUES");
         }        
 
         //Ejecución del estado
@@ -162,7 +160,7 @@ public class EnemyController : MonoBehaviour
                 {//-----Lanzar un rayo para comprobar si hay un muro muy cerca-----
                     if (CheckFreeShoot(towardsTarget))
                     {
-                        Debug.Log("DISPAROOO!!");
+                        //Debug.Log("DISPAROOO!!");
                         _weapon.Fire();
                         StartCoroutine(CooldownFireRate());
                     }                       
