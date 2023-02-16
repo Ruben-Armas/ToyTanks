@@ -14,7 +14,7 @@ public class GameManager : MonoBehaviour
     private Vector3 _shieldStartPosition;
 
     private List<Player> listOfPlayers = new List<Player>();
-    private List<EnemyController> listOfEnemies = new List<EnemyController>();
+    private List<Enemy> listOfEnemies = new List<Enemy>();
 
     private int _level;
 
@@ -38,16 +38,16 @@ public class GameManager : MonoBehaviour
     {
         Player.onPlayerCreated += OnPlayerCreated;
         Player.onPlayerDestroyed += OnPlayerDestroyed;
-        EnemyController.onEnemyCreated += OnEnemyCreated;
-        EnemyController.onEnemyDestroyed += OnEnemyDestroyed;
+        Enemy.onEnemyCreated += OnEnemyCreated;
+        Enemy.onEnemyDestroyed += OnEnemyDestroyed;
     }
     //DESUSCRIPCIÓN al EVENTO
     void OnDisable()
     {
         Player.onPlayerCreated -= OnPlayerCreated;
         Player.onPlayerDestroyed -= OnPlayerDestroyed;
-        EnemyController.onEnemyCreated -= OnEnemyCreated;
-        EnemyController.onEnemyDestroyed -= OnEnemyDestroyed;
+        Enemy.onEnemyCreated -= OnEnemyCreated;
+        Enemy.onEnemyDestroyed -= OnEnemyDestroyed;
     }
     //DELEGADOS
     private void OnPlayerCreated(Player playerCreated, Vector3 position)
@@ -66,13 +66,13 @@ public class GameManager : MonoBehaviour
             //HACER aquí la COMPROBACIÓN de si quedan más VIDAS???
     }
 
-    private void OnEnemyCreated(EnemyController enemyCreated, Vector3 position)
+    private void OnEnemyCreated(Enemy enemyCreated, Vector3 position)
     {
         //Añado el enemigo creado a la lista de Enemigos
         listOfEnemies.Add(enemyCreated);
         Debug.Log(listOfEnemies.Count);
     }
-    private void OnEnemyDestroyed(EnemyController enemyDestroyed, Vector3 position)
+    private void OnEnemyDestroyed(Enemy enemyDestroyed, Vector3 position)
     {
         //Borro el enemigo destruido de la lista de Enemigos
         listOfEnemies.Remove(enemyDestroyed);

@@ -8,7 +8,6 @@ X gamepad -> apuntado
 X disparar
 X Cada jugador tiene una vida por nivel, es decir, será destruido si le alcanzan.
 O soltar minas
-X Trail de las orugas
 
 
 2. Enemigos:
@@ -68,8 +67,11 @@ O Empieza con los contadores de puntuación a cero.
 O Empieza con una vida.
 O Se termina cuando pierdes un nivel y no te quedan vidas.
 
-O Lista de players
-	O Eventos
+O BeginGame()
+	O Comprobar si hay una lista de enemigos, sino crearlos (nº aleatorio)
+
+X Lista de players
+	X Eventos
 X Lista de enemigos
 	X Eventos
 	O Refactorizar clases Enemy y EnemyController
@@ -110,6 +112,9 @@ O Vidas restantes para reintentar niveles cuando eliminan a todos los jugadores.
 O Al disparar la bala
 O Al rebotar la bala
 X Trail de la bala
+X Trail de las orugas
+X Partículas de humo
+	O Más partículas cuando acelere (Emission)
 
 O Al morir/explotar un tanque
 

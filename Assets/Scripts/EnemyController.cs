@@ -6,14 +6,6 @@ using UnityEngine.AI;
 [RequireComponent(typeof(Animator))]
 public class EnemyController : MonoBehaviour
 {
-    //EVENTO (DELEGADO)   --> características a las que llama
-    public delegate void EnemyCreated(EnemyController enemyController, Vector3 position);
-    public static event EnemyCreated onEnemyCreated;        //(EVENTO)
-    //EVENTO (DELEGADO)   --> características a las que llama
-    public delegate void EnemyDestroyed(EnemyController enemyController, Vector3 position);    
-    public static event EnemyDestroyed onEnemyDestroyed;    //(EVENTO)
-
-
     public Transform turret;
 
     [Header("Movement")]
@@ -61,11 +53,7 @@ public class EnemyController : MonoBehaviour
         _animator = GetComponent<Animator>();
         _weapon = gameObject.GetComponentInChildren<Weapon>();
 
-        _initialPosition = gameObject.transform.position;
-
-        //Evento
-        if (onEnemyCreated != null)
-            onEnemyCreated(this, transform.position);
+        _initialPosition = gameObject.transform.position;        
 
         //Maq.Estados-----------
         ChangeState(State.TrackingTarget);
@@ -390,15 +378,5 @@ public class EnemyController : MonoBehaviour
         {
             _navMeshAgent.speed = 0f;
         }
-    }
-    
-
-    public void SetDestroyed()
-    {
-        //invulnerabilityTime = time;
-        //Evento
-        if (onEnemyDestroyed != null)
-            onEnemyDestroyed(this, transform.position);
-        Destroy(gameObject);
     }
 }

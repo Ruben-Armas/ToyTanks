@@ -11,7 +11,7 @@ public class Bullet : MonoBehaviour
     private int contBounces;
     private bool canDetectCollision = true;
 
-    private EnemyController enemy;
+    private Enemy enemy;
     private Player player;
     private Bullet bullet;
     private Shield currentShield;
@@ -66,7 +66,7 @@ public class Bullet : MonoBehaviour
     private void OnCollisionEnter(Collision collision)
     {
         // Comprueba si la colisión es con un jugador, un enemigo o una bala
-        enemy = collision.collider.GetComponentInParent<EnemyController>();
+        enemy = collision.collider.GetComponentInParent<Enemy>();
         player = collision.collider.GetComponent<Player>();
         bullet = collision.collider.GetComponentInParent<Bullet>();
 

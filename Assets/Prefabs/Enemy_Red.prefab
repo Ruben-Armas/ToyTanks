@@ -694,6 +694,7 @@ GameObject:
   - component: {fileID: 8665461898255977888}
   - component: {fileID: 7428135019761084191}
   - component: {fileID: 1834323697}
+  - component: {fileID: -5629531334144546290}
   - component: {fileID: 3787422810958176240}
   - component: {fileID: 3657200478503351674}
   - component: {fileID: 6987738626326265616}
@@ -755,6 +756,18 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 2, y: 2.2, z: 2.5}
   m_Center: {x: 0, y: 0.9, z: -0.08}
+--- !u!114 &-5629531334144546290
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8665461898255977889}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b34aa8a63fcbe09479f38f5184d57021, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &3787422810958176240
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -768,7 +781,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   turret: {fileID: 0}
-  desiredMovement: {x: 0, y: 0}
   movementSpeed: 3
   rotationSpeed: 100
   precisionRotate: 0.97
