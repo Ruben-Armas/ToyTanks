@@ -8185,7 +8185,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &1423864507
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8201,6 +8201,9 @@ MonoBehaviour:
   playerPrefab: {fileID: 4834055819713867425, guid: e037ca1509ab48940b258ffeea11e0c0, type: 3}
   enemyPrefab: {fileID: 8665461898255977889, guid: b457d6d0f852573488c50e39475d7e4b, type: 3}
   shieldPrefab: {fileID: 4862822824241569333, guid: b93b299e9ea2d6943abd32394768d469, type: 3}
+  minimumAmount: 0
+  maximumAmount: 0
+  currentLives: 2
 --- !u!4 &1423864508
 Transform:
   m_ObjectHideFlags: 0
@@ -13077,6 +13080,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4862822824241569333, guid: b93b299e9ea2d6943abd32394768d469, type: 3}
       propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6136204058393558992, guid: b93b299e9ea2d6943abd32394768d469, type: 3}
+      propertyPath: hoverSpeed
       value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []

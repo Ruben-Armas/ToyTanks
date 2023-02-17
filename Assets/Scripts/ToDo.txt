@@ -59,6 +59,7 @@ X Se activa automáticamente al recogerlo
 X Resiste un disparo.
 X Al ser golpeado se desactiva.
 O Resiste una Mina.
+O Hacer que si tengo uno, no lo coja y no desaparezca
 
 
 6. Partida:
@@ -72,7 +73,7 @@ O BeginGame()
 	X Comprobar si hay una lista de enemigos, sino crearlos (nº aleatorio)
 		O Crearlos en Posición y cantidad aleatoria
 	X Comprobar si hay una lista de jugadores, sino crearlos
-		X Si tienes compañero y ha muerto, que vuelva a spawnear
+		X Si tienes compañero y ha muerto, que vuelva a spawnear	(Al subir de nivel se duplica)
 
 X Lista de players
 	X Eventos
@@ -93,6 +94,7 @@ O OnEnemyRoundEnds
 
 O NextLevel()
 	O ClearScene()
+    O desactivar escudos
 
 O OnGameOver()
 	O Pantalla de GameOver UI
