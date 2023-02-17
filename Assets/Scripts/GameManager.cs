@@ -7,6 +7,7 @@ public class GameManager : MonoBehaviour
     public int maxPLayers = 2;
     [Header("Prefabs")]
     public GameObject playerPrefab;
+    public GameObject player2Prefab;
     public GameObject enemyPrefab;
     public GameObject shieldPrefab;
 
@@ -29,6 +30,10 @@ public class GameManager : MonoBehaviour
     public int currentLevel { get; private set; }   //public leer, privado modificar
     public int maxLevel { get; private set; }
     public int currentLives;// { get; private set; }
+
+
+    private bool[] playersExists;               //Player activos
+    private List<GameObject> playersPrefabs;    //Lista de prefabs
 
     void Start()
     {
@@ -124,8 +129,10 @@ public class GameManager : MonoBehaviour
         {
             //Vector3 playerStartPosition = stageGenerator.GetPlayerStartPosition();
             Instantiate(playerPrefab, _playerStartPosition, Quaternion.Euler(0, 90, 0));
+            //playersPrefabs.Add(playerPrefab);
             _initialNumPlayers++;
-            Instantiate(playerPrefab, _playerStartPosition, Quaternion.Euler(0, 90, 0));
+            Instantiate(player2Prefab, _playerStartPosition, Quaternion.Euler(0, 90, 0));
+            //playersPrefabs.Add(player2Prefab);
             _initialNumPlayers++;
             //Comprobar si se puede crear más player y no están el máximo
         }
@@ -134,18 +141,20 @@ public class GameManager : MonoBehaviour
             if (listOfPlayers.Count < _initialNumPlayers)
             {
                 Debug.Log("Falta alguno");
-                for (int i = 0; i < _initialNumPlayers; i++)
+                while(listOfPlayers.Count < _initialNumPlayers)
                 {
-                    Debug.Log(i);
-                    //Si la cantidad actual de players coincide con la inicial
-                    if (i < listOfPlayers.Count)
-                        listOfPlayers[i].transform.position = listOfPlayers[i].startPosition;
-                    else
+                    if(listOfPlayers.Count == 0)
                     {
-                        Debug.Log("Creando Player destruido");
                         Instantiate(playerPrefab, _playerStartPosition, Quaternion.Euler(0, 90, 0));
                     }
-                }
+                    else
+                    {
+                        if (listOfPlayers[0].color == Player.Colors.blue)
+                            Instantiate(player2Prefab, _playerStartPosition, Quaternion.Euler(0, 90, 0));
+                        else
+                            Instantiate(playerPrefab, _playerStartPosition, Quaternion.Euler(0, 90, 0));
+                    }
+                }                
             }
             else if (listOfPlayers.Count == _initialNumPlayers)
             {

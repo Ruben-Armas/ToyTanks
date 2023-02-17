@@ -11,6 +11,13 @@ public class Player : MonoBehaviour
     public delegate void PlayerDestroyed(Player player, Vector3 position);
     public static event PlayerDestroyed onPlayerDestroyed;    //(EVENTO)
 
+    public enum Colors
+    {
+        blue,
+        green
+    }
+    public Colors color;
+
     public Vector3 startPosition { get; private set; }
 
     private void Awake()
