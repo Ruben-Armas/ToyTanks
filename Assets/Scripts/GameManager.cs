@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 
 public class GameManager : MonoBehaviour
 {
@@ -176,15 +177,10 @@ public class GameManager : MonoBehaviour
         {
             foreach (Enemy enemy in listOfEnemies)
             {
+                //Recoloca al Enemigo en su Pos inicial
+                enemy.GetComponent<NavMeshAgent>().enabled = false;
                 enemy.transform.position = enemy.startPosition;
-                /*
-                Rigidbody _rigidbody = enemy.GetComponent<Rigidbody>();
-                _rigidbody.isKinematic = true;
-                _rigidbody.detectCollisions = false;
-                enemy.transform.position = enemy.startPosition;
-                _rigidbody.isKinematic = false;
-                _rigidbody.detectCollisions = true;
-                */
+                enemy.GetComponent<NavMeshAgent>().enabled = true;
             }
         }
         else
