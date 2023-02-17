@@ -108,8 +108,16 @@ public class GameManager : MonoBehaviour
 
         //Escudos
         Instantiate(shieldPrefab, _shieldStartPosition, Quaternion.identity);
-                
+
         //Jugador/es
+        SpawnPlayers();
+
+        //Enemigos
+        SpawnEnemies();
+    }
+
+    void SpawnPlayers()
+    {
         Debug.Log($"listOfPlayers -> {listOfPlayers.Count}");
         Debug.Log($"_initialNumPlayers -> {_initialNumPlayers}");
         //int initialPlayersNum = listOfInitialPlayers.Count;
@@ -120,18 +128,18 @@ public class GameManager : MonoBehaviour
             _initialNumPlayers++;
             Instantiate(playerPrefab, _playerStartPosition, Quaternion.Euler(0, 90, 0));
             _initialNumPlayers++;
-                //Comprobar si se puede crear más player y no están el máximo
+            //Comprobar si se puede crear más player y no están el máximo
         }
         else
         {
             if (listOfPlayers.Count < _initialNumPlayers)
             {
                 Debug.Log("Falta alguno");
-                for (int i=0; i< _initialNumPlayers; i++)
+                for (int i = 0; i < _initialNumPlayers; i++)
                 {
                     Debug.Log(i);
                     //Si la cantidad actual de players coincide con la inicial
-                    if(i < listOfPlayers.Count)
+                    if (i < listOfPlayers.Count)
                         listOfPlayers[i].transform.position = listOfPlayers[i].startPosition;
                     else
                     {
@@ -152,9 +160,10 @@ public class GameManager : MonoBehaviour
 
         Debug.Log($"listOfPlayers -> {listOfPlayers.Count}");
         Debug.Log($"_initialNumPlayers -> {_initialNumPlayers}");
+    }
 
-
-        //Enemigos
+    void SpawnEnemies()
+    {
         if (listOfEnemies.Count > 0)
         {
             foreach (Enemy enemy in listOfEnemies)
@@ -175,6 +184,25 @@ public class GameManager : MonoBehaviour
             CreateEnemies();
         }
     }
+
+    void CreateEnemies()
+    {
+        int numEnemies = Random.Range(minimumAmount, maximumAmount + 1);
+        Debug.Log($"numEnemies -> { numEnemies}");
+        for (int i = 0; i < numEnemies; i++)
+        {
+            //Vector3 nestStartPosition = stageGenerator.GetEnemyNestPosition(playerStartPosition);
+            Instantiate(enemyPrefab, _enemyStartPosition, Quaternion.Euler(0, 270, 0));
+        }
+    }
+
+    /*void CreatePlayers()
+    {
+        listOfInitialPlayers.Clear();
+        //Vector3 playerStartPosition = stageGenerator.GetPlayerStartPosition();
+        Instantiate(playerPrefab, _playerStartPosition, Quaternion.Euler(0, 90, 0));
+        //Instantiate(playerPrefab, _playerStartPosition, Quaternion.Euler(0, 90, 0));
+    }*/
 
     void OnPlayerRoundEnds()
     {
@@ -222,22 +250,4 @@ public class GameManager : MonoBehaviour
 
         //Borrar las balas y las minas
     }
-
-    void CreateEnemies()
-    {
-        int numEnemies = Random.Range(minimumAmount, maximumAmount +1);
-        for (int i = 0; i < numEnemies; i++)
-        {
-            //Vector3 nestStartPosition = stageGenerator.GetEnemyNestPosition(playerStartPosition);
-            Instantiate(enemyPrefab, _enemyStartPosition, Quaternion.Euler(0, 270, 0));
-        }
-    }
-    /*
-    void CreatePlayers()
-    {
-        listOfInitialPlayers.Clear();
-        //Vector3 playerStartPosition = stageGenerator.GetPlayerStartPosition();
-        Instantiate(playerPrefab, _playerStartPosition, Quaternion.Euler(0, 90, 0));
-        //Instantiate(playerPrefab, _playerStartPosition, Quaternion.Euler(0, 90, 0));
-    }*/
 }

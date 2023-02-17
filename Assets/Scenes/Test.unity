@@ -8198,11 +8198,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 06246b82b651023409a3295112b6d5ea, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  maxPLayers: 2
   playerPrefab: {fileID: 4834055819713867425, guid: e037ca1509ab48940b258ffeea11e0c0, type: 3}
   enemyPrefab: {fileID: 8665461898255977889, guid: b457d6d0f852573488c50e39475d7e4b, type: 3}
   shieldPrefab: {fileID: 4862822824241569333, guid: b93b299e9ea2d6943abd32394768d469, type: 3}
-  minimumAmount: 0
-  maximumAmount: 0
+  minimumAmount: 1
+  maximumAmount: 4
   currentLives: 2
 --- !u!4 &1423864508
 Transform:
