@@ -542,7 +542,7 @@ Transform:
   - {fileID: 4834055819830971367}
   - {fileID: 3017504875441508545}
   m_Father: {fileID: 0}
-  m_RootOrder: 9
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 90, z: 0}
 --- !u!114 &6336408041709275117
 MonoBehaviour:
@@ -556,6 +556,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dae6ad86eda697d42b3f8858e69bd0a9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  color: 0
 --- !u!114 &4834055819713867430
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -614,13 +615,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ccd2c5de84167c849825af86e5208eed, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  turnSensitivity: 10
   weapon: {fileID: 6421683940042917583}
   turret: {fileID: 9163783729468572596}
+  turnSensitivity: 10
   lookSpeed: 10
-  desiredLook: {x: 0, y: 0, z: 0}
   _movement: {fileID: 4834055819713867427}
-  _aim: {fileID: 0}
 --- !u!114 &4834055819713867427
 MonoBehaviour:
   m_ObjectHideFlags: 0

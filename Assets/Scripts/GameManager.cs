@@ -130,12 +130,11 @@ public class GameManager : MonoBehaviour
         {
             //Vector3 playerStartPosition = stageGenerator.GetPlayerStartPosition();
             Instantiate(playerPrefab, _playerStartPosition, Quaternion.Euler(0, 90, 0));
-            //playersPrefabs.Add(playerPrefab);
             _initialNumPlayers++;
+
+
             Instantiate(player2Prefab, _playerStartPosition, Quaternion.Euler(0, 90, 0));
-            //playersPrefabs.Add(player2Prefab);
             _initialNumPlayers++;
-            //Comprobar si se puede crear más player y no están el máximo
         }
         else
         {
