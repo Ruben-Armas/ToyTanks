@@ -7,6 +7,7 @@ public class ShieldController : MonoBehaviour
 {
     public BoxCollider _boxCollider;
     private Shield shield;
+    private Player player;
 
     void OnValidate()
     {
@@ -15,12 +16,16 @@ public class ShieldController : MonoBehaviour
 
     private void OnTriggerEnter(Collider collision)
     {
-        shield = collision.GetComponent<Shield>();
-        if (shield != null)
+        player = collision.GetComponent<Player>();
+        if (player != null)
         {
-            //Debug.Log("Escudo!!");
-            shield.activateShield();    //Activar escudo
-            Destroy(gameObject);        //Quitar escudo recogido del mapa
+            shield = player.GetComponent<Shield>();
+            if (shield != null)
+            {
+                //Debug.Log("Escudo!!");
+                shield.activateShield();    //Activar escudo
+                Destroy(gameObject);        //Quitar escudo recogido del mapa
+            }
         }
     }
 }

@@ -23,7 +23,7 @@ public class GameManager : MonoBehaviour
     private List<Enemy> listOfEnemies = new List<Enemy>();
 
     private int _level;
-    private int _startLives;
+    //private int _startLives;
     private int _initialNumPlayers;
 
     public int currentLevel { get; private set; }   //public leer, privado modificar
@@ -33,7 +33,6 @@ public class GameManager : MonoBehaviour
     void Start()
     {
         _level = 1;
-        _startLives = 0;
         maxLevel = 0;
         //Temporal
         _initialNumPlayers = 0;
