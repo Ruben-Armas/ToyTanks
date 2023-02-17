@@ -71,9 +71,11 @@ O Se termina cuando pierdes un nivel y no te quedan vidas.
 
 O BeginGame()
 	X Comprobar si hay una lista de enemigos, sino crearlos (nº aleatorio)
-		O Crearlos en Posición y cantidad aleatoria
+		O Distintos tipos (aleatorio)
+		O En Posición aleatoria (lejos del jugador)
+		X Cantidad aleatoria
 	X Comprobar si hay una lista de jugadores, sino crearlos
-		X Si tienes compañero y ha muerto, que vuelva a spawnear	(Al subir de nivel se duplica)
+		X Si tienes compañero y ha muerto, que vuelva a spawnear
 
 X Lista de players
 	X Eventos
@@ -82,7 +84,6 @@ X Lista de enemigos
 	X Refactorizar clases Enemy y EnemyController
 
 O OnRoundEnds
-	O Limpiar las listas de enemigos/jugadores
 	O Guardar puntuación
 	O ¿deshabilitar inputs de tanque?
 	O ¿eliminar tanques?
@@ -93,8 +94,9 @@ O OnEnemyRoundEnds
 	O NextLevel()
 
 O NextLevel()
-	O ClearScene()
-    O desactivar escudos
+	X Limpiar las listas de enemigos
+	X ClearSceneItems()
+    X desactivar escudos
 
 O OnGameOver()
 	O Pantalla de GameOver UI
@@ -108,9 +110,9 @@ O Spawner
 	en el medio - escudo
 O Generación Procedural
 O Cada nivel tiene su disposición de obstáculos, enemigos, escudos (si los hay) y a los jugadores.
-O Al comenzar el nivel, si uno de los dos jugadores estaba destruido, reaparece.
+X Al comenzar el nivel, si uno de los dos jugadores estaba destruido, reaparece.
 O Cada dos niveles superados se añade una vida.
-O Al no superar el nivel se quita una vida.
+X Al no superar el nivel se quita una vida.
 
 
 8. UI:

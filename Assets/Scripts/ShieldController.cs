@@ -24,13 +24,13 @@ public class ShieldController : MonoBehaviour
             {
                 if (shield.getShield() == false)
                 {
-                    Debug.Log("Escudo!!");
+                    //Debug.Log("Escudo!!");
                     shield.activateShield();    //Activar escudo
                     Destroy(gameObject);        //Quitar escudo recogido del mapa
 
                 }
                 else
-                    Debug.Log("Ya tenía escudo");
+                    //Debug.Log("Ya tenía escudo");
             }
         }
     }

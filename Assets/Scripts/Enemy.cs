@@ -21,6 +21,7 @@ public class Enemy : MonoBehaviour
         if (onEnemyCreated != null)
             onEnemyCreated(this, transform.position);
     }
+
     public void SetDestroyed()
     {
         //invulnerabilityTime = time;
