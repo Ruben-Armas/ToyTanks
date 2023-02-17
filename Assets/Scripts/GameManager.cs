@@ -207,16 +207,13 @@ public class GameManager : MonoBehaviour
     {
         Debug.Log($"Ronda {currentLevel} terminada!!!");
 
-        //Si la lista de players = 0 -> Siguiente nivel
         if (currentLives == 0)
         {
             OnGameOver();
         }
         else
         {
-            currentLives--;
-            //desactivar escudos
-            BeginGame();
+            ReplayLevel();
         }
     }
     void OnEnemyRoundEnds()
@@ -232,21 +229,52 @@ public class GameManager : MonoBehaviour
         Debug.Log($"Partida terminada en la ronda {currentLevel}");
     }
 
+    void ReplayLevel()
+    {
+        currentLives--;
+        deactivateAllShields();
+        ClearSceneItems();
+        BeginGame();
+    }
     void NextLevel()
     {
         _level++;
         currentLives++;
-        //desactivar escudos
-        //ClearScene();
+
+        listOfEnemies.Clear();
+
+        deactivateAllShields();
+        ClearSceneItems();
         //Reinicio temporal PRUEBAS
         BeginGame();
     }
 
-    void ClearScene()
+    void ClearSceneItems()
     {
-        listOfPlayers.Clear();
-        listOfEnemies.Clear();
+        //Borrar las balas y las minas y los escudos
+        DestroyGameObjectsWithTag("Bullet");
+        DestroyGameObjectsWithTag("Shield");
 
-        //Borrar las balas y las minas
+    }
+
+    void deactivateAllShields()
+    {
+        foreach (Player player in listOfPlayers)
+        {
+            Shield currentShield = player.GetComponent<Shield>();
+            bool haveShield = currentShield.getShield();
+
+            if (currentShield != null && haveShield)   //Si tiene escudo
+                currentShield.deactivateShield();   //Lo desactivo
+        }
+    }
+
+
+    private void DestroyGameObjectsWithTag(string tag)
+    {
+        //Buscamos el GameObject a eliminar
+        GameObject[] objects = GameObject.FindGameObjectsWithTag(tag);
+        for (int i = 0; i < objects.Length; i++)    //Destruimos los GameObjects uno a uno
+            Destroy(objects[i]);
     }
 }

@@ -9,7 +9,6 @@ public class Bullet : MonoBehaviour
     public Rigidbody rigidbody;
     public int numBounces;
     private int contBounces;
-    private bool canDetectCollision = true;
 
     private Enemy enemy;
     private Player player;
@@ -83,7 +82,7 @@ public class Bullet : MonoBehaviour
             currentShield = player.GetComponent<Shield>();
             bool haveShield = currentShield.getShield();
             //Debug.Log($"Escudo -> {haveShield}");
-            if (currentShield != null && currentShield.getShield())   //Si tiene escudo
+            if (currentShield != null && haveShield)   //Si tiene escudo
             {
                 currentShield.deactivateShield();   //Lo desactivo           
                 //Debug.Log("Escudo Rotooo!!");

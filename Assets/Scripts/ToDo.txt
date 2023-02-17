@@ -59,7 +59,7 @@ X Se activa automáticamente al recogerlo
 X Resiste un disparo.
 X Al ser golpeado se desactiva.
 O Resiste una Mina.
-O Hacer que si tengo uno, no lo coja y no desaparezca
+X Hacer que si tengo uno, no lo coja y no desaparezca
 
 
 6. Partida:
@@ -158,6 +158,9 @@ O   ContActual = puntos tanques enemigos
 O   Valor enemigo   ¿10?
 O pierdes una vida --> -5% ??
 
+
+12. Guardar juego
+O Puntuación
 
 
 ## BUGS ##
