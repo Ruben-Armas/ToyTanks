@@ -16,6 +16,7 @@ O Tipos
 	O Normal
 	O Solo minas
 	O Balas lentas con más rebotes
+	O No se mueve y solo detecta en un rango -- balas rápidas
 - Los enemigos se mueven y disparan aleatoriamente, o hacia el jugador más cercano.
 X Selector de tipo de traking
 - Máquina de estados

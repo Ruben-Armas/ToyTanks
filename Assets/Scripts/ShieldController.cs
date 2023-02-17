@@ -30,7 +30,9 @@ public class ShieldController : MonoBehaviour
 
                 }
                 else
+                {
                     //Debug.Log("Ya tenía escudo");
+                }
             }
         }
     }

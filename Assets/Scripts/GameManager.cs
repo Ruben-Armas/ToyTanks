@@ -245,6 +245,7 @@ public class GameManager : MonoBehaviour
 
         deactivateAllShields();
         ClearSceneItems();
+
         //Reinicio temporal PRUEBAS
         BeginGame();
     }
@@ -254,7 +255,6 @@ public class GameManager : MonoBehaviour
         //Borrar las balas y las minas y los escudos
         DestroyGameObjectsWithTag("Bullet");
         DestroyGameObjectsWithTag("Shield");
-
     }
 
     void deactivateAllShields()
@@ -268,7 +268,6 @@ public class GameManager : MonoBehaviour
                 currentShield.deactivateShield();   //Lo desactivo
         }
     }
-
 
     private void DestroyGameObjectsWithTag(string tag)
     {
