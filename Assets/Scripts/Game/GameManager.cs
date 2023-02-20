@@ -5,7 +5,7 @@ using UnityEngine.AI;
 
 public class GameManager : MonoBehaviour
 {
-    public int maxPLayers = 2;
+    public int maxPlayers = 2;
     [Header("Prefabs")]
     public GameObject playerPrefab;
     public GameObject player2Prefab;
