@@ -118,7 +118,10 @@ X Al no superar el nivel se quita una vida.
 
 8. UI:
 
-O Menú iniciar partida
+X Menú iniciar partida
+O Pausa
+	O Cambiar el Action Map a UI	Fix y Refactorizar (lo hace el InGameView y PauseView)
+	X Pausa al pulsar esc/start
 O Game Over 
 O Reiniciar partida
 

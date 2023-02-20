@@ -7,8 +7,14 @@ using UnityEngine.InputSystem;
 //[RequireComponent(typeof(Aim))]
 public class PlayerInputHandler : MonoBehaviour
 {
+    //EVENTO (DELEGADO)   --> características a las que llama
+    public delegate void Pause();
+    public static event Pause onPause;  //(EVENTO)
+
     public Weapon weapon;
     public Transform turret;
+    //public InGameView inGameView;
+    
     [Header("Torreta")]
     [Range(0f, 20f)]
     public float turnSensitivity = 10;
@@ -108,7 +114,12 @@ public class PlayerInputHandler : MonoBehaviour
                 turret.rotation.eulerAngles.z);
             */
         }
+    }
 
-
+    public void OnPause()
+    {
+        if (onPause != null)
+            onPause();
+        //inGameView.PauseGame();
     }
 }

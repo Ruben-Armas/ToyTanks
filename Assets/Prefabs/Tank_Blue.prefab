@@ -542,7 +542,7 @@ Transform:
   - {fileID: 4834055819830971367}
   - {fileID: 3017504875441508545}
   m_Father: {fileID: 0}
-  m_RootOrder: 0
+  m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: 0, y: 90, z: 0}
 --- !u!114 &6336408041709275117
 MonoBehaviour:
@@ -617,6 +617,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   weapon: {fileID: 6421683940042917583}
   turret: {fileID: 9163783729468572596}
+  inGameView: {fileID: 0}
   turnSensitivity: 10
   lookSpeed: 10
   _movement: {fileID: 4834055819713867427}

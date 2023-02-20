@@ -32,9 +32,10 @@ public class GameManager : MonoBehaviour
     public int maxLevel { get; private set; }
     public int currentLives;// { get; private set; }
 
-
     private bool[] playersExists;               //Player activos
     private List<GameObject> playersPrefabs;    //Lista de prefabs
+
+    private InGameView _inGameView;
 
     void Start()
     {
@@ -58,6 +59,7 @@ public class GameManager : MonoBehaviour
         Player.onPlayerDestroyed += OnPlayerDestroyed;
         Enemy.onEnemyCreated += OnEnemyCreated;
         Enemy.onEnemyDestroyed += OnEnemyDestroyed;
+        PlayerInputHandler.onPause += OnPause;
     }
     //DESUSCRIPCIÓN al EVENTO
     void OnDisable()
@@ -66,6 +68,7 @@ public class GameManager : MonoBehaviour
         Player.onPlayerDestroyed -= OnPlayerDestroyed;
         Enemy.onEnemyCreated -= OnEnemyCreated;
         Enemy.onEnemyDestroyed -= OnEnemyDestroyed;
+        PlayerInputHandler.onPause -= OnPause;
     }
     //DELEGADOS
     private void OnPlayerCreated(Player playerCreated, Vector3 startPosition)
@@ -100,6 +103,12 @@ public class GameManager : MonoBehaviour
         //Compruebo si no quedan enemigos para terminar la ronda    (lo mismo con los players)
         if (listOfEnemies.Count == 0)
             OnEnemyRoundEnds();
+    }
+
+    private void OnPause()
+    {
+        Debug.Log($"Pausa");
+        _inGameView.PauseGame();
     }
     //----------
 
