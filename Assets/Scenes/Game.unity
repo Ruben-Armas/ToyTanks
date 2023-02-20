@@ -7750,8 +7750,9 @@ MonoBehaviour:
   menuManager: {fileID: 678547568}
   pauseView: {fileID: 210788344}
   gameManager: {fileID: 1423864507}
-  scoreLabel: {fileID: 70771690}
-  highScoreLabel: {fileID: 556158644}
+  lives: {fileID: 348937045}
+  level: {fileID: 70771690}
+  record: {fileID: 556158644}
   playerInput: {fileID: 0}
 --- !u!224 &1157089633
 RectTransform:

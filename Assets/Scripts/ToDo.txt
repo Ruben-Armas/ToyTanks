@@ -65,10 +65,10 @@ X Hacer que si tengo uno, no lo coja y no desaparezca
 
 6. Partida:
 
-O Guarda la puntuación récord.
-O Empieza con los contadores de puntuación a cero. 
-O Empieza con una vida.
-O Se termina cuando pierdes un nivel y no te quedan vidas.
+X Guarda la puntuación récord.
+X Empieza con los contadores de puntuación a cero. 
+X Empieza con una vida.
+X Se termina cuando pierdes un nivel y no te quedan vidas.
 
 O BeginGame()
 	X Comprobar si hay una lista de enemigos, sino crearlos (nº aleatorio)
@@ -101,6 +101,8 @@ O NextLevel()
 
 O OnGameOver()
 	O Pantalla de GameOver UI
+		O Reiniciar
+		O Menú principal
 	O Cambiar controles a UI
 
 7. Nivel:
@@ -125,10 +127,12 @@ O Pausa
 O Game Over 
 O Reiniciar partida
 
-O Indicador de nivel actual.
+X Indicador de nivel actual.
+X Indicador de Record --> Guardar en memoria
+X Vidas restantes para reintentar niveles cuando eliminan a todos los jugadores.
+
 O Nª de enemigos eliminados por el jugador 1.
 O Nª de enemigos eliminados por el jugador 2.
-O Vidas restantes para reintentar niveles cuando eliminan a todos los jugadores.
 
 
 9. FX (partículas)

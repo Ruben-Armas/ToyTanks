@@ -29,7 +29,7 @@ public class GameManager : MonoBehaviour
     private int _initialNumPlayers;
 
     public int currentLevel { get; private set; }   //public leer, privado modificar
-    public int maxLevel { get; private set; }
+    public int record { get; private set; }
     public int currentLives;// { get; private set; }
 
     private bool[] playersExists;               //Player activos
@@ -40,7 +40,7 @@ public class GameManager : MonoBehaviour
     void Start()
     {
         _level = 1;
-        maxLevel = 0;
+        record = 0;
         //Temporal
         _initialNumPlayers = 0;
 
@@ -117,8 +117,8 @@ public class GameManager : MonoBehaviour
         Debug.Log($"Nivel -> {_level}");
         Debug.Log($"Nº de vidas -> {currentLives}");
         currentLevel = _level;
-        if (currentLevel > maxLevel)
-            maxLevel = currentLevel;
+        if (currentLevel > record)
+            record = currentLevel;
 
 
         //Escudos
@@ -241,6 +241,9 @@ public class GameManager : MonoBehaviour
     void OnGameOver()
     {
         Debug.Log($"Partida terminada en la ronda {currentLevel}");
+        //Guardar puntuación
+        if (PlayerPrefs.GetInt("Record", 0) < currentLevel)
+            PlayerPrefs.SetInt("Record", currentLevel);
     }
 
     void ReplayLevel()

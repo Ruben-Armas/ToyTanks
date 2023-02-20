@@ -11,8 +11,9 @@ public class InGameView : MonoBehaviour
     public MenuView pauseView;
 
     public GameManager gameManager;
-    public TextMeshProUGUI scoreLabel;
-    public TextMeshProUGUI highScoreLabel;  //Para guardar el record
+    public TextMeshProUGUI lives;
+    public TextMeshProUGUI level;
+    public TextMeshProUGUI record;  //Para guardar el record
 
 
     //private TankControls tankControls;
@@ -29,16 +30,18 @@ public class InGameView : MonoBehaviour
 
         //PlayerPrefs.DeleteAll();  //Borra todo
         //Si nunca se ha guardado una puntuación - que aparezca otro texto
-        if (PlayerPrefs.GetInt("HighScore", -1) == -1)
-            highScoreLabel.text = "Keep Playing!!";
+        if (PlayerPrefs.GetInt("Record", -1) == -1)
+            record.text = "Keep Playing!!";
         else
             //Si no tiene puntos se queda a 0   (IMPORTANTE ver que tiene el mismo nombre que en el Manager)
-            highScoreLabel.text = $"HighScore: {PlayerPrefs.GetInt("HighScore", 0)}";   //- Forma 1
+            record.text = $"Record: <color=red><b>{PlayerPrefs.GetInt("Record", 0)}</b>";   //- Forma 1
     }
 
     void Update()
     {
-        //scoreLabel.text = $"Score: <color=red><b>{gameManager.currentScore}</b>";
+        lives.text = $"Lives: <color=green><b>{gameManager.currentLives}</b>";
+        level.text = $"Level: <color=red><b>{gameManager.currentLevel}</b>";
+        record.text = $"Record: <color=red><b>{PlayerPrefs.GetInt("Record", 0)}</b>";
     }
 
     public void PauseGame()
