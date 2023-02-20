@@ -101,6 +101,7 @@ public class GameManager : MonoBehaviour
         if (listOfEnemies.Count == 0)
             OnEnemyRoundEnds();
     }
+    //----------
 
     void BeginGame()
     {
@@ -132,9 +133,9 @@ public class GameManager : MonoBehaviour
             Instantiate(playerPrefab, _playerStartPosition, Quaternion.Euler(0, 90, 0));
             _initialNumPlayers++;
 
-
+            /*
             Instantiate(player2Prefab, _playerStartPosition, Quaternion.Euler(0, 90, 0));
-            _initialNumPlayers++;
+            _initialNumPlayers++;*/
         }
         else
         {
