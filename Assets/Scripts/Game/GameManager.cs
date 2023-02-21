@@ -6,6 +6,8 @@ using UnityEngine.AI;
 public class GameManager : MonoBehaviour
 {
     public int maxPlayers = 2;
+    public MapGenerator mapGenerator;
+
     [Header("Prefabs")]
     public GameObject playerPrefab;
     public GameObject player2Prefab;
@@ -43,6 +45,9 @@ public class GameManager : MonoBehaviour
     {
         _mainMenu = new MainMenu();
         _menuManager = new MenuManager();
+
+        //Generar obstáculos
+        mapGenerator.GenerateMap();
     }
     void Start()
     {
@@ -127,7 +132,7 @@ public class GameManager : MonoBehaviour
         if (currentLevel > record)
             record = currentLevel;
 
-
+        //---------------------
         //Escudos
         Instantiate(shieldPrefab, _shieldStartPosition, Quaternion.identity);
 
@@ -274,6 +279,8 @@ public class GameManager : MonoBehaviour
         ClearSceneItems();
 
         //Reinicio temporal PRUEBAS
+        //Generar obstáculos
+        mapGenerator.GenerateMap();
         BeginGame();
     }
 

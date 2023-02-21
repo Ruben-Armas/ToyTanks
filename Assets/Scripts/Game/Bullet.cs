@@ -34,9 +34,9 @@ public class Bullet : MonoBehaviour
         if (Physics.Raycast(transform.position, rigidbody.velocity, out hit, 1)) // Comprueba si choca
         {
             // Comprueba si la colisión es con una pared
-            if (hit.collider.GetComponentInParent<Wall>() != null)
+            if (hit.collider.GetComponentInParent<Wall>() != null || hit.collider.GetComponent<Wall>() != null)
             {
-                //Debug.Log("Wall");
+                Debug.Log("Wall");
                 if (checkIfSelfDestroy() == false)
                 {
                     // Calcula la normal de la superficie de la pared con la que chocando
