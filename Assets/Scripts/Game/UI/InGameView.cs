@@ -52,8 +52,8 @@ public class InGameView : MonoBehaviour
         //tankControls.Player.Disable();
         //tankControls.UI.Enable();
 
-        InputSystem.DisableAllEnabledActions();
-        playerInput.SwitchCurrentActionMap("UI");
+        //InputSystem.DisableAllEnabledActions();
+        //playerInput.SwitchCurrentActionMap("UI");
 
 
         //Parar el tiempo   también para los menus que se deberían generar(no los genera)

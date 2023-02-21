@@ -42,7 +42,7 @@ X Pueden rebotar X veces en la pared, al siguiente impacto se destruyen.
 4. Minas: 
 
 O Crear Prefab
-O Asiganr botón player input
+O Asignar botón player input
 O Rango de explosión
 
 O Pueden ser colocadas por los jugadores y los enemigos.
@@ -85,7 +85,7 @@ X Lista de enemigos
 	X Refactorizar clases Enemy y EnemyController
 
 O OnRoundEnds
-	O Guardar puntuación
+	X Guardar puntuación
 	O ¿deshabilitar inputs de tanque?
 	O ¿eliminar tanques?
 O OnPlayerRoundEnds
@@ -100,9 +100,9 @@ O NextLevel()
     X desactivar escudos
 
 O OnGameOver()
-	O Pantalla de GameOver UI
-		O Reiniciar
-		O Menú principal
+	X Pantalla de GameOver UI
+		X Reiniciar
+		X Menú principal
 	O Cambiar controles a UI
 
 7. Nivel:
@@ -124,8 +124,12 @@ X Menú iniciar partida
 O Pausa
 	O Cambiar el Action Map a UI	Fix y Refactorizar (lo hace el InGameView y PauseView)
 	X Pausa al pulsar esc/start
-O Game Over 
-O Reiniciar partida
+		X Resume
+		O Exit -> Vuelve a la pantalla de inicio, no al menú
+X Menu Game Over 
+	X Reiniciar partida
+	X Volver al menú principal
+		O Vuelve a la pantalla de inicio, no al menú
 
 X Indicador de nivel actual.
 X Indicador de Record --> Guardar en memoria

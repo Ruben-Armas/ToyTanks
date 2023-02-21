@@ -36,7 +36,14 @@ public class GameManager : MonoBehaviour
     private List<GameObject> playersPrefabs;    //Lista de prefabs
 
     private InGameView _inGameView;
+    private MainMenu _mainMenu;
+    private MenuManager _menuManager;
 
+    private void Awake()
+    {
+        _mainMenu = new MainMenu();
+        _menuManager = new MenuManager();
+    }
     void Start()
     {
         _level = 1;
@@ -244,6 +251,9 @@ public class GameManager : MonoBehaviour
         //Guardar puntuación
         if (PlayerPrefs.GetInt("Record", 0) < currentLevel)
             PlayerPrefs.SetInt("Record", currentLevel);
+
+        _mainMenu.LoadScene("Scenes/UIGameOver");
+        //_menuManager.OpenView("Scenes/UIMainMenu");
     }
 
     void ReplayLevel()
