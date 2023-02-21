@@ -111,7 +111,14 @@ O Spawner
 	izquierda - players
 	derecha - enemigos
 	en el medio - escudo
-O Generación Procedural
+X Generación Procedural
+	O Mejorar generación de obstáculos
+		O Formar barricadas -- (2-3 bloques seguidos)
+		O Dejar pasillos de 2 Pos
+	X Bake de la malla
+		O No bakea todo (no conecta bien)
+		O Bakea en los techos de los obstáculos (mal)
+
 O Cada nivel tiene su disposición de obstáculos, enemigos, escudos (si los hay) y a los jugadores.
 X Al comenzar el nivel, si uno de los dos jugadores estaba destruido, reaparece.
 O Cada dos niveles superados se añade una vida.

@@ -1,6 +1,7 @@
-using System.Collections;
 using System.Collections.Generic;
+using Unity.AI.Navigation;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class MapGenerator : MonoBehaviour
 {
@@ -72,7 +73,7 @@ public class MapGenerator : MonoBehaviour
                 Vector3 cubePosition = new Vector3(xPos, startPosition.y, zPos);
                 Instantiate(cubePrefab, cubePosition, Quaternion.identity);
                 */
-                if(Random.Range(1,100) > 80)
+                if(Random.Range(1,100) > 50)
                 {
                     //Genera el cubo
                     GameObject cube = Instantiate(cubePrefab, transform);
@@ -85,8 +86,13 @@ public class MapGenerator : MonoBehaviour
                 }
                 
             }
-        }/*
+        }
 
+        //Malla de navegación por código con el paquete experimental
+        NavMeshSurface navmesh = floor.gameObject.GetComponent<NavMeshSurface>();
+        navmesh.BuildNavMesh();
+
+        /*
         // Instancia los cubos en una cuadrícula
         int i = 0;
         for (int x = 0; x < width; x++)
@@ -109,7 +115,7 @@ public class MapGenerator : MonoBehaviour
                 {
                     Instantiate(cubePrefab, position, Quaternion.identity);
                 }*/
-            /*}
-        }*/
+        /*}
+    }*/
     }
 }
