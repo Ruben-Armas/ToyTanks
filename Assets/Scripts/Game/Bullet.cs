@@ -36,7 +36,7 @@ public class Bullet : MonoBehaviour
             // Comprueba si la colisión es con una pared
             if (hit.collider.GetComponentInParent<Wall>() != null || hit.collider.GetComponent<Wall>() != null)
             {
-                Debug.Log("Wall");
+                //Debug.Log("Wall");
                 if (checkIfSelfDestroy() == false)
                 {
                     // Calcula la normal de la superficie de la pared con la que chocando

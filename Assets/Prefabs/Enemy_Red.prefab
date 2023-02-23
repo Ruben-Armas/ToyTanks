@@ -700,7 +700,7 @@ GameObject:
   - component: {fileID: 6987738626326265616}
   m_Layer: 0
   m_Name: Enemy_Red
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -780,12 +780,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1d5bfe87a33939d43816a21bef7f5094, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  turret: {fileID: 0}
   movementSpeed: 3
   rotationSpeed: 100
   precisionRotate: 0.97
   cooldownFireRate: 3
   precisionFire: 0.97
+  traking: 0
 --- !u!195 &3657200478503351674
 NavMeshAgent:
   m_ObjectHideFlags: 0

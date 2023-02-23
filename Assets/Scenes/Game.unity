@@ -1573,9 +1573,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   floor: {fileID: 1151779800}
-  cubePrefab: {fileID: 8695445643753438597, guid: 00cab1c2c91c81b45998ded0348ee80a, type: 3}
-  cube2Prefab: {fileID: 7225326190871310631, guid: 79bc289c5a9c7a24884a50802af4dceb, type: 3}
+  cubePrefab: {fileID: 98275983122370233, guid: 4fafc6d0e83a0664d91ac3c3bc220809, type: 3}
+  cube2Prefab: {fileID: 98275983122370233, guid: b1490f8dcca32c34a808627a0cf81d7d, type: 3}
   cubeSize: 2.5
+  wallSpacing: 2
   width: 22
   height: 15
 --- !u!4 &251485940
@@ -7865,9 +7866,9 @@ MonoBehaviour:
   m_OverrideTileSize: 0
   m_TileSize: 256
   m_OverrideVoxelSize: 0
-  m_VoxelSize: 0.4333333
-  m_MinRegionArea: 2
-  m_NavMeshData: {fileID: 23800000, guid: 50000052d8e30af42b6db3276f31468c, type: 2}
+  m_VoxelSize: 0.33333334
+  m_MinRegionArea: 1.3
+  m_NavMeshData: {fileID: 0}
   m_BuildHeightMesh: 0
 --- !u!1 &1157089629
 GameObject:
@@ -10237,8 +10238,10 @@ MonoBehaviour:
   player2Prefab: {fileID: 2818086229701906832, guid: a88587617d2cb54448de14c18100cf80, type: 3}
   enemyPrefab: {fileID: 8665461898255977889, guid: b457d6d0f852573488c50e39475d7e4b, type: 3}
   shieldPrefab: {fileID: 4862822824241569333, guid: b93b299e9ea2d6943abd32394768d469, type: 3}
+  obstaclesPrefab1: {fileID: 3717917646360964080, guid: 4f0532e31f32cb942918c03c19254e89, type: 3}
+  obstaclesPrefab2: {fileID: 6629110306118578421, guid: 7b0abe333186739479622bce6ed3c2c4, type: 3}
   minimumAmount: 1
-  maximumAmount: 4
+  maximumAmount: 1
   currentLives: 2
 --- !u!4 &1423864508
 Transform:
@@ -12855,7 +12858,7 @@ GameObject:
   - component: {fileID: 1796111978}
   m_Layer: 0
   m_Name: Obstacles
-  m_TagString: Untagged
+  m_TagString: Obstacles
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -12874,8 +12877,8 @@ Transform:
   m_Children:
   - {fileID: 1312101672}
   - {fileID: 549653700}
-  - {fileID: 434324681}
   - {fileID: 1890439697}
+  - {fileID: 434324681}
   m_Father: {fileID: 0}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}

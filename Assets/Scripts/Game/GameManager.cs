@@ -13,6 +13,8 @@ public class GameManager : MonoBehaviour
     public GameObject player2Prefab;
     public GameObject enemyPrefab;
     public GameObject shieldPrefab;
+    public GameObject obstaclesPrefab1;
+    public GameObject obstaclesPrefab2;
 
     [Header("Enemigos")]
     public int minimumAmount = 1;
@@ -41,13 +43,12 @@ public class GameManager : MonoBehaviour
     private MainMenu _mainMenu;
     private MenuManager _menuManager;
 
+    private GameObject _obstacles;
+
     private void Awake()
     {
         _mainMenu = new MainMenu();
         _menuManager = new MenuManager();
-
-        //Generar obstáculos
-        mapGenerator.GenerateMap();
     }
     void Start()
     {
@@ -61,7 +62,17 @@ public class GameManager : MonoBehaviour
         _enemyStartPosition = new Vector3(24, 0, 0);
         _shieldStartPosition = new Vector3(0, 0, 0);
 
-        BeginGame();
+        //Generar obstáculos
+        //mapGenerator.GenerateMap();
+
+        if (_level == 1)
+        {
+            _obstacles = Instantiate(obstaclesPrefab1, Vector3.zero, Quaternion.identity);
+            mapGenerator.CreateNavMesh();
+        }
+
+
+        PlayGame();
     }
 
     //SUSCRIPCIÓN al EVENTO
@@ -88,7 +99,7 @@ public class GameManager : MonoBehaviour
         //Añado el player creado a la lista de Players
         listOfPlayers.Add(playerCreated);
         //listOfInitialPlayers.Add(playerCreated);
-        Debug.Log($"Nº de Jugadores {listOfPlayers.Count}");
+        //Debug.Log($"Nº de Jugadores {listOfPlayers.Count}");
     }
     private void OnPlayerDestroyed(Player playerDestroyed, Vector3 startPosition)
     {
@@ -103,13 +114,13 @@ public class GameManager : MonoBehaviour
     {
         //Añado el enemigo creado a la lista de Enemigos
         listOfEnemies.Add(enemyCreated);
-        Debug.Log($"Nº de Enemigos {listOfEnemies.Count}");
+        //Debug.Log($"Nº de Enemigos {listOfEnemies.Count}");
     }
     private void OnEnemyDestroyed(Enemy enemyDestroyed, Vector3 startPosition)
     {
         //Borro el enemigo destruido de la lista de Enemigos
         listOfEnemies.Remove(enemyDestroyed);
-        Debug.Log($"Nº de Enemigos {listOfEnemies.Count}");
+        //Debug.Log($"Nº de Enemigos {listOfEnemies.Count}");
 
         //REFACTORIZAR EVENTO   --- Crear una clase ENEMY independiente del control
         //Compruebo si no quedan enemigos para terminar la ronda    (lo mismo con los players)
@@ -124,29 +135,31 @@ public class GameManager : MonoBehaviour
     }
     //----------
 
-    void BeginGame()
+    void PlayGame()
     {
-        Debug.Log($"Nivel -> {_level}");
-        Debug.Log($"Nº de vidas -> {currentLives}");
+        //Debug.Log($"Nivel -> {_level}");
+        //Debug.Log($"Nº de vidas -> {currentLives}");
         currentLevel = _level;
         if (currentLevel > record)
             record = currentLevel;
 
         //---------------------
         //Escudos
-        Instantiate(shieldPrefab, _shieldStartPosition, Quaternion.identity);
+        //Instantiate(shieldPrefab, _shieldStartPosition, Quaternion.identity);
 
         //Jugador/es
-        SpawnPlayers();
+        //SpawnPlayers();
+        Instantiate(playerPrefab, _playerStartPosition, Quaternion.Euler(0, 90, 0));
+        Instantiate(enemyPrefab, _enemyStartPosition, Quaternion.Euler(0, 270, 0));
 
         //Enemigos
-        SpawnEnemies();
+        //SpawnEnemies();
     }
 
     void SpawnPlayers()
     {
-        Debug.Log($"listOfPlayers -> {listOfPlayers.Count}");
-        Debug.Log($"_initialNumPlayers -> {_initialNumPlayers}");
+        //Debug.Log($"listOfPlayers -> {listOfPlayers.Count}");
+        //Debug.Log($"_initialNumPlayers -> {_initialNumPlayers}");
         //int initialPlayersNum = listOfInitialPlayers.Count;
         if (_initialNumPlayers == 0)
         {
@@ -162,7 +175,7 @@ public class GameManager : MonoBehaviour
         {
             if (listOfPlayers.Count < _initialNumPlayers)
             {
-                Debug.Log("Falta alguno");
+                //Debug.Log("Falta alguno");
                 while(listOfPlayers.Count < _initialNumPlayers)
                 {
                     if(listOfPlayers.Count == 0)
@@ -188,8 +201,8 @@ public class GameManager : MonoBehaviour
                 Debug.Log("-----HAY MÁS DE LO NORMAL-----");
         }
 
-        Debug.Log($"listOfPlayers -> {listOfPlayers.Count}");
-        Debug.Log($"_initialNumPlayers -> {_initialNumPlayers}");
+        //Debug.Log($"listOfPlayers -> {listOfPlayers.Count}");
+        //Debug.Log($"_initialNumPlayers -> {_initialNumPlayers}");
     }
 
     void SpawnEnemies()
@@ -213,7 +226,7 @@ public class GameManager : MonoBehaviour
     void CreateEnemies()
     {
         int numEnemies = Random.Range(minimumAmount, maximumAmount + 1);
-        Debug.Log($"numEnemies -> { numEnemies}");
+        //Debug.Log($"numEnemies -> { numEnemies}");
         for (int i = 0; i < numEnemies; i++)
         {
             //Vector3 nestStartPosition = stageGenerator.GetEnemyNestPosition(playerStartPosition);
@@ -266,10 +279,11 @@ public class GameManager : MonoBehaviour
         currentLives--;
         deactivateAllShields();
         ClearSceneItems();
-        BeginGame();
+        PlayGame();
     }
     void NextLevel()
     {
+        ClearObstaclesPrefab();
         _level++;
         currentLives++;
 
@@ -278,17 +292,47 @@ public class GameManager : MonoBehaviour
         deactivateAllShields();
         ClearSceneItems();
 
-        //Reinicio temporal PRUEBAS
+        Debug.Log($"Borrar nav");
+        //StartCoroutine(mapGenerator.DoRemoveNavMesh());
+
         //Generar obstáculos
-        mapGenerator.GenerateMap();
-        BeginGame();
+        if (_level == 2)
+        {
+            _obstacles = Instantiate(obstaclesPrefab2, Vector3.zero, Quaternion.identity);
+            //mapGenerator.DoRemoveNavMesh();
+            mapGenerator.CreateNavMesh();
+        }
+        else
+        {
+            //Procedural
+            CreateObstacles();
+
+            //mapGenerator.DoRemoveNavMesh();
+            //mapGenerator.CreateNavMesh();
+        }
+        PlayGame();
     }
 
-    void ClearSceneItems()
+    private void ClearSceneItems()
     {
         //Borrar las balas y las minas y los escudos
         DestroyGameObjectsWithTag("Bullet");
         DestroyGameObjectsWithTag("Shield");
+
+        //Limpiar procedural
+        if (_level > 2)
+        {
+            DestroyGameObjectsWithTag("Obstacles");
+            Debug.Log("Destruyendo Obstáculos");
+        }
+    }
+    private void ClearObstaclesPrefab()
+    {
+        if (_level == 1 || _level == 2)
+        {
+            Destroy(_obstacles);
+            Debug.Log("Destruyendo Obstáculos --Prefabs--");
+        }
     }
 
     void deactivateAllShields()
@@ -309,5 +353,19 @@ public class GameManager : MonoBehaviour
         GameObject[] objects = GameObject.FindGameObjectsWithTag(tag);
         for (int i = 0; i < objects.Length; i++)    //Destruimos los GameObjects uno a uno
             Destroy(objects[i]);
+    }
+
+
+    //Procedural
+    public void CreateObstacles()
+    {
+        StartCoroutine(DoCreateObstacles());
+    }
+    IEnumerator DoCreateObstacles()
+    {
+        ClearSceneItems();
+        mapGenerator.GenerateMap();
+        yield return 0;
+        //yield return new WaitForSeconds(10f);
     }
 }

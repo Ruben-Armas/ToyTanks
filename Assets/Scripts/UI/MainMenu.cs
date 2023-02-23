@@ -8,4 +8,9 @@ public class MainMenu : MonoBehaviour
     {
         Veil.instance.LoadScene(sceneName);
     }
+
+    public void Exit()
+    {
+        Application.Quit();
+    }
 }
