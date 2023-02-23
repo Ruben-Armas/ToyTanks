@@ -26,6 +26,14 @@ public class MapGenerator : MonoBehaviour
 
     private NavMeshSurface _navmesh;
 
+    /*//Instanciar Player,etc.. en MapGenerator
+    //private bool _isNavMeshReady = false;
+
+    //Pos Temporales
+    private Vector3 _playerStartPosition;
+    private Vector3 _enemyStartPosition;
+    private Vector3 _shieldStartPosition;*/
+
     private void Awake()
     {
         cuadricula = new GameObject[width, height];
@@ -65,35 +73,15 @@ public class MapGenerator : MonoBehaviour
             Instantiate(obstaclePrefab, new Vector3(x, 0, z), Quaternion.identity);
         }*/
 
-        ClearMap();
+        StartCoroutine(DoClearMap());
 
-        CreateCubes(); 
+        StartCoroutine(DoCreateCubes());
 
-        /*Debug.Log(_navmesh.navMeshData);
-        _navmesh.RemoveData();
-
-        _navmesh = floor.gameObject.GetComponent<NavMeshSurface>();
-        Debug.Log(_navmesh.navMeshData);
-
-        _navmesh.BuildNavMesh();*/
-        CreateNavMesh();
-    }
-
-    public void CreateNavMesh()
-    {
         StartCoroutine(DoCreateNavMesh());
-        /*// Generar NavMesh
-        _navmesh.RemoveData(); // Eliminar la anterior NavMeshData
-        NavMeshData navMeshData = new NavMeshData();
-        navMeshData.name = "NavMesh";
-        navMeshDataInstance = _navmesh.AddNavMeshData(navMeshData);
-        NavMeshBuilder.BuildNavMeshData(navMeshBuildSources, navMeshData, navMeshBounds, navMeshBuildConfig);*/
     }
+
     public IEnumerator DoCreateNavMesh()
     {
-        //StartCoroutine(DoCreateCubes());
-        //Malla de navegación por código con el paquete experimental
-
         //Para que no se solape la malla nueva con la vieja
         if(_navmesh != null)
             yield return StartCoroutine(DoRemoveNavMesh());
@@ -103,8 +91,10 @@ public class MapGenerator : MonoBehaviour
         _navmesh.BuildNavMesh();
 
         Debug.Log($"Nav --> {_navmesh.navMeshData}");
-        yield return 0;
-        //yield return new WaitForSeconds(10f);
+
+        //Instanciar Player,etc.. en MapGenerator
+        //_isNavMeshReady = true;
+        //yield return 0;
     }
     public IEnumerator DoRemoveNavMesh()
     {
@@ -114,10 +104,26 @@ public class MapGenerator : MonoBehaviour
         yield return 0;
     }
 
-    private void ClearMap()
+    /*//Instanciar Player,etc.. en MapGenerator
+    public IEnumerator InstantiatePlayerAndEnemies(GameObject playerPrefab, GameObject enemyPrefab)
     {
-        StartCoroutine(DoClearMap());
-    }
+        while (!_isNavMeshReady)
+        {
+            yield return null;
+        }
+        _isNavMeshReady = false;
+
+        //Pos temporales
+        _playerStartPosition = new Vector3(-24, 0, 5);
+        _enemyStartPosition = new Vector3(24, 0, 0);
+        _shieldStartPosition = new Vector3(0, 0, 0);
+
+        // Instancia el jugador y los enemigos
+        Instantiate(playerPrefab, _playerStartPosition, Quaternion.Euler(0, 90, 0));
+        Instantiate(enemyPrefab, _enemyStartPosition, Quaternion.Euler(0, 270, 0));
+
+    }*/
+
     IEnumerator DoClearMap()
     {
         // Destruir los cubos existentes en la cuadrícula
@@ -141,10 +147,6 @@ public class MapGenerator : MonoBehaviour
     }
 
     
-    private void CreateCubes()
-    {
-        StartCoroutine(DoCreateCubes());
-    }
     IEnumerator DoCreateCubes()
     {
         //StartCoroutine(DoClearMap());
