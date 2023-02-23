@@ -144,16 +144,39 @@ public class GameManager : MonoBehaviour
             record = currentLevel;
 
         //---------------------
+        StartCoroutine(SpawnObjectsWhenReady());
+
         //Escudos
         //Instantiate(shieldPrefab, _shieldStartPosition, Quaternion.identity);
 
         //Jugador/es
         //SpawnPlayers();
-        Instantiate(playerPrefab, _playerStartPosition, Quaternion.Euler(0, 90, 0));
-        Instantiate(enemyPrefab, _enemyStartPosition, Quaternion.Euler(0, 270, 0));
 
         //Enemigos
         //SpawnEnemies();
+    }
+
+    private IEnumerator SpawnObjectsWhenReady()
+    {
+        // Espera hasta que la navMesh esté lista
+        yield return StartCoroutine(mapGenerator.DoCreateNavMesh());
+
+        // Instancia el jugador y los enemigos
+        //Instantiate(playerPrefab, _playerStartPosition, Quaternion.Euler(0, 90, 0));
+        //Instantiate(enemyPrefab, _enemyStartPosition, Quaternion.Euler(0, 270, 0));
+        
+        //Jugador/es
+        SpawnPlayers();
+
+        //Enemigos
+        SpawnEnemies();
+
+        /*//Instancia un enemigo aleatorio de una lista   
+        foreach (var spawnPoint in enemySpawnPoints)
+        {
+            //public List<Transform> enemySpawnPoints;
+            //Instantiate(enemyPrefabs[Random.Range(0, enemyPrefabs.Count)], spawnPoint.position, spawnPoint.rotation);
+        }*/
     }
 
     void SpawnPlayers()

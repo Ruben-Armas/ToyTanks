@@ -95,7 +95,8 @@ public class MapGenerator : MonoBehaviour
         //Malla de navegación por código con el paquete experimental
 
         //Para que no se solape la malla nueva con la vieja
-        yield return StartCoroutine(DoRemoveNavMesh());
+        if(_navmesh != null)
+            yield return StartCoroutine(DoRemoveNavMesh());
 
         _navmesh = floor.gameObject.GetComponent<NavMeshSurface>();
 
@@ -213,7 +214,7 @@ public class MapGenerator : MonoBehaviour
                 GameObject cube = Instantiate(cubePrefab, wall.transform);
                 cube.transform.position = new Vector3(
                     (pos.x - width / 2) * cubeSize,
-                    0f,
+                    1.75f,
                     (pos.y - height / 2) * cubeSize
                 );
                 usedPositions.Add(pos);
