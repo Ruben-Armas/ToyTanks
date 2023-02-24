@@ -27,7 +27,7 @@ public class EnemyController : MonoBehaviour
     }
     [Header("Type Of Traking")]
     [SerializeField]
-    private SelectedTraking traking;
+    public SelectedTraking traking;
 
     private Animator _animator;
     private Weapon _weapon;

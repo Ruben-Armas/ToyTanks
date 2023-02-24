@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -20,13 +21,17 @@ public class GameManager : MonoBehaviour
     public int minimumAmount = 1;
     public int maximumAmount = 4;
 
+    //--TEMPORAL--
     private Vector3 _playerStartPosition;
     private Vector3 _enemyStartPosition;
     private Vector3 _shieldStartPosition;
 
     private List<Player> listOfPlayers = new List<Player>();
     private List<Player> listOfInitialPlayers = new List<Player>();
-    private List<Enemy> listOfEnemies = new List<Enemy>();
+    private List<Enemy> listOfEnemies = new List<Enemy>();  //Lista que controlará la cantidad de enemigos vivos en la escena
+    private List<EnemyData> listOfEnemiesDataTemp = new List<EnemyData>();  //Lista que guarda los datos de los supervivientes para reInstanciarlos
+
+    private bool _flagReplay = false;   //Controla que listOfEnemies se modifique solo durante la partida
 
     private int _level;
     //private int _startLives;
@@ -38,12 +43,12 @@ public class GameManager : MonoBehaviour
 
     private bool[] playersExists;               //Player activos
     private List<GameObject> playersPrefabs;    //Lista de prefabs
+    private GameObject _obstacles;
 
     private InGameView _inGameView;
     private MainMenu _mainMenu;
     private MenuManager _menuManager;
 
-    private GameObject _obstacles;
 
     private void Awake()
     {
@@ -111,17 +116,19 @@ public class GameManager : MonoBehaviour
 
     private void OnEnemyCreated(Enemy enemyCreated, Vector3 startPosition)
     {
-        //Añado el enemigo creado a la lista de Enemigos
-        listOfEnemies.Add(enemyCreated);
-        Debug.Log($"Nº de Enemigos {listOfEnemies.Count}");
+        //Informo de que se ha creado
+        //Enemy se añade la lista de Enemigos en CreateEnemies()
+        if (_flagReplay == false)
+            Debug.Log("Creando enemy");
     }
     private void OnEnemyDestroyed(Enemy enemyDestroyed, Vector3 startPosition)
     {
         //Borro el enemigo destruido de la lista de Enemigos
-        listOfEnemies.Remove(enemyDestroyed);
-        Debug.Log($"Nº de Enemigos {listOfEnemies.Count}");
-
-        //REFACTORIZAR EVENTO   --- Crear una clase ENEMY independiente del control
+        if (_flagReplay == false)
+        {
+            Debug.Log("Borrando enemy");
+            listOfEnemies.Remove(enemyDestroyed);
+        }
         //Compruebo si no quedan enemigos para terminar la ronda    (lo mismo con los players)
         if (listOfEnemies.Count == 0)
             OnEnemyRoundEnds();
@@ -233,30 +240,37 @@ public class GameManager : MonoBehaviour
 
     void SpawnEnemies()
     {
-        if (listOfEnemies.Count > 0)
+        if (listOfEnemiesDataTemp.Count > 0)
         {
-            foreach (Enemy enemy in listOfEnemies)
+            foreach (EnemyData enemyData in listOfEnemiesDataTemp)
             {
                 //Recoloca al Enemigo en su Pos inicial
-                enemy.GetComponent<NavMeshAgent>().enabled = false;
-                enemy.transform.position = enemy.startPosition;
-                enemy.GetComponent<NavMeshAgent>().enabled = true;
+                //enemy.GetComponent<NavMeshAgent>().enabled = false;
+                //enemy.transform.position = enemy.startPosition;
+                //enemy.GetComponent<NavMeshAgent>().enabled = true;
+
+                //Creo a los enemigos supervivientes (evita error al generar el navMesh)
+                Enemy newEnemy = Instantiate(enemyPrefab, enemyData.initPos, Quaternion.Euler(0, 270, 0)).GetComponent<Enemy>();
+                //Asigna el objetivo
+                newEnemy.GetComponent<EnemyController>().traking = enemyData.traking;
+
+                listOfEnemies.Add(newEnemy);
             }
+            _flagReplay = false;
         }
         else
-        {
             CreateEnemies();
-        }
     }
 
     void CreateEnemies()
     {
         int numEnemies = Random.Range(minimumAmount, maximumAmount + 1);
-        //Debug.Log($"numEnemies -> { numEnemies}");
         for (int i = 0; i < numEnemies; i++)
         {
             //Vector3 nestStartPosition = stageGenerator.GetEnemyNestPosition(playerStartPosition);
-            Instantiate(enemyPrefab, _enemyStartPosition, Quaternion.Euler(0, 270, 0));
+            Enemy newEnemy = Instantiate(enemyPrefab, _enemyStartPosition, Quaternion.Euler(0, 270, 0)).GetComponent<Enemy>();
+
+            listOfEnemies.Add(newEnemy);
         }
     }
 
@@ -278,7 +292,7 @@ public class GameManager : MonoBehaviour
         }
         else
         {
-            ReplayLevel();
+            StartCoroutine(DoReplayLevel());
         }
     }
     void OnEnemyRoundEnds()
@@ -300,11 +314,14 @@ public class GameManager : MonoBehaviour
         //_menuManager.OpenView("Scenes/UIMainMenu");
     }
 
-    void ReplayLevel()
+    IEnumerator DoReplayLevel()
     {
         currentLives--;
+        _flagReplay = true;
         deactivateAllShields();
         ClearSceneItems();
+        yield return StartCoroutine(ClearEnemies());
+
         PlayGame();
     }
     void NextLevel()
@@ -313,6 +330,8 @@ public class GameManager : MonoBehaviour
         _level++;
         currentLives++;
 
+        //listNumOfEnemies.Clear();
+        _flagReplay = false;
         listOfEnemies.Clear();
 
         deactivateAllShields();
@@ -354,6 +373,28 @@ public class GameManager : MonoBehaviour
             Destroy(_obstacles);
             Debug.Log("Destruyendo Obstáculos --Prefabs--");
         }
+    }
+
+    //Borro los enemigos que quedaban para instanciarlos después (y no den error al generar el navMesh)
+    IEnumerator ClearEnemies()
+    {
+        listOfEnemiesDataTemp.Clear();
+        if (listOfEnemies.Count > 0)
+        {
+            //_survivors = listOfEnemies.Count;
+            Debug.Log("------CLEAR ENEMIES------");
+            //listOfEnemiesTemp.AddRange(listNumOfEnemies);
+            //foreach (Enemy enemy in listNumOfEnemies)
+            foreach (Enemy enemy in listOfEnemies)
+            {
+                //Guardo los datos de Enemy para más adelante
+                listOfEnemiesDataTemp.Add(new EnemyData(enemy));
+
+                Destroy(enemy.gameObject);
+            }
+        }
+        listOfEnemies.Clear();
+        yield return new WaitForSeconds(2f);
     }
 
     void deactivateAllShields()
