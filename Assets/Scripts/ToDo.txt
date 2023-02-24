@@ -126,6 +126,7 @@ X Generación Procedural
 		O Bakea en los techos de los obstáculos (mal)
 		O La malla anterior se solapa con la nueva (mal)
 			X Cubos /obstáculos
+			X Cuando Player / Enemy muere
 			O Player / Enemy ...
 
 
