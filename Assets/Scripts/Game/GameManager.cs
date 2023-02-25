@@ -27,13 +27,11 @@ public class GameManager : MonoBehaviour
     private Vector3 _shieldStartPosition;
 
     private List<Player> listOfPlayers = new List<Player>();
-    private List<Player> listOfInitialPlayers = new List<Player>();
     private List<Enemy> listOfEnemies = new List<Enemy>();  //Lista que controlará la cantidad de enemigos vivos en la escena
     private List<EnemyData> listOfEnemiesDataTemp = new List<EnemyData>();  //Lista que guarda los datos de los supervivientes para reInstanciarlos
 
     private bool _flagReplay = false;   //Controla que listOfEnemies se modifique solo durante la partida
-    private bool _flagNextLevel = false;   //Controla que listOfPlayers se modifique solo durante la partida
-
+    
     private int _level;
     //private int _startLives;
     public int _initialNumPlayers;
@@ -42,8 +40,6 @@ public class GameManager : MonoBehaviour
     public int record { get; private set; }
     public int currentLives;// { get; private set; }
 
-    private bool[] playersExists;               //Player activos
-    private List<GameObject> playersPrefabs;    //Lista de prefabs
     private GameObject _obstacles;
 
     private InGameView _inGameView;
@@ -103,8 +99,7 @@ public class GameManager : MonoBehaviour
     {
         //Añado el player creado a la lista de Players
         listOfPlayers.Add(playerCreated);
-        //listOfInitialPlayers.Add(playerCreated);
-        Debug.Log($"Nº de Jugadores {listOfPlayers.Count}");
+        //Debug.Log($"Nº de Jugadores {listOfPlayers.Count}");
     }
     private void OnPlayerDestroyed(Player playerDestroyed, Vector3 startPosition)
     {
@@ -121,14 +116,16 @@ public class GameManager : MonoBehaviour
         //Informo de que se ha creado
         //Enemy se añade la lista de Enemigos en CreateEnemies()
         if (_flagReplay == false)
-            Debug.Log("Creando enemy");
+        {
+            //Debug.Log("Creando enemy");
+        }
     }
     private void OnEnemyDestroyed(Enemy enemyDestroyed, Vector3 startPosition)
     {
         //Borro el enemigo destruido de la lista de Enemigos
         if (_flagReplay == false)
         {
-            Debug.Log("Borrando enemy");
+            //Debug.Log("Borrando enemy");
             listOfEnemies.Remove(enemyDestroyed);
         }
         //Compruebo si no quedan enemigos para terminar la ronda
@@ -159,12 +156,6 @@ public class GameManager : MonoBehaviour
 
         //Escudos
         //Instantiate(shieldPrefab, _shieldStartPosition, Quaternion.identity);
-
-        //Jugador/es
-        //SpawnPlayers();
-
-        //Enemigos
-        //SpawnEnemies();
     }
 
     private IEnumerator SpawnObjectsWhenReady()
@@ -172,14 +163,8 @@ public class GameManager : MonoBehaviour
         // Espera hasta que la navMesh esté lista
         yield return StartCoroutine(mapGenerator.DoCreateNavMesh());
 
-        // Instancia el jugador y los enemigos
-        //Instantiate(playerPrefab, _playerStartPosition, Quaternion.Euler(0, 90, 0));
-        //Instantiate(enemyPrefab, _enemyStartPosition, Quaternion.Euler(0, 270, 0));
-        
-        //Jugador/es
         SpawnPlayers();
 
-        //Enemigos
         SpawnEnemies();
 
         /*
@@ -190,55 +175,6 @@ public class GameManager : MonoBehaviour
             //Instantiate(enemyPrefabs[Random.Range(0, enemyPrefabs.Count)], spawnPoint.position, spawnPoint.rotation);
         }*/
     }
-
-    /*void SpawnPlayers()
-    {
-        //Debug.Log($"listOfPlayers -> {listOfPlayers.Count}");
-        //Debug.Log($"_initialNumPlayers -> {_initialNumPlayers}");
-        //int initialPlayersNum = listOfInitialPlayers.Count;
-        if (_initialNumPlayers == 0)
-        {
-            //Vector3 playerStartPosition = stageGenerator.GetPlayerStartPosition();
-            Instantiate(playerPrefab, _playerStartPosition, Quaternion.Euler(0, 90, 0));
-            _initialNumPlayers++;
-
-            /*
-            Instantiate(player2Prefab, _playerStartPosition, Quaternion.Euler(0, 90, 0));
-            _initialNumPlayers++;*/
-        /*}
-        else
-        {
-            if (listOfPlayers.Count < _initialNumPlayers)
-            {
-                //Debug.Log("Falta alguno");
-                while(listOfPlayers.Count < _initialNumPlayers)
-                {
-                    if(listOfPlayers.Count == 0)
-                    {
-                        Instantiate(playerPrefab, _playerStartPosition, Quaternion.Euler(0, 90, 0));
-                    }
-                    else
-                    {
-                        if (listOfPlayers[0].color == Player.Colors.blue)
-                            Instantiate(player2Prefab, _playerStartPosition, Quaternion.Euler(0, 90, 0));
-                        else
-                            Instantiate(playerPrefab, _playerStartPosition, Quaternion.Euler(0, 90, 0));
-                    }
-                }                
-            }
-            else if (listOfPlayers.Count == _initialNumPlayers)
-            {
-                //Si todos siguen vivos, recolocarlos en el inicio (o pos "aleatoria")
-                for (int i = 0; i < _initialNumPlayers; i++)
-                    listOfPlayers[i].transform.position = listOfPlayers[i].startPosition;
-            }
-            else if (listOfPlayers.Count > _initialNumPlayers)
-                Debug.Log("-----HAY MÁS DE LO NORMAL-----");
-        }
-
-        //Debug.Log($"listOfPlayers -> {listOfPlayers.Count}");
-        //Debug.Log($"_initialNumPlayers -> {_initialNumPlayers}");
-    }*/
 
     void SpawnPlayers()
     {
@@ -288,14 +224,6 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    /*void CreatePlayers()
-    {
-        listOfInitialPlayers.Clear();
-        //Vector3 playerStartPosition = stageGenerator.GetPlayerStartPosition();
-        Instantiate(playerPrefab, _playerStartPosition, Quaternion.Euler(0, 90, 0));
-        //Instantiate(playerPrefab, _playerStartPosition, Quaternion.Euler(0, 90, 0));
-    }*/
-
     void OnPlayerRoundEnds()
     {
         Debug.Log($"Ronda {currentLevel} terminada!!!");
@@ -342,7 +270,8 @@ public class GameManager : MonoBehaviour
     {
         ClearObstaclesPrefab();
         _level++;
-        currentLives++;
+        if(_level % 2 == 0)
+            currentLives++;
 
         _flagReplay = false;
         listOfEnemies.Clear();
@@ -378,7 +307,7 @@ public class GameManager : MonoBehaviour
         if (_level > 2)
         {
             DestroyGameObjectsWithTag("Obstacles");
-            Debug.Log("Destruyendo Obstáculos");
+            //Debug.Log("Destruyendo Obstáculos");
         }
     }
     private void ClearObstaclesPrefab()
@@ -386,7 +315,7 @@ public class GameManager : MonoBehaviour
         if (_level == 1 || _level == 2)
         {
             Destroy(_obstacles);
-            Debug.Log("Destruyendo Obstáculos --Prefabs--");
+            //Debug.Log("Destruyendo Obstáculos --Prefabs--");
         }
     }
 
@@ -395,7 +324,7 @@ public class GameManager : MonoBehaviour
     {
         if (listOfPlayers.Count > 0)
         {
-            Debug.Log("------CLEAR ENEMIES------");
+            //Debug.Log("------CLEAR ENEMIES------");
             foreach (Player player in listOfPlayers)
             {
                 Destroy(player.gameObject);
@@ -411,7 +340,7 @@ public class GameManager : MonoBehaviour
         listOfEnemiesDataTemp.Clear();
         if (listOfEnemies.Count > 0)
         {
-            Debug.Log("------CLEAR ENEMIES------");
+            //Debug.Log("------CLEAR ENEMIES------");
             foreach (Enemy enemy in listOfEnemies)
             {
                 //Guardo los datos de Enemy para más adelante

@@ -75,13 +75,17 @@ X Empieza con los contadores de puntuación a cero.
 X Empieza con una vida.
 X Se termina cuando pierdes un nivel y no te quedan vidas.
 
-O BeginGame()
+O PlayGame()
+	X Actualizar record
+	X Esperar a que la NavMesh esté lista
+	X Crear
+		X Players
+		X Enemies
+
 	X Comprobar si hay una lista de enemigos, sino crearlos (nº aleatorio)
 		O Distintos tipos (aleatorio)
 		O En Posición aleatoria (lejos del jugador)
 		X Cantidad aleatoria
-	X Comprobar si hay una lista de jugadores, sino crearlos
-		X Si tienes compañero y ha muerto, que vuelva a spawnear
 
 X Lista de players
 	X Eventos
@@ -92,23 +96,48 @@ X Lista de enemigos
 O OnRoundEnds
 	X Guardar puntuación
 	O ¿deshabilitar inputs de tanque?
-	O ¿eliminar tanques?
 O OnPlayerRoundEnds
 	X Si no hay vidas -> OnGameOver()
 	X Quitar una vida
-O OnEnemyRoundEnds
-	O NextLevel()
+X OnEnemyRoundEnds
+	X NextLevel()
 
-O NextLevel()
+X ReplayLevel
+
+X NextLevel()
+    X _level++;
+    X Sumar vida en los niveles pares
 	X Limpiar las listas de enemigos
+	X Limpiar obstáculos
 	X ClearSceneItems()
     X desactivar escudos
+	X destruir Players
+	X Crear Obstáculos
+	X Crear NavMesh
+	X Go PlayGame
 
 O OnGameOver()
+	X Si es record GUARDA
 	X Pantalla de GameOver UI
 		X Reiniciar
 		X Menú principal
 	O Cambiar controles a UI
+
+O SpawnPlayers
+	NextLevel
+		O En posición aleatoria	(dentro del navMesh)
+		X Crea los players
+	ReplayLevel
+		X al repetir nivel, crea a todos los jugadores
+
+O SpawnEnemies
+	NextLevel
+		O De distinto tipo
+		O En posición aleatoria	(dentro del navMesh)
+		X Crea los enemigos
+	ReplayLevel
+		X al repetir nivel, crea los enemigos que quedaban vivos
+
 
 7. Nivel:
 
@@ -124,11 +153,11 @@ X Generación Procedural
 	X Bake de la malla
 		O No bakea todo (no conecta bien)
 		O Bakea en los techos de los obstáculos (mal)
-		O La malla anterior se solapa con la nueva (mal)
+		X La malla anterior se solapa con la nueva (mal)
 			X Cubos /obstáculos
 			X Cuando Player / Enemy muere
+			X Cuando Player / Enemy NO muere
 			O Player / Enemy ...
-
 
 O Cada nivel tiene su disposición de obstáculos, enemigos, escudos (si los hay) y a los jugadores.
 X Al comenzar el nivel, si uno de los dos jugadores estaba destruido, reaparece.
