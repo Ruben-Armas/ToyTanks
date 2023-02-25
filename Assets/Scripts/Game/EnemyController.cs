@@ -282,16 +282,18 @@ public class EnemyController : MonoBehaviour
         bool freeEnemy = true;
         RaycastHit hitWall;
         RaycastHit hitEnemy;
-        if (Physics.Raycast(_weapon.transform.position, towardsTarget, out hitWall, 10)) // Comprueba si choca
+        if (Physics.Raycast(_weapon.transform.position, towardsTarget, out hitWall, 20)) // Comprueba si choca
         {
+            //Debug.DrawLine(_weapon.transform.position, hitWall.point, Color.green);
             // Comprueba si la colisión es con una pared
             if (hitWall.collider.GetComponentInParent<Wall>() != null)
             {
                 freeWall = false;
             }
         }
-        if (Physics.Raycast(_weapon.transform.position, towardsTarget, out hitEnemy, 30)) // Comprueba si choca
+        if (Physics.Raycast(_weapon.transform.position, towardsTarget, out hitEnemy, 50)) // Comprueba si choca
         {
+            //Debug.DrawLine(_weapon.transform.position, hitEnemy.point, Color.blue);
             // Comprueba si la colisión es con un enemigo "Aliado"
             if (hitEnemy.collider.GetComponent<EnemyController>() != null)
             {
