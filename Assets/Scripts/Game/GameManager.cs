@@ -110,6 +110,7 @@ public class GameManager : MonoBehaviour
         //Borro el player destruido de la lista de Players
         listOfPlayers.Remove(playerDestroyed);
 
+        //Compruebo si no quedan players para terminar la ronda
         if (listOfPlayers.Count == 0)
             OnPlayerRoundEnds();
     }
@@ -129,7 +130,7 @@ public class GameManager : MonoBehaviour
             Debug.Log("Borrando enemy");
             listOfEnemies.Remove(enemyDestroyed);
         }
-        //Compruebo si no quedan enemigos para terminar la ronda    (lo mismo con los players)
+        //Compruebo si no quedan enemigos para terminar la ronda
         if (listOfEnemies.Count == 0)
             OnEnemyRoundEnds();
     }
@@ -330,7 +331,6 @@ public class GameManager : MonoBehaviour
         _level++;
         currentLives++;
 
-        //listNumOfEnemies.Clear();
         _flagReplay = false;
         listOfEnemies.Clear();
 
@@ -394,7 +394,7 @@ public class GameManager : MonoBehaviour
             }
         }
         listOfEnemies.Clear();
-        yield return new WaitForSeconds(2f);
+        yield return new WaitForSeconds(1f);
     }
 
     void deactivateAllShields()

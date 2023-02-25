@@ -10318,7 +10318,7 @@ MonoBehaviour:
   obstaclesPrefab1: {fileID: 3717917646360964080, guid: 4f0532e31f32cb942918c03c19254e89, type: 3}
   obstaclesPrefab2: {fileID: 6629110306118578421, guid: 7b0abe333186739479622bce6ed3c2c4, type: 3}
   minimumAmount: 1
-  maximumAmount: 1
+  maximumAmount: 4
   currentLives: 2
 --- !u!4 &1423864508
 Transform:
