@@ -32,10 +32,11 @@ public class GameManager : MonoBehaviour
     private List<EnemyData> listOfEnemiesDataTemp = new List<EnemyData>();  //Lista que guarda los datos de los supervivientes para reInstanciarlos
 
     private bool _flagReplay = false;   //Controla que listOfEnemies se modifique solo durante la partida
+    private bool _flagNextLevel = false;   //Controla que listOfPlayers se modifique solo durante la partida
 
     private int _level;
     //private int _startLives;
-    private int _initialNumPlayers;
+    public int _initialNumPlayers;
 
     public int currentLevel { get; private set; }   //public leer, privado modificar
     public int record { get; private set; }
@@ -60,7 +61,7 @@ public class GameManager : MonoBehaviour
         _level = 1;
         record = 0;
         //Temporal
-        _initialNumPlayers = 0;
+        //_initialNumPlayers = 0;
 
         //Pos temporales
         _playerStartPosition = new Vector3(-24, 0, 5);
@@ -102,7 +103,7 @@ public class GameManager : MonoBehaviour
     {
         //Añado el player creado a la lista de Players
         listOfPlayers.Add(playerCreated);
-        listOfInitialPlayers.Add(playerCreated);
+        //listOfInitialPlayers.Add(playerCreated);
         Debug.Log($"Nº de Jugadores {listOfPlayers.Count}");
     }
     private void OnPlayerDestroyed(Player playerDestroyed, Vector3 startPosition)
@@ -190,7 +191,7 @@ public class GameManager : MonoBehaviour
         }*/
     }
 
-    void SpawnPlayers()
+    /*void SpawnPlayers()
     {
         //Debug.Log($"listOfPlayers -> {listOfPlayers.Count}");
         //Debug.Log($"_initialNumPlayers -> {_initialNumPlayers}");
@@ -204,7 +205,7 @@ public class GameManager : MonoBehaviour
             /*
             Instantiate(player2Prefab, _playerStartPosition, Quaternion.Euler(0, 90, 0));
             _initialNumPlayers++;*/
-        }
+        /*}
         else
         {
             if (listOfPlayers.Count < _initialNumPlayers)
@@ -237,8 +238,20 @@ public class GameManager : MonoBehaviour
 
         //Debug.Log($"listOfPlayers -> {listOfPlayers.Count}");
         //Debug.Log($"_initialNumPlayers -> {_initialNumPlayers}");
-    }
+    }*/
 
+    void SpawnPlayers()
+    {
+        if (_initialNumPlayers == 1)
+        {
+            Instantiate(playerPrefab, _playerStartPosition, Quaternion.Euler(0, 90, 0));
+        }
+        else
+        {
+            Instantiate(playerPrefab, _playerStartPosition, Quaternion.Euler(0, 90, 0));
+            Instantiate(player2Prefab, _playerStartPosition, Quaternion.Euler(0, 90, 0));
+        }
+    }
     void SpawnEnemies()
     {
         if (listOfEnemiesDataTemp.Count > 0)
@@ -300,7 +313,7 @@ public class GameManager : MonoBehaviour
     {
         Debug.Log($"Ronda {currentLevel} terminada!!!");
 
-        NextLevel();
+        StartCoroutine(DoNextLevel());
     }
 
     //Para cuando mueren los players y no tienen más vidas
@@ -325,7 +338,7 @@ public class GameManager : MonoBehaviour
 
         PlayGame();
     }
-    void NextLevel()
+    IEnumerator DoNextLevel()
     {
         ClearObstaclesPrefab();
         _level++;
@@ -336,6 +349,8 @@ public class GameManager : MonoBehaviour
 
         deactivateAllShields();
         ClearSceneItems();
+
+        yield return StartCoroutine(ClearPlayers());
 
         //Generar obstáculos
         if (_level == 2)
@@ -375,16 +390,28 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    //Borro los players que quedaban para instanciarlos después (y no den error al generar el navMesh)
+    IEnumerator ClearPlayers()
+    {
+        if (listOfPlayers.Count > 0)
+        {
+            Debug.Log("------CLEAR ENEMIES------");
+            foreach (Player player in listOfPlayers)
+            {
+                Destroy(player.gameObject);
+            }
+            listOfPlayers.Clear();
+        }
+        yield return new WaitForSeconds(1f);
+    }
+
     //Borro los enemigos que quedaban para instanciarlos después (y no den error al generar el navMesh)
     IEnumerator ClearEnemies()
     {
         listOfEnemiesDataTemp.Clear();
         if (listOfEnemies.Count > 0)
         {
-            //_survivors = listOfEnemies.Count;
             Debug.Log("------CLEAR ENEMIES------");
-            //listOfEnemiesTemp.AddRange(listNumOfEnemies);
-            //foreach (Enemy enemy in listNumOfEnemies)
             foreach (Enemy enemy in listOfEnemies)
             {
                 //Guardo los datos de Enemy para más adelante
