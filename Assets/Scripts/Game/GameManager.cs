@@ -34,7 +34,7 @@ public class GameManager : MonoBehaviour
     
     private int _level;
     //private int _startLives;
-    public int _initialNumPlayers;
+    private int _initialNumPlayers;
 
     public int currentLevel { get; private set; }   //public leer, privado modificar
     public int record { get; private set; }
@@ -58,6 +58,7 @@ public class GameManager : MonoBehaviour
         record = 0;
         //Temporal
         //_initialNumPlayers = 0;
+        getInitialNumOfPlayers();
 
         //Pos temporales
         _playerStartPosition = new Vector3(-24, 0, 5);
@@ -371,6 +372,20 @@ public class GameManager : MonoBehaviour
         GameObject[] objects = GameObject.FindGameObjectsWithTag(tag);
         for (int i = 0; i < objects.Length; i++)    //Destruimos los GameObjects uno a uno
             Destroy(objects[i]);
+    }
+
+    private void getInitialNumOfPlayers()
+    {
+        // Obtener el valor de PlayerPrefs
+        int numPlayers = PlayerPrefs.GetInt("numPlayers", 1);
+        // Asignar el valor a la variable numOfPlayers
+        if (numPlayers < 0)
+            _initialNumPlayers = 1;
+        else if (numPlayers > 2)
+            _initialNumPlayers = 2;
+        else
+            _initialNumPlayers = numPlayers;
+        Debug.Log($"-----------------numPlayers-->{numPlayers}-----------------");
     }
 
 
