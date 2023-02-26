@@ -57,7 +57,7 @@ public class GameManager : MonoBehaviour
     }
     void Start()
     {
-        _level = 1;
+        _level = 3;
         record = 0;
         //Temporal
         //_initialNumPlayers = 0;
@@ -187,7 +187,7 @@ public class GameManager : MonoBehaviour
         {
             Player player = Instantiate(playerPrefab, _playerStartPosition, Quaternion.Euler(0, 90, 0)).GetComponent<Player>();
             //getSchemes(player);
-            setInputPlayer1(player);
+            //setInputPlayer1(player);
         }
         else
         {

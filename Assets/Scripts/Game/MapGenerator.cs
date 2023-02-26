@@ -7,17 +7,16 @@ using UnityEngine.InputSystem;
 public class MapGenerator : MonoBehaviour
 {
     public GameObject floor;
+    //public List<GameObject> cubePrefab;
     public GameObject cubePrefab;
     public GameObject cube2Prefab;
-    /*public GameObject cube3Prefab;
-    public GameObject cube4Prefab;
-    public GameObject cube5Prefab;
-    public GameObject cube6Prefab;*/
     private GameObject _nextCubePrefab;
     //public int numObstacles = 10;
     //public int gridSize = 8; // Tamaño de la cuadrícula, en número de cubos
     //public float gridSpacing = 1f; // Espaciado entre cubos
-    
+    public Vector3 gridOffset;
+
+
     public float cubeSize = 2.5f;
     public float wallSpacing = 2;
     public int width;
@@ -146,8 +145,7 @@ public class MapGenerator : MonoBehaviour
         //yield return new WaitForSeconds(2f);
     }
 
-    
-    IEnumerator DoCreateCubes()
+    /*IEnumerator DoCreateCubes()
     {
         //StartCoroutine(DoClearMap());
         int i = 0;
@@ -173,7 +171,7 @@ public class MapGenerator : MonoBehaviour
             bool wallFits = true;
             for (int j = 0; j < wallSize; j++)
             {
-                Vector2 checkPos = randomPos + direction * j * (wallSpacing + 1);
+                Vector2 checkPos = randomPos + direction * j * (wallSpacing *2);
                 if (checkPos.x < 0 || checkPos.x >= width || checkPos.y < 0 || checkPos.y >= height ||
                     usedPositions.Contains(checkPos))
                 {
@@ -190,7 +188,7 @@ public class MapGenerator : MonoBehaviour
             GameObject wall = new GameObject("Wall");
             for (int j = 0; j < wallSize; j++)
             {
-                Vector2 pos = randomPos + direction * j * (wallSpacing + 1);
+                Vector2 pos = randomPos + direction * j;
                 GameObject cubePrefab;
                 switch (wallSize)
                 {
@@ -230,7 +228,7 @@ public class MapGenerator : MonoBehaviour
         yield return 0;
         //yield return new WaitForSeconds(5f);
     }
-
+    */
     /*
     public IEnumerator GenerateMap()
     {
@@ -318,16 +316,19 @@ public class MapGenerator : MonoBehaviour
         }
     }*/
 
-    /*  //Rellena todo
+    //Rellena todo
+    IEnumerator DoCreateCubes()
+    {
         // Instancia los cubos en una cuadrícula
         int i = 0;
+        Vector3 ajust = new Vector3(-width * cubeSize/2 +1.15f, 0, -height * cubeSize/2 +1.25f);
         for (int x = 0; x < width; x++)
         {
             for (int y = 0; y < height; y++)
             {
-                Vector3 position = new Vector3(x * cubeSize, 0, y * cubeSize) + gridOffset;
+                Vector3 position = new Vector3(x * cubeSize, 0, y * cubeSize)+ajust + gridOffset;
 
-                if(i % 2 == 0)
+                if (i % 2 == 0)
                     Instantiate(cubePrefab, position, Quaternion.identity);
                 else
                     Instantiate(cube2Prefab, position, Quaternion.identity);
@@ -341,10 +342,13 @@ public class MapGenerator : MonoBehaviour
                 else if (x % 2 == 0 && y % 2 == 0)
                 {
                     Instantiate(cubePrefab, position, Quaternion.identity);
-                }*//*
+                }*/
             }
-        }*/
-    /*//Rellena aleatoriamente
+        }
+        yield return 0;
+    }
+        
+    /*// Rellena aleatoriamente
         // Instanciar los cubos
         int i = 0;
         for (int x = 0; x < width; x++)
