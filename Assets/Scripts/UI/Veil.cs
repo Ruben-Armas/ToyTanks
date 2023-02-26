@@ -86,7 +86,7 @@ public class Veil : MonoBehaviour
         op.allowSceneActivation = false;   //pulsa para iniciar, después de cargar
         while (op.progress < 0.9f)
         {
-            Debug.Log(op.progress);
+            //Debug.Log(op.progress);
             yield return 0;
         }
         op.allowSceneActivation = true; //Activa la escena (deberíamos poner un botón para empezar)
