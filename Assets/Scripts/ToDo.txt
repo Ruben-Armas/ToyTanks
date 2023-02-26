@@ -177,6 +177,8 @@ X Menu Game Over
 	X Reiniciar partida
 	X Volver al menú principal
 		O Vuelve a la pantalla de inicio, no al menú
+X Dropdown nº de jugadores
+X DropDown tipo de control del Jugador 1
 
 X Indicador de nivel actual.
 X Indicador de Record --> Guardar en memoria

@@ -90,7 +90,7 @@ public class MapGenerator : MonoBehaviour
 
         _navmesh.BuildNavMesh();
 
-        Debug.Log($"Nav --> {_navmesh.navMeshData}");
+        //Debug.Log($"Nav --> {_navmesh.navMeshData}");
 
         //Instanciar Player,etc.. en MapGenerator
         //_isNavMeshReady = true;
@@ -98,9 +98,9 @@ public class MapGenerator : MonoBehaviour
     }
     public IEnumerator DoRemoveNavMesh()
     {
-        Debug.Log($"Nav a eliminar--> {_navmesh.navMeshData}");
+        //Debug.Log($"Nav a eliminar--> {_navmesh.navMeshData}");
         _navmesh.RemoveData();
-        Debug.Log($"Nav ELIMINADA --> {_navmesh.navMeshData}");
+        //Debug.Log($"Nav ELIMINADA --> {_navmesh.navMeshData}");
         yield return 0;
     }
 

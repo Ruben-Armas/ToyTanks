@@ -30,7 +30,7 @@ public class DropdownPlayerHandler : MonoBehaviour
     {
         //Valor seleccionado
         numPlayers = NumOfPlayersDropdown.value + 1;
-        inputP1 = InputDropdown.value + 1;
+        inputP1 = InputDropdown.value;
 
         // Guardar el valor en PlayerPrefs  (para poder pasarlo a la otra escena)
         PlayerPrefs.SetInt("numPlayers", numPlayers);

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.InputSystem;
 
 public class GameManager : MonoBehaviour
 {
@@ -35,6 +36,8 @@ public class GameManager : MonoBehaviour
     private int _level;
     //private int _startLives;
     private int _initialNumPlayers;
+    private int _inputPlayer1;
+    private PlayerInput _playerInput;
 
     public int currentLevel { get; private set; }   //public leer, privado modificar
     public int record { get; private set; }
@@ -59,6 +62,7 @@ public class GameManager : MonoBehaviour
         //Temporal
         //_initialNumPlayers = 0;
         getInitialNumOfPlayers();
+        getInputPlayer1();
 
         //Pos temporales
         _playerStartPosition = new Vector3(-24, 0, 5);
@@ -181,11 +185,14 @@ public class GameManager : MonoBehaviour
     {
         if (_initialNumPlayers == 1)
         {
-            Instantiate(playerPrefab, _playerStartPosition, Quaternion.Euler(0, 90, 0));
+            Player player = Instantiate(playerPrefab, _playerStartPosition, Quaternion.Euler(0, 90, 0)).GetComponent<Player>();
+            //getSchemes(player);
+            setInputPlayer1(player);
         }
         else
         {
-            Instantiate(playerPrefab, _playerStartPosition, Quaternion.Euler(0, 90, 0));
+            Player player = Instantiate(playerPrefab, _playerStartPosition, Quaternion.Euler(0, 90, 0)).GetComponent<Player>();
+            //setInputPlayer1(player);
             Instantiate(player2Prefab, _playerStartPosition, Quaternion.Euler(0, 90, 0));
         }
     }
@@ -385,8 +392,58 @@ public class GameManager : MonoBehaviour
             _initialNumPlayers = 2;
         else
             _initialNumPlayers = numPlayers;
-        Debug.Log($"-----------------numPlayers-->{numPlayers}-----------------");
+        //Debug.Log($"------numPlayers-->{numPlayers}"------");
     }
+    private void getInputPlayer1()
+    {
+        // Obtener el valor de PlayerPrefs
+        int inputP1 = PlayerPrefs.GetInt("inputP1", 1);
+        // Asignar el valor a la variable numOfPlayers
+        if (inputP1 < 0)
+            _inputPlayer1 = 1;
+        else if (inputP1 > 2)
+            _inputPlayer1 = 2;
+        else
+            _inputPlayer1 = inputP1;
+        Debug.Log($"------Input-->{inputP1}------");
+    }
+    private void setInputPlayer1(Player player)
+    {
+        _playerInput = player.GetComponent<PlayerInput>();
+        Debug.Log($"_playerInput --> {_playerInput}");
+        if (_playerInput != null)
+        {
+            if (_inputPlayer1 == 0)
+            {
+                _playerInput.SwitchCurrentControlScheme("Keyboard&Mouse");
+                //_playerInput.defaultControlScheme = "Keyboard&Mouse";
+                Debug.Log("Keyboard&Mouse");
+            }
+            else
+            {
+                _playerInput.SwitchCurrentControlScheme("Gamepad");
+                //_playerInput.defaultControlScheme = "Gamepad";
+                Debug.Log("Gamepad");
+            }
+        }        
+    }
+    /*
+    private void getSchemes(Player player)
+    {
+        _playerInput = player.GetComponent<PlayerInput>();
+        // Obtener el nombre del esquema predeterminado
+        string defaultScheme = _playerInput.defaultControlScheme;
+
+        // Obtener la lista de esquemas disponibles
+        InputControlScheme[] schemes = _playerInput.controlSchemes.ToArray();
+
+        // Imprimir los nombres de los esquemas disponibles
+        Debug.Log("Schemes available:");
+        foreach (InputControlScheme scheme in schemes)
+        {
+            Debug.Log(scheme.name);
+        }
+    }*/
 
 
     //Procedural
