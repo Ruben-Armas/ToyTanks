@@ -1579,7 +1579,8 @@ MonoBehaviour:
   - {fileID: 98275983122370233, guid: b1490f8dcca32c34a808627a0cf81d7d, type: 3}
   - {fileID: 3984408098127413074, guid: 8ce2e14431ab7854abebc9dbed006b90, type: 3}
   cubePrefab: {fileID: 98275983122370233, guid: 4fafc6d0e83a0664d91ac3c3bc220809, type: 3}
-  maxCubes: 50
+  minCubes: 10
+  maxCubes: 40
   cubeSize: 3
   diagonalProbability: 0.5
   width: 24

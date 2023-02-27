@@ -13,7 +13,9 @@ public class MapGenerator : MonoBehaviour
     private Vector3 _gridOffset;
     private Vector3 _position;
 
-    public int maxCubes = 50;
+    public int minCubes = 10;
+    [Range(10, 50)]
+    public int maxCubes = 40;
     public float cubeSize = 2.5f;
     public float diagonalProbability = 0.5f;
     public int width;
@@ -161,7 +163,8 @@ public class MapGenerator : MonoBehaviour
     IEnumerator DoCreateCubes()
     {
         int cubesGenerated = 0;
-        while (cubesGenerated < maxCubes)
+        int numCubes = Random.Range(minCubes, maxCubes);
+        while (cubesGenerated < numCubes)
         {
             Vector3 pos = GetRandomPosition();
             Vector3 position = pos + _gridOffset;

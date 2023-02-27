@@ -11,6 +11,8 @@ public class Movement : MonoBehaviour
     public float maxSpeed = 250;
     [Range(0f, 200f)]
     public float rotationSpeed = 150;
+    [Range(0f, 1f)]
+    public float precisionRotate = 0.8f;
     public Vector2 desiredMovement;
 
     private Rigidbody _rigidbody;
