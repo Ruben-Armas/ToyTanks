@@ -10,7 +10,7 @@ public class EnemyController : MonoBehaviour
     [Range(0f, 5f)]
     public float movementSpeed = 3;
     [Range(0f, 100f)]
-    public float rotationSpeed = 100;
+    public float rotationSpeed = 80;
     [Range(0.1f, 1f)]
     public float precisionRotate = 0.97f;
 
@@ -19,6 +19,8 @@ public class EnemyController : MonoBehaviour
     public float cooldownFireRate = 3;
     [Range(0.1f, 1f)]
     public float precisionFire = 0.97f;
+    [Range(0.1f, 1f)]
+    public float turretRotationSpeed = 0.7f;
 
     public enum SelectedTraking
     {
@@ -155,7 +157,7 @@ public class EnemyController : MonoBehaviour
                 //ChangeState(State.Aim);
                 Vector3 towardsTarget = _currentTarget.position - transform.position;
                 _weapon.transform.forward =
-                    Vector3.Lerp(_weapon.transform.forward, towardsTarget.normalized, Time.deltaTime);
+                    Vector3.Lerp(_weapon.transform.forward, towardsTarget.normalized, Time.deltaTime * turretRotationSpeed);
                 //_weapon.transform.LookAt(_currentTarget);   //Instantáneo
 
                 //DISPARA

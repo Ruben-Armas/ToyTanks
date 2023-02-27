@@ -22,8 +22,8 @@ public class GameManager : MonoBehaviour
     public int minimumAmount = 1;
     public int maximumAmount = 4;
 
-    //--TEMPORAL--
-    private Vector3 _playerStartPosition;
+    private Vector3 _player1StartPosition;
+    private Vector3 _player2StartPosition;
     private Vector3 _enemyStartPosition;
     private Vector3 _shieldStartPosition;
 
@@ -44,6 +44,8 @@ public class GameManager : MonoBehaviour
     public int currentLives;// { get; private set; }
 
     private GameObject _obstacles;
+    private List<Vector3> freePositions;    // referencia a la lista de posiciones libres
+    private bool startingLevel = true;
 
     private InGameView _inGameView;
     private MainMenu _mainMenu;
@@ -57,17 +59,12 @@ public class GameManager : MonoBehaviour
     }
     void Start()
     {
-        _level = 3;
+        _level = 2;
         record = 0;
         //Temporal
         //_initialNumPlayers = 0;
         getInitialNumOfPlayers();
         getInputPlayer1();
-
-        //Pos temporales
-        _playerStartPosition = new Vector3(-24, 0, 5);
-        _enemyStartPosition = new Vector3(24, 0, 0);
-        _shieldStartPosition = new Vector3(0, 0, 0);
 
         //Generar obstáculos
         //mapGenerator.GenerateMap();
@@ -168,6 +165,8 @@ public class GameManager : MonoBehaviour
         // Espera hasta que la navMesh esté lista
         yield return StartCoroutine(mapGenerator.DoCreateNavMesh());
 
+        setPositions();
+
         SpawnPlayers();
 
         SpawnEnemies();
@@ -183,17 +182,18 @@ public class GameManager : MonoBehaviour
 
     void SpawnPlayers()
     {
+        Vector3 offset = new Vector3(0, 0, 1);
         if (_initialNumPlayers == 1)
         {
-            Player player = Instantiate(playerPrefab, _playerStartPosition, Quaternion.Euler(0, 90, 0)).GetComponent<Player>();
+            Player player = Instantiate(playerPrefab, _player1StartPosition + offset, Quaternion.Euler(0, 90, 0)).GetComponent<Player>();
             //getSchemes(player);
             //setInputPlayer1(player);
         }
         else
         {
-            Player player = Instantiate(playerPrefab, _playerStartPosition, Quaternion.Euler(0, 90, 0)).GetComponent<Player>();
+            Player player = Instantiate(playerPrefab, _player1StartPosition + offset, Quaternion.Euler(0, 90, 0)).GetComponent<Player>();
             //setInputPlayer1(player);
-            Instantiate(player2Prefab, _playerStartPosition, Quaternion.Euler(0, 90, 0));
+            Instantiate(player2Prefab, _player2StartPosition + offset, Quaternion.Euler(0, 90, 0));
         }
     }
     void SpawnEnemies()
@@ -218,6 +218,90 @@ public class GameManager : MonoBehaviour
         }
         else
             CreateEnemies();
+    }
+
+    private void setPositions()
+    {
+        if (_level <= 2)
+        {
+            _player1StartPosition = new Vector3(-27, 0, 5);
+            _player2StartPosition = new Vector3(-27, 0, -5);
+            _enemyStartPosition = new Vector3(24, 0, 0);
+            _shieldStartPosition = new Vector3(0, 0, 0);
+        }
+        else if (startingLevel)
+        {
+            if (_initialNumPlayers == 1)
+                _player1StartPosition = setPlayerPosition();
+            else
+            {
+                _player1StartPosition = setPlayerPosition();
+                _player2StartPosition = setPlayerPosition();
+            }
+            freePositions = mapGenerator.freePositions; //Obtengo la lista
+
+
+            /*int randomIndex = Random.Range(0, freePositions.Count); // genera un número aleatorio
+
+            // obtiene la posición del índice aleatorio
+            _playerStartPosition = freePositions[randomIndex];
+            // elimina la posición usada
+            freePositions.RemoveAt(randomIndex);*/
+
+            startingLevel = false;
+        }
+    }
+    private Vector3 setPlayerPosition()
+    {
+        freePositions = mapGenerator.freePositions; //Obtengo la lista
+
+        // Obtener la mitad del ancho de la cuadrícula
+        int halfWidth = mapGenerator.width / 2;
+
+        // Crear una lista con las posiciones libres de la parte izquierda del mapa
+        List<Vector3> leftFreePositions = new List<Vector3>();
+        foreach (Vector3 pos in freePositions)
+        {
+            if (pos.x < halfWidth)
+                leftFreePositions.Add(pos);
+        }
+        // nº aleatorio entre 0 y el número de posiciones libres de la parte izquierda del mapa
+        int randomIndex = Random.Range(0, leftFreePositions.Count);
+        // Obtengo la posición de la lista de posiciones
+        Vector3 newPos = leftFreePositions[randomIndex];
+        Vector3 newPosFixed = new Vector3(newPos.x, 0, newPos.z);
+        Debug.Log($"pos --> {newPosFixed}");
+
+        // elimina la posición usada
+        freePositions.RemoveAt(randomIndex);
+
+        return newPosFixed;
+    }
+    private Vector3 setEnemyPosition()
+    {
+        freePositions = mapGenerator.freePositions; //Obtengo la lista
+
+        // Obtener la mitad del ancho de la cuadrícula
+        int halfWidth = mapGenerator.width / 2;
+
+        // Crear una lista con las posiciones libres de la parte derecha del mapa
+        List<Vector3> leftFreePositions = new List<Vector3>();
+        foreach (Vector3 pos in freePositions)
+        {
+            if (pos.x > halfWidth)
+                leftFreePositions.Add(pos);
+        }
+        // nº aleatorio entre 0 y el número de posiciones libres de la parte derecha del mapa
+        int randomIndex = Random.Range(0, leftFreePositions.Count);
+        // Obtengo la posición de la lista de posiciones
+        Vector3 newPos = leftFreePositions[randomIndex];
+        Vector3 newPosFixed = new Vector3(newPos.x, 0, newPos.z);
+        Debug.Log($"pos --> {newPosFixed}");
+
+        // elimina la posición usada
+        freePositions.RemoveAt(randomIndex);
+
+        return newPosFixed;
     }
 
     void CreateEnemies()

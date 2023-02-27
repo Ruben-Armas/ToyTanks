@@ -781,10 +781,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   movementSpeed: 3
-  rotationSpeed: 100
+  rotationSpeed: 80
   precisionRotate: 0.97
   cooldownFireRate: 3
   precisionFire: 0.97
+  turretRotationSpeed: 0.7
   traking: 0
 --- !u!195 &3657200478503351674
 NavMeshAgent:

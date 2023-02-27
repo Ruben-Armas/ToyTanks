@@ -7,21 +7,20 @@ using UnityEngine.InputSystem;
 public class MapGenerator : MonoBehaviour
 {
     public GameObject floor;
-    //public List<GameObject> cubePrefab;
+    public List<GameObject> listCubePrefab;
     public GameObject cubePrefab;
-    public GameObject cube2Prefab;
     private GameObject _nextCubePrefab;
-    //public int numObstacles = 10;
-    //public int gridSize = 8; // Tamaño de la cuadrícula, en número de cubos
-    //public float gridSpacing = 1f; // Espaciado entre cubos
-    public Vector3 gridOffset;
+    private Vector3 _gridOffset;
+    private Vector3 _position;
 
-
+    public int maxCubes = 50;
     public float cubeSize = 2.5f;
-    public float wallSpacing = 2;
+    public float diagonalProbability = 0.5f;
     public int width;
     public int height;
     public GameObject[,] cuadricula;
+    public List<GameObject> listCubes;
+    public List<Vector3> freePositions { get; private set; }
 
     private NavMeshSurface _navmesh;
 
@@ -35,12 +34,13 @@ public class MapGenerator : MonoBehaviour
 
     private void Awake()
     {
-        cuadricula = new GameObject[width, height];
-        wallSpacing = wallSpacing * cubeSize;
+        freePositions = new List<Vector3>();
         width = (int)(floor.transform.localScale.x / cubeSize);
         height = (int)(floor.transform.localScale.z / cubeSize);
+        cuadricula = new GameObject[width, height];
         Debug.Log($"width -> {width}");
         Debug.Log($"height -> {height}");
+        _gridOffset = new Vector3(-width * cubeSize / 2 + 1.15f, 1.75f, -height * cubeSize / 2 + 1.25f);
 
     }
     void Start()
@@ -126,7 +126,7 @@ public class MapGenerator : MonoBehaviour
     IEnumerator DoClearMap()
     {
         // Destruir los cubos existentes en la cuadrícula
-        if (cuadricula != null)
+        /*if (cuadricula != null)
         {
             for (int x = 0; x < width; x++)
             {
@@ -140,10 +140,97 @@ public class MapGenerator : MonoBehaviour
                     }
                 }
             }
+        }*/
+        if(listCubes != null)
+        {
+            for (int i = 0; i < listCubes.Count; i++)
+            {
+                GameObject cube = listCubes[i];
+                if (cube != null)
+                {
+                    Destroy(cube);
+                    //listCubes[i] = null;
+                }
+            }
+            listCubes.Clear();
         }
         yield return 0;
         //yield return new WaitForSeconds(2f);
     }
+
+    IEnumerator DoCreateCubes()
+    {
+        int cubesGenerated = 0;
+        while (cubesGenerated < maxCubes)
+        {
+            Vector3 pos = GetRandomPosition();
+            Vector3 position = pos + _gridOffset;
+            if (!HasAdjacentCube(pos) && Random.value < diagonalProbability && HasNoDiagonalCube(pos))
+            {
+                _nextCubePrefab = listCubePrefab[cubesGenerated % listCubePrefab.Count];
+                GameObject cube = Instantiate(_nextCubePrefab, position, Quaternion.identity);
+                listCubes.Add(cube);
+                cubesGenerated++;
+            }
+
+            // Agregar la posición a la lista de posiciones libres si no hay un cubo generado en esa posición
+            if (!HasCube(position))
+            {
+                if(!freePositions.Contains(position))
+    {
+                    freePositions.Add(position);
+                }
+            }
+        }
+        //Guardo las posiciones libres
+        //saveFreePositions();
+        yield return 0;
+    }
+
+    private bool HasAdjacentCube(Vector3 pos)
+    {
+        int x = Mathf.RoundToInt(pos.x / cubeSize);
+        int y = Mathf.RoundToInt(pos.z / cubeSize);
+        if (cuadricula[x, y] != null) return true;
+        if (x > 0 && cuadricula[x - 1, y] != null) return true;
+        if (x < width - 1 && cuadricula[x + 1, y] != null) return true;
+        if (y > 0 && cuadricula[x, y - 1] != null) return true;
+        if (y < height - 1 && cuadricula[x, y + 1] != null) return true;
+        return false;
+    }
+
+    private bool HasNoDiagonalCube(Vector3 pos)
+    {
+        int x = Mathf.RoundToInt(pos.x / cubeSize);
+        int y = Mathf.RoundToInt(pos.z / cubeSize);
+        if (x > 1 && y > 1 && cuadricula[x - 2, y - 2] != null) return false;
+        if (x > 1 && y < height - 2 && cuadricula[x - 2, y + 2] != null) return false;
+        if (x < width - 2 && y > 1 && cuadricula[x + 2, y - 2] != null) return false;
+        if (x < width - 2 && y < height - 2 && cuadricula[x + 2, y + 2] != null) return false;
+        return true;
+    }
+
+    private Vector3 GetRandomPosition()
+    {
+        float x = Random.Range(0, width) * cubeSize;
+        float y = 0;
+        float z = Random.Range(0, height) * cubeSize;
+        return new Vector3(x, y, z);
+    }
+
+    private bool HasCube(Vector3 position)
+    {
+        Collider[] colliders = Physics.OverlapSphere(position, cubeSize / 2);
+        foreach (Collider c in colliders)
+        {
+            if (c.gameObject.CompareTag("Cube"))
+            {
+                return true;
+            }
+        }
+        return false;
+    }
+
 
     /*IEnumerator DoCreateCubes()
     {
@@ -316,23 +403,151 @@ public class MapGenerator : MonoBehaviour
         }
     }*/
 
-    //Rellena todo
+    /*//Rellena todo
     IEnumerator DoCreateCubes()
     {
         // Instancia los cubos en una cuadrícula
-        int i = 0;
-        Vector3 ajust = new Vector3(-width * cubeSize/2 +1.15f, 0, -height * cubeSize/2 +1.25f);
         for (int x = 0; x < width; x++)
         {
             for (int y = 0; y < height; y++)
             {
-                Vector3 position = new Vector3(x * cubeSize, 0, y * cubeSize)+ajust + gridOffset;
+                _position = new Vector3(Random.Range(0, width), 0, Random.Range(0, height)) * cubeSize + _gridOffset;
 
-                if (i % 2 == 0)
-                    Instantiate(cubePrefab, position, Quaternion.identity);
-                else
-                    Instantiate(cube2Prefab, position, Quaternion.identity);
-                i++;
+                if (CanSpawnCube(_position))
+                {
+                    Instantiate(cubePrefab, _position, Quaternion.identity);
+
+                    if (Random.value < spawnChance)
+                    {
+                        // Check adjacent positions and try to spawn a cube
+                        Vector3[] adjacentOffsets = new Vector3[]
+                        {
+                    Vector3.forward,
+                    Vector3.right,
+                    Vector3.back,
+                    Vector3.left
+                        };
+
+                        foreach (Vector3 adjacentOffset in adjacentOffsets)
+                        {
+                            Vector3 adjacentPosition = _position + adjacentOffset * cubeSize;
+
+                            if (CanSpawnCube(adjacentPosition) && Random.value < spawnChance)
+                            {
+                                Instantiate(cubePrefab, adjacentPosition, Quaternion.identity);
+                            }
+                        }
+                    }
+                }
+
+                //Vector3 position = new Vector3(x * cubeSize, 0, y * cubeSize) + _gridOffset;
+                //_nextCubePrefab = listCubePrefab[(x + y) % listCubePrefab.Count];
+                //Instantiate(_nextCubePrefab, position, Quaternion.identity);
+            }
+        }
+        yield return 0;
+    }
+
+    private bool CanSpawnCube(Vector3 position)
+    {
+        // Check if the position is valid and there's no other cube nearby
+        Collider[] colliders = Physics.OverlapSphere(position, cubeSize / 2);
+
+        foreach (Collider collider in colliders)
+        {
+            if (collider.CompareTag("Cube"))
+            {
+                return false;
+            }
+        }
+
+        return true;
+    }*/
+    /*
+    IEnumerator DoCreateCubes()
+    {
+        // Obtener el ancho y la altura del suelo
+        int width = (int)(floor.transform.localScale.x / cubeSize);
+        int height = (int)(floor.transform.localScale.z / cubeSize);
+
+        // Generar una posición aleatoria dentro del área del suelo
+        Vector3 GetRandomPosition()
+        {
+            float x = Random.Range(0, width) * cubeSize;
+            float z = Random.Range(0, height) * cubeSize;
+            return new Vector3(x, 0, z);
+        }
+
+        // Verificar si hay un cubo adyacente en cruz
+        bool HasAdjacentCube(Vector3 pos)
+        {
+            bool hasCube = false;
+            Vector3[] adjacentOffsets = { Vector3.forward, Vector3.right, Vector3.back, Vector3.left };
+            foreach (Vector3 offset in adjacentOffsets)
+            {
+                Vector3 adjacentPos = pos + offset * cubeSize;
+                if (_positions.Contains(adjacentPos))
+                {
+                    hasCube = true;
+                    break;
+                }
+            }
+            return hasCube;
+        }
+
+        // Verificar si no hay un cubo en diagonal en una distancia mínima
+        bool HasNoDiagonalCube(Vector3 pos)
+        {
+            bool hasNoCube = true;
+            int numDiagonalCubes = 0;
+            Vector3[] diagonalOffsets = { Vector3.forward + Vector3.right, Vector3.forward + Vector3.left,
+                                      Vector3.back + Vector3.right, Vector3.back + Vector3.left };
+            foreach (Vector3 offset in diagonalOffsets)
+            {
+                Vector3 diagonalPos = pos + offset * cubeSize;
+                if (_positions.Contains(diagonalPos))
+                {
+                    numDiagonalCubes++;
+                }
+            }
+            if (numDiagonalCubes >= 2 || (numDiagonalCubes == 1 && Random.value < probability))
+            {
+                hasNoCube = false;
+            }
+            return hasNoCube;
+        }
+
+        // Instancia los cubos en posiciones aleatorias
+        for (int i = 0; i < numCubes; i++)
+        {
+            Vector3 position = GetRandomPosition();
+
+            // Verificar si la posición es válida
+            bool isValidPosition = !HasAdjacentCube(position) && HasNoDiagonalCube(position);
+
+            if (isValidPosition)
+            {
+                _nextCubePrefab = listCubePrefab[Random.Range(0, listCubePrefab.Count)];
+                Instantiate(_nextCubePrefab, position, Quaternion.identity);
+                _positions.Add(position);
+            }
+        }
+
+        yield return 0;
+    }*/
+
+    /*//Rellena todo
+    IEnumerator DoCreateCubes()
+    {
+        // Instancia los cubos en una cuadrícula
+        Vector3 ajust = new Vector3(-width * cubeSize / 2 + 1.15f, 0, -height * cubeSize / 2 + 1.25f);
+        for (int x = 0; x < width; x++)
+        {
+            for (int y = 0; y < height; y++)
+            {
+                Vector3 position = new Vector3(x * cubeSize, 0, y * cubeSize) + _gridOffset;
+                _nextCubePrefab = listCubePrefab[(x + y) % listCubePrefab.Count];
+                Instantiate(_nextCubePrefab, position, Quaternion.identity);
                 /*
                 // Asegura que los cubos estén unidos sin superponerse
                 if (x == 0 || x == width - 1 || y == 0 || y == height - 1)
@@ -342,12 +557,12 @@ public class MapGenerator : MonoBehaviour
                 else if (x % 2 == 0 && y % 2 == 0)
                 {
                     Instantiate(cubePrefab, position, Quaternion.identity);
-                }*/
+                }*//*
             }
         }
         yield return 0;
-    }
-        
+    }*/
+
     /*// Rellena aleatoriamente
         // Instanciar los cubos
         int i = 0;
