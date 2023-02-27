@@ -1,12 +1,17 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.InputSystem;
+using UnityEngine.EventSystems;
+using UnityEngine.EventSystems;
+using UnityEngine.UI;
 
 public class PauseView : MonoBehaviour
 {
     public MenuManager menuManager;
     public MenuView ingameView;
+
+    public GameObject firstSelectedButton;
+    private ChangeFirstSelectedButton changeFirstSelectedButton;
 
     //public InputActionAsset uiInputAsset;
     //private TankControls tankControls => GameInputManager.tankControls;
@@ -15,6 +20,30 @@ public class PauseView : MonoBehaviour
     {
         GameInputManager.ToggleActionMap(tankControls.UI);
     }*/
+
+    private void Start()
+    {
+        // Buscar el primer botón dentro de MenuHolder -> ButtonsHolder
+        GameObject buttonsHolder = transform.Find("MenuHolder/ButtonsHolder").gameObject;
+        if (buttonsHolder != null)
+        {
+            Button firstButton = buttonsHolder.GetComponentInChildren<Button>();
+            if (firstButton != null)
+            {
+                firstSelectedButton = firstButton.gameObject;
+            }
+        }
+
+        //changeFirstSelectedButton = new ChangeFirstSelectedButton();
+        //changeFirstSelectedButton.SetFirstSelectedButton("MenuHolder/ButtonsHolder");
+    }
+    private void OnEnable()
+    {
+        if (firstSelectedButton != null)
+            EventSystem.current.SetSelectedGameObject(firstSelectedButton);
+        //changeFirstSelectedButton = new ChangeFirstSelectedButton();
+        //changeFirstSelectedButton.SetFirstSelectedButton("MenuHolder/ButtonsHolder");
+    }
 
     public void ResumeGame()
     {

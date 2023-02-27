@@ -44,6 +44,5 @@ public class MenuManager : MonoBehaviour
         //Abrimos la nextView
         yield return StartCoroutine(nextView.OpenView());
         currentView = nextView;
-
     }
 }

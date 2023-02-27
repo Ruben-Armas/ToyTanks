@@ -47,7 +47,7 @@ public class GameManager : MonoBehaviour
     private List<Vector3> freePositions;    // referencia a la lista de posiciones libres
     private bool startingLevel = true;
 
-    private InGameView _inGameView;
+    public InGameView _inGameView;
     private MainMenu _mainMenu;
     private MenuManager _menuManager;
 
@@ -59,7 +59,7 @@ public class GameManager : MonoBehaviour
     }
     void Start()
     {
-        _level = 2;
+        _level = 1;
         record = 0;
         //Temporal
         //_initialNumPlayers = 0;

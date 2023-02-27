@@ -17,8 +17,8 @@ public class InGameView : MonoBehaviour
 
 
     //private TankControls tankControls;
-    //private TankControls tankControls => GameInputManager.tankControls;
-    public PlayerInput playerInput;
+    private TankControls tankControls => GameInputManager.tankControls;
+    //public PlayerInput playerInput;
     //private PlayerInput _playerInput;
 
 
@@ -46,8 +46,8 @@ public class InGameView : MonoBehaviour
 
     public void PauseGame()
     {
-        //tankControls.Player.Disable();
-        //GameInputManager.ToggleActionMap(tankControls.UI);
+        tankControls.Player.Disable();
+        GameInputManager.ToggleActionMap(tankControls.UI);
 
         //tankControls.Player.Disable();
         //tankControls.UI.Enable();
