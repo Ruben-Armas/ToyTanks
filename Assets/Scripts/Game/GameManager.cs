@@ -66,9 +66,6 @@ public class GameManager : MonoBehaviour
         getInitialNumOfPlayers();
         getInputPlayer1();
 
-        //Generar obstáculos
-        //mapGenerator.GenerateMap();
-
         if (_level == 1)
         {
             _obstacles = Instantiate(obstaclesPrefab1, Vector3.zero, Quaternion.identity);
