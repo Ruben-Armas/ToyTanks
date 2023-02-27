@@ -1150,6 +1150,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   menuManager: {fileID: 678547568}
   ingameView: {fileID: 1157089630}
+  firstSelectedButton: {fileID: 0}
 --- !u!114 &210788344
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1541,7 +1542,7 @@ MonoBehaviour:
   m_ScrollWheelAction: {fileID: 2314984535695359517, guid: 152c579b50b98d34688282686b84d993, type: 3}
   m_TrackedDevicePositionAction: {fileID: -3947519005962149375, guid: 152c579b50b98d34688282686b84d993, type: 3}
   m_TrackedDeviceOrientationAction: {fileID: -7067986969822213014, guid: 152c579b50b98d34688282686b84d993, type: 3}
-  m_DeselectOnBackgroundClick: 1
+  m_DeselectOnBackgroundClick: 0
   m_PointerBehavior: 0
   m_CursorLockBehavior: 0
 --- !u!1 &251485938
@@ -1688,6 +1689,18 @@ MonoBehaviour:
       - m_Target: {fileID: 1157089632}
         m_TargetAssemblyTypeName: InGameView, Assembly-CSharp
         m_MethodName: PauseGame
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 1798832457}
+        m_TargetAssemblyTypeName: SelectButton, Assembly-CSharp
+        m_MethodName: OnSelectButton
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -5164,7 +5177,7 @@ MonoBehaviour:
     m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
     m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
     m_PressedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
-    m_SelectedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
+    m_SelectedColor: {r: 0.8509936, g: 1, b: 0.6367924, a: 1}
     m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
     m_ColorMultiplier: 1
     m_FadeDuration: 0.1
@@ -12989,6 +13002,7 @@ GameObject:
   - component: {fileID: 1798832456}
   - component: {fileID: 1798832455}
   - component: {fileID: 1798832454}
+  - component: {fileID: 1798832457}
   m_Layer: 5
   m_Name: ResumeButton
   m_TagString: Untagged
@@ -13041,7 +13055,7 @@ MonoBehaviour:
     m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
     m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
     m_PressedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
-    m_SelectedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
+    m_SelectedColor: {r: 0.8509936, g: 1, b: 0.6367924, a: 1}
     m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
     m_ColorMultiplier: 1
     m_FadeDuration: 0.1
@@ -13111,6 +13125,18 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1798832452}
   m_CullTransparentMesh: 1
+--- !u!114 &1798832457
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1798832452}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2688828eb25d0aa4aa8e09e11a5cf39d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1821796916
 GameObject:
   m_ObjectHideFlags: 0
