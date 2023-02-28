@@ -13,9 +13,9 @@ public class MapGenerator : MonoBehaviour
     private Vector3 _gridOffset;
     private Vector3 _position;
 
-    public int minCubes = 10;
-    [Range(10, 50)]
-    public int maxCubes = 40;
+    public int minCubes = 25;
+    [Range(10, 70)]
+    public int maxCubes = 50;
     public float cubeSize = 2.5f;
     public float diagonalProbability = 0.5f;
     public int width;
@@ -42,7 +42,7 @@ public class MapGenerator : MonoBehaviour
         cuadricula = new GameObject[width, height];
         Debug.Log($"width -> {width}");
         Debug.Log($"height -> {height}");
-        _gridOffset = new Vector3(-width * cubeSize / 2 + 1.15f, 1.75f, -height * cubeSize / 2 + 1.25f);
+        _gridOffset = new Vector3(-width * cubeSize / 2 + 1.5f, 1.75f, -height * cubeSize / 2 + 1.5f);
 
     }
     void Start()
@@ -160,7 +160,7 @@ public class MapGenerator : MonoBehaviour
         //yield return new WaitForSeconds(2f);
     }
 
-    IEnumerator DoCreateCubes()
+    /*IEnumerator DoCreateCubes()
     {
         int cubesGenerated = 0;
         int numCubes = Random.Range(minCubes, maxCubes);
@@ -173,7 +173,17 @@ public class MapGenerator : MonoBehaviour
                 _nextCubePrefab = listCubePrefab[cubesGenerated % listCubePrefab.Count];
                 GameObject cube = Instantiate(_nextCubePrefab, position, Quaternion.identity);
                 listCubes.Add(cube);
+                //remove de la lista de posiciones libres
                 cubesGenerated++;
+            }
+            else if (!HasAdjacentCube(pos) && HasNoDiagonalCube(pos))
+            {
+                _nextCubePrefab = listCubePrefab[cubesGenerated % listCubePrefab.Count];
+                GameObject cube = Instantiate(_nextCubePrefab, position, Quaternion.identity);
+                listCubes.Add(cube);
+                //remove de la lista de posiciones libres
+                cubesGenerated++;
+                Debug.Log(position);
             }
 
             // Agregar la posición a la lista de posiciones libres si no hay un cubo generado en esa posición
@@ -188,7 +198,7 @@ public class MapGenerator : MonoBehaviour
         //Guardo las posiciones libres
         //saveFreePositions();
         yield return 0;
-    }
+    }*/
 
     private bool HasAdjacentCube(Vector3 pos)
     {
@@ -539,11 +549,11 @@ public class MapGenerator : MonoBehaviour
         yield return 0;
     }*/
 
-    /*//Rellena todo
+    //Rellena todo
     IEnumerator DoCreateCubes()
     {
         // Instancia los cubos en una cuadrícula
-        Vector3 ajust = new Vector3(-width * cubeSize / 2 + 1.15f, 0, -height * cubeSize / 2 + 1.25f);
+        Vector3 ajust = new Vector3(-width * cubeSize / 2 + 1.5f, 0, -height * cubeSize / 2 + 1.5f);
         for (int x = 0; x < width; x++)
         {
             for (int y = 0; y < height; y++)
@@ -560,11 +570,11 @@ public class MapGenerator : MonoBehaviour
                 else if (x % 2 == 0 && y % 2 == 0)
                 {
                     Instantiate(cubePrefab, position, Quaternion.identity);
-                }*//*
+                }*/
             }
         }
         yield return 0;
-    }*/
+    }
 
     /*// Rellena aleatoriamente
         // Instanciar los cubos

@@ -18,6 +18,9 @@ public class GameManager : MonoBehaviour
     public GameObject obstaclesPrefab1;
     public GameObject obstaclesPrefab2;
 
+    public GameObject cube1Prefab;
+    public GameObject cube2Prefab;
+
     [Header("Enemigos")]
     public int minimumAmount = 1;
     public int maximumAmount = 4;
@@ -26,6 +29,7 @@ public class GameManager : MonoBehaviour
     private Vector3 _player2StartPosition;
     private Vector3 _enemyStartPosition;
     private Vector3 _shieldStartPosition;
+    private List<Vector3> _listEnemyStartPositions;
 
     private List<Player> listOfPlayers = new List<Player>();
     private List<Enemy> listOfEnemies = new List<Enemy>();  //Lista que controlará la cantidad de enemigos vivos en la escena
@@ -228,17 +232,29 @@ public class GameManager : MonoBehaviour
         }
         else if (startingLevel)
         {
+            //Players
             if (_initialNumPlayers == 1)
-                _player1StartPosition = setPlayerPosition();
+                _player1StartPosition = setLeftRightPosition(true);
             else
             {
-                _player1StartPosition = setPlayerPosition();
-                _player2StartPosition = setPlayerPosition();
+                _player1StartPosition = setLeftRightPosition(true);
+                _player2StartPosition = setLeftRightPosition(true);
             }
-            freePositions = mapGenerator.freePositions; //Obtengo la lista
 
+            //Enemies
+            if (listOfEnemiesDataTemp.Count > 0)
+            {
+                _listEnemyStartPositions.Clear();
+                foreach (EnemyData enemyData in listOfEnemiesDataTemp)
+                {
+                    _listEnemyStartPositions.Add(setLeftRightPosition(false));
+                }
+            }
 
-            /*int randomIndex = Random.Range(0, freePositions.Count); // genera un número aleatorio
+            //Shield
+            /*freePositions = mapGenerator.freePositions; //Obtengo la lista
+
+            int randomIndex = Random.Range(0, freePositions.Count); // genera un número aleatorio
 
             // obtiene la posición del índice aleatorio
             _playerStartPosition = freePositions[randomIndex];
@@ -248,52 +264,42 @@ public class GameManager : MonoBehaviour
             startingLevel = false;
         }
     }
-    private Vector3 setPlayerPosition()
+    private Vector3 setLeftRightPosition(bool left)
     {
         freePositions = mapGenerator.freePositions; //Obtengo la lista
 
         // Obtener la mitad del ancho de la cuadrícula
-        int halfWidth = mapGenerator.width / 2;
+        int halfWidth = mapGenerator.width / 4;
 
-        // Crear una lista con las posiciones libres de la parte izquierda del mapa
-        List<Vector3> leftFreePositions = new List<Vector3>();
+        // Crear una lista con las posiciones libres de la parte izquierda/derecha del mapa
+        List<Vector3> leftRightFreePositions = new List<Vector3>();
         foreach (Vector3 pos in freePositions)
         {
-            if (pos.x < halfWidth)
-                leftFreePositions.Add(pos);
+            //if (left)
+            //{
+                if (pos.x < halfWidth)
+                {
+                    leftRightFreePositions.Add(pos);
+                    Instantiate(cube1Prefab, pos, Quaternion.identity);
+                }
+                    
+            //}
+            else
+            {
+                if (pos.x > halfWidth)
+                {
+                    leftRightFreePositions.Add(pos);
+                    Instantiate(cube2Prefab, pos, Quaternion.identity);
+                }
+                    
+            }            
         }
-        // nº aleatorio entre 0 y el número de posiciones libres de la parte izquierda del mapa
-        int randomIndex = Random.Range(0, leftFreePositions.Count);
+        // nº aleatorio entre 0 y el número de posiciones libres de la parte izquierda/derecha del mapa
+        int randomIndex = Random.Range(0, leftRightFreePositions.Count);
         // Obtengo la posición de la lista de posiciones
-        Vector3 newPos = leftFreePositions[randomIndex];
+        Vector3 newPos = leftRightFreePositions[randomIndex];
         Vector3 newPosFixed = new Vector3(newPos.x, 0, newPos.z);
-        Debug.Log($"pos --> {newPosFixed}");
-
-        // elimina la posición usada
-        freePositions.RemoveAt(randomIndex);
-
-        return newPosFixed;
-    }
-    private Vector3 setEnemyPosition()
-    {
-        freePositions = mapGenerator.freePositions; //Obtengo la lista
-
-        // Obtener la mitad del ancho de la cuadrícula
-        int halfWidth = mapGenerator.width / 2;
-
-        // Crear una lista con las posiciones libres de la parte derecha del mapa
-        List<Vector3> leftFreePositions = new List<Vector3>();
-        foreach (Vector3 pos in freePositions)
-        {
-            if (pos.x > halfWidth)
-                leftFreePositions.Add(pos);
-        }
-        // nº aleatorio entre 0 y el número de posiciones libres de la parte derecha del mapa
-        int randomIndex = Random.Range(0, leftFreePositions.Count);
-        // Obtengo la posición de la lista de posiciones
-        Vector3 newPos = leftFreePositions[randomIndex];
-        Vector3 newPosFixed = new Vector3(newPos.x, 0, newPos.z);
-        Debug.Log($"pos --> {newPosFixed}");
+        Debug.Log($"pos to spawn --> {newPosFixed}");
 
         // elimina la posición usada
         freePositions.RemoveAt(randomIndex);

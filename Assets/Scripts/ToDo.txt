@@ -227,5 +227,6 @@ O Puntuación
 
 
 ## BUGS ##
+O el ratón no apunta bien
 O Hay ángulos en los que la bala choca contra la pared, en los que no rebota
-O se solapan los inputs   (clase del miércoles)
+O los cubos generados se "Sobreescriben"/colocan unos dentro de otros
