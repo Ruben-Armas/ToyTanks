@@ -40,8 +40,8 @@ public class MapGenerator : MonoBehaviour
         width = (int)(floor.transform.localScale.x / cubeSize);
         height = (int)(floor.transform.localScale.z / cubeSize);
         cuadricula = new GameObject[width, height];
-        Debug.Log($"width -> {width}");
-        Debug.Log($"height -> {height}");
+        //Debug.Log($"width -> {width}");
+        //Debug.Log($"height -> {height}");
         _gridOffset = new Vector3(-width * cubeSize / 2 + 1.5f, 1.75f, -height * cubeSize / 2 + 1.5f);
 
     }

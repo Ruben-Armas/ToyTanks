@@ -61,14 +61,14 @@ public class GameManager : MonoBehaviour
     private bool startingLevel = true;
 
     public InGameView _inGameView;
-    private MainMenu _mainMenu;
-    private MenuManager _menuManager;
+    public MainMenu _mainMenu;
+    public MenuManager _menuManager;
 
 
     private void Awake()
     {
-        _mainMenu = new MainMenu();
-        _menuManager = new MenuManager();
+        //_mainMenu = new MainMenu();
+        //_menuManager = new MenuManager();
     }
     void Start()
     {
@@ -212,8 +212,8 @@ public class GameManager : MonoBehaviour
         if (_initialNumPlayers == 1)
         {
             Player player = Instantiate(playerPrefab, _player1StartPosition + offset, Quaternion.Euler(0, 90, 0)).GetComponent<Player>();
-            //getSchemes(player);
-            //SetInputPlayer1(player);
+            //GetSchemes(player);
+            SetInputPlayer1(player);
         }
         else
         {
@@ -248,7 +248,6 @@ public class GameManager : MonoBehaviour
     void CreateEnemies()
     {
         _randNumEnemies = Random.Range(minAmountEnemies, maxAmountEnemies + 1);
-        Debug.Log($"_randNumEnemies --> {_randNumEnemies}");
 
         GetEnemyPositions();
 
@@ -499,7 +498,6 @@ public class GameManager : MonoBehaviour
         }
         yield return new WaitForSeconds(1f);
     }
-
     //Borro los enemigos que quedaban para instanciarlos después (y no den error al generar el navMesh)
     IEnumerator ClearEnemies()
     {
@@ -530,7 +528,6 @@ public class GameManager : MonoBehaviour
                 currentShield.deactivateShield();   //Lo desactivo
         }
     }
-
     private void DestroyGameObjectsWithTag(string tag)
     {
         //Buscamos el GameObject a eliminar
@@ -568,25 +565,24 @@ public class GameManager : MonoBehaviour
     private void SetInputPlayer1(Player player)
     {
         _playerInput = player.GetComponent<PlayerInput>();
-        Debug.Log($"_playerInput --> {_playerInput}");
+        Debug.Log($"PlayerInput --> {_playerInput}");
         if (_playerInput != null)
         {
             if (_inputPlayer1 == 0)
             {
-                _playerInput.SwitchCurrentControlScheme("Keyboard&Mouse");
+                _playerInput.SwitchCurrentControlScheme("Keyboard&Mouse", Keyboard.current);
                 //_playerInput.defaultControlScheme = "Keyboard&Mouse";
-                Debug.Log("Keyboard&Mouse");
+                Debug.Log("Switch to Keyboard&Mouse");
             }
             else
             {
-                _playerInput.SwitchCurrentControlScheme("Gamepad");
+                _playerInput.SwitchCurrentControlScheme("Gamepad", Gamepad.current);
                 //_playerInput.defaultControlScheme = "Gamepad";
-                Debug.Log("Gamepad");
+                Debug.Log("Switch to Gamepad");
             }
         }        
-    }
-    /*
-    private void getSchemes(Player player)
+    }    
+    /*private void GetSchemes(Player player)
     {
         _playerInput = player.GetComponent<PlayerInput>();
         // Obtener el nombre del esquema predeterminado
@@ -602,7 +598,6 @@ public class GameManager : MonoBehaviour
             Debug.Log(scheme.name);
         }
     }*/
-
 
     //Procedural
     IEnumerator DoCreateObstacles()

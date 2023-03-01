@@ -647,7 +647,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &83679517
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -10337,10 +10337,14 @@ MonoBehaviour:
   obstaclesPrefab2: {fileID: 6629110306118578421, guid: 7b0abe333186739479622bce6ed3c2c4, type: 3}
   cube1Prefab: {fileID: 98275983122370233, guid: f091743607f9fdd419f6e788e55a27dd, type: 3}
   cube2Prefab: {fileID: 98275983122370233, guid: fae614c2d53d66e4795dcd789335b977, type: 3}
-  minimumAmount: 1
-  maximumAmount: 1
+  minAmountEnemies: 1
+  maxAmountEnemies: 4
+  minAmountShields: 1
+  maxAmountShields: 2
   currentLives: 2
   _inGameView: {fileID: 1157089632}
+  _mainMenu: {fileID: 0}
+  _menuManager: {fileID: 0}
 --- !u!4 &1423864508
 Transform:
   m_ObjectHideFlags: 0
