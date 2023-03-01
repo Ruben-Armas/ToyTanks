@@ -22,14 +22,21 @@ public class GameManager : MonoBehaviour
     public GameObject cube2Prefab;
 
     [Header("Enemigos")]
-    public int minimumAmount = 1;
-    public int maximumAmount = 4;
+    public int minAmountEnemies = 1;
+    public int maxAmountEnemies = 4;
+
+    [Header("Escudos")]
+    public int minAmountShields = 1;
+    public int maxAmountShields = 2;
 
     private Vector3 _player1StartPosition;
     private Vector3 _player2StartPosition;
     private Vector3 _enemyStartPosition;
-    private Vector3 _shieldStartPosition;
-    private List<Vector3> _listEnemyStartPositions;
+    private Vector3 _shield1StartPosition;
+    private Vector3 _shield2StartPosition;
+    private List<Vector3> _listEnemyStartPositions = new List<Vector3>();
+    private int _randNumEnemies;
+    private int _randNumShields;
     private int _width;
     private int _height;
 
@@ -67,8 +74,10 @@ public class GameManager : MonoBehaviour
     {
         _level = 1;
         record = 0;
-        getInitialNumOfPlayers();
-        getInputPlayer1();
+        _width = mapGenerator.width;
+        _height = mapGenerator.height;
+        GetInitialNumOfPlayers();
+        GetInputPlayer1();
 
         if (_level == 1)
         {
@@ -166,13 +175,11 @@ public class GameManager : MonoBehaviour
         // Espera hasta que la navMesh esté lista
         yield return StartCoroutine(mapGenerator.DoCreateNavMesh());
 
-        setPositions();
-
-        SpawnShield();
-
+        SpawnShields();
         SpawnPlayers();
-
         SpawnEnemies();
+
+        startingLevel = false;
 
         /*
         //Instancia un enemigo aleatorio de una lista   
@@ -183,23 +190,35 @@ public class GameManager : MonoBehaviour
         }*/
     }
 
-    void SpawnShield()
+    void SpawnShields()
     {
-        Instantiate(shieldPrefab, _shieldStartPosition, Quaternion.identity);
+        _randNumShields = Random.Range(minAmountShields, maxAmountShields + 1);
+
+        GetShieldPositions();
+
+        if(_randNumShields == 1)
+            Instantiate(shieldPrefab, _shield1StartPosition, Quaternion.identity);
+        else
+        {
+            Instantiate(shieldPrefab, _shield1StartPosition, Quaternion.identity);
+            Instantiate(shieldPrefab, _shield2StartPosition, Quaternion.identity);
+        }            
     }
     void SpawnPlayers()
     {
+        GetPlayerPositions();
+
         Vector3 offset = new Vector3(0, 0, 1);
         if (_initialNumPlayers == 1)
         {
             Player player = Instantiate(playerPrefab, _player1StartPosition + offset, Quaternion.Euler(0, 90, 0)).GetComponent<Player>();
             //getSchemes(player);
-            //setInputPlayer1(player);
+            //SetInputPlayer1(player);
         }
         else
         {
             Player player = Instantiate(playerPrefab, _player1StartPosition + offset, Quaternion.Euler(0, 90, 0)).GetComponent<Player>();
-            //setInputPlayer1(player);
+            //SetInputPlayer1(player);
             Instantiate(player2Prefab, _player2StartPosition + offset, Quaternion.Euler(0, 90, 0));
         }
     }
@@ -226,18 +245,26 @@ public class GameManager : MonoBehaviour
         else
             CreateEnemies();
     }
-
-    private void setPositions()
+    void CreateEnemies()
     {
-        _width = mapGenerator.width;
-        _height = mapGenerator.height;
+        _randNumEnemies = Random.Range(minAmountEnemies, maxAmountEnemies + 1);
+        Debug.Log($"_randNumEnemies --> {_randNumEnemies}");
 
+        GetEnemyPositions();
+
+        for (int i = 0; i < _randNumEnemies; i++)
+        {
+            Enemy newEnemy = Instantiate(enemyPrefab, _listEnemyStartPositions[i], Quaternion.Euler(0, 270, 0)).GetComponent<Enemy>();
+            listOfEnemies.Add(newEnemy);
+        }
+    }
+
+    private void GetPlayerPositions()
+    {
         if (_level <= 2)
         {
             _player1StartPosition = new Vector3(-27, 0, 5);
             _player2StartPosition = new Vector3(-27, 0, -5);
-            _enemyStartPosition = new Vector3(24, 0, 0);
-            _shieldStartPosition = new Vector3(0, 0, 0);
         }
         else if (startingLevel)
         {
@@ -249,21 +276,43 @@ public class GameManager : MonoBehaviour
                 _player1StartPosition = SetLeftRightPosition(true);
                 _player2StartPosition = SetLeftRightPosition(true);
             }
-
+        }
+    }
+    private void GetEnemyPositions()
+    {
+        if (_level <= 2)
+            for (int i = 0; i < _randNumEnemies; i++)
+                _listEnemyStartPositions.Add(new Vector3(24, 0, 0));
+        else if (startingLevel)
+        {
             //Enemies
-            if (listOfEnemiesDataTemp.Count > 0)
+            if (_randNumEnemies > 0)
             {
                 _listEnemyStartPositions.Clear();
-                foreach (EnemyData enemyData in listOfEnemiesDataTemp)
+                for (int i = 0; i <_randNumEnemies; i++)
                 {
                     _listEnemyStartPositions.Add(SetLeftRightPosition(false));
                 }
             }
-
+        }
+    }
+    private void GetShieldPositions()
+    {
+        if (_level <= 2)
+        {
+            _shield1StartPosition = new Vector3(0, 0, 0);
+            _shield2StartPosition = new Vector3(0, 0, 0);
+        }
+        else if (startingLevel)
+        {
             //Shield
-            _shieldStartPosition = SetMiddlePosition();
-
-            startingLevel = false;
+            if (_randNumShields == 1)
+                _shield1StartPosition = SetMiddlePosition();
+            else
+            {
+                _shield1StartPosition = SetMiddlePosition();
+                _shield2StartPosition = SetMiddlePosition();
+            }
         }
     }
     private Vector3 SetMiddlePosition()
@@ -285,7 +334,7 @@ public class GameManager : MonoBehaviour
         // Obtengo la posición de la lista de posiciones
         Vector3 newPos = middleFreePositions[randomIndex];
         Vector3 newPosFixed = new Vector3(newPos.x, 0, newPos.z);
-        Debug.Log($"pos middle to spawn --> {newPosFixed}");
+        //Debug.Log($"pos middle to spawn --> {newPosFixed}");
 
         // elimina la posición usada
         freePositions.RemoveAt(randomIndex);
@@ -339,18 +388,6 @@ public class GameManager : MonoBehaviour
             return false;
     }
 
-    void CreateEnemies()
-    {
-        int numEnemies = Random.Range(minimumAmount, maximumAmount + 1);
-        for (int i = 0; i < numEnemies; i++)
-        {
-            //Vector3 nestStartPosition = stageGenerator.GetEnemyNestPosition(playerStartPosition);
-            Enemy newEnemy = Instantiate(enemyPrefab, _enemyStartPosition, Quaternion.Euler(0, 270, 0)).GetComponent<Enemy>();
-
-            listOfEnemies.Add(newEnemy);
-        }
-    }
-
     void OnPlayerRoundEnds()
     {
         Debug.Log($"Ronda {currentLevel} terminada!!!");
@@ -387,7 +424,7 @@ public class GameManager : MonoBehaviour
     {
         currentLives--;
         _flagReplay = true;
-        deactivateAllShields();
+        DeactivateAllShields();
         ClearSceneItems();
         yield return StartCoroutine(ClearEnemies());
 
@@ -399,15 +436,16 @@ public class GameManager : MonoBehaviour
         _level++;
         if(_level % 2 == 0)
             currentLives++;
-        startingLevel = true;
 
+        startingLevel = true;
         _flagReplay = false;
         listOfEnemies.Clear();
 
-        deactivateAllShields();
+        DeactivateAllShields();
         ClearSceneItems();
 
         yield return StartCoroutine(ClearPlayers());
+        listOfEnemiesDataTemp.Clear();
 
         //Generar obstáculos
         if (_level == 2)
@@ -481,7 +519,7 @@ public class GameManager : MonoBehaviour
         yield return new WaitForSeconds(1f);
     }
 
-    void deactivateAllShields()
+    void DeactivateAllShields()
     {
         foreach (Player player in listOfPlayers)
         {
@@ -501,7 +539,7 @@ public class GameManager : MonoBehaviour
             Destroy(objects[i]);
     }
 
-    private void getInitialNumOfPlayers()
+    private void GetInitialNumOfPlayers()
     {
         // Obtener el valor de PlayerPrefs
         int numPlayers = PlayerPrefs.GetInt("numPlayers", 1);
@@ -514,7 +552,7 @@ public class GameManager : MonoBehaviour
             _initialNumPlayers = numPlayers;
         //Debug.Log($"------numPlayers-->{numPlayers}"------");
     }
-    private void getInputPlayer1()
+    private void GetInputPlayer1()
     {
         // Obtener el valor de PlayerPrefs
         int inputP1 = PlayerPrefs.GetInt("inputP1", 1);
@@ -527,7 +565,7 @@ public class GameManager : MonoBehaviour
             _inputPlayer1 = inputP1;
         Debug.Log($"------Input-->{inputP1}------");
     }
-    private void setInputPlayer1(Player player)
+    private void SetInputPlayer1(Player player)
     {
         _playerInput = player.GetComponent<PlayerInput>();
         Debug.Log($"_playerInput --> {_playerInput}");
