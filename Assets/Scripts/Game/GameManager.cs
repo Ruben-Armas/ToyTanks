@@ -388,8 +388,7 @@ public class GameManager : MonoBehaviour
 
     void OnPlayerRoundEnds()
     {
-        Debug.Log($"Ronda {currentLevel} terminada!!!");
-
+        //Debug.Log($"Ronda {currentLevel} terminada!!!");
         if (currentLives == 0)
         {
             OnGameOver();

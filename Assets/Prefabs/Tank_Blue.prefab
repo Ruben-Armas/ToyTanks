@@ -542,7 +542,7 @@ Transform:
   - {fileID: 4834055819830971367}
   - {fileID: 3017504875441508545}
   m_Father: {fileID: 0}
-  m_RootOrder: 9
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 90, z: 0}
 --- !u!114 &6336408041709275117
 MonoBehaviour:
@@ -634,6 +634,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxSpeed: 250
   rotationSpeed: 150
+  precisionRotate: 0.8
   desiredMovement: {x: 0, y: 0}
 --- !u!114 &8493150913795461049
 MonoBehaviour:
