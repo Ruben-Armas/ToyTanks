@@ -7,8 +7,13 @@ using UnityEngine.InputSystem;
 
 public class GameManager : MonoBehaviour
 {
-    public int maxPlayers = 2;
+    public int startLives;
+
+    [Header("Referencias")]
     public MapGenerator mapGenerator;
+    public InGameView inGameView;
+    public MainMenu mainMenu;
+    public MenuManager menuManager;
 
     [Header("Prefabs")]
     public GameObject playerPrefab;
@@ -29,6 +34,9 @@ public class GameManager : MonoBehaviour
     public int minAmountShields = 1;
     public int maxAmountShields = 2;
 
+    private int _numOfEnemiesDestroyed;
+    private int _numOfDeaths;
+
     private Vector3 _player1StartPosition;
     private Vector3 _player2StartPosition;
     private Vector3 _enemyStartPosition;
@@ -47,30 +55,23 @@ public class GameManager : MonoBehaviour
     private bool _flagReplay = false;   //Controla que listOfEnemies se modifique solo durante la partida
     
     private int _level;
-    //private int _startLives;
     private int _initialNumPlayers;
     private int _inputPlayer1;
     private PlayerInput _playerInput;
 
     public int currentLevel { get; private set; }   //public leer, privado modificar
     public int record { get; private set; }
-    public int currentLives;// { get; private set; }
+    public int currentLives { get; private set; }
 
     private GameObject _obstacles;
     private List<Vector3> freePositions;    // referencia a la lista de posiciones libres
     private bool startingLevel = true;
 
-    public InGameView _inGameView;
-    public MainMenu _mainMenu;
-    public MenuManager _menuManager;
-
-    private int _numOfEnemiesDestroyed;
-    private int _numOfDeaths;
-
     void Start()
     {
         _numOfEnemiesDestroyed = 0;
         _numOfDeaths = 0;
+        currentLives = startLives;
         _level = 1;
         record = 0;
         _width = mapGenerator.width;
@@ -151,7 +152,7 @@ public class GameManager : MonoBehaviour
     private void OnPause()
     {
         Debug.Log($"Pausa");
-        _inGameView.PauseGame();
+        inGameView.PauseGame();
     }
     //----------
 
@@ -426,8 +427,8 @@ public class GameManager : MonoBehaviour
         if (PlayerPrefs.GetInt("Record", 0) < currentLevel)
             PlayerPrefs.SetInt("Record", currentLevel);
 
-        _mainMenu.LoadScene("Scenes/UIGameOver");
-        //_menuManager.OpenView("Scenes/UIMainMenu");
+        mainMenu.LoadScene("Scenes/UIGameOver");
+        //menuManager.OpenView("Scenes/UIMainMenu");
     }
 
     IEnumerator DoReplayLevel()
@@ -444,7 +445,7 @@ public class GameManager : MonoBehaviour
     {
         ClearObstaclesPrefab();
         _level++;
-        if(_level % 2 == 0)
+        if(_level+1 % 2 == 0)
             currentLives++;
 
         startingLevel = true;
