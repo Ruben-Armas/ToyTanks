@@ -570,7 +570,7 @@ public class GameManager : MonoBehaviour
         {
             if (_inputPlayer1 == 0)
             {
-                _playerInput.SwitchCurrentControlScheme("Keyboard&Mouse", Keyboard.current);
+                _playerInput.SwitchCurrentControlScheme("Keyboard&Mouse", Keyboard.current, Mouse.current);
                 //_playerInput.defaultControlScheme = "Keyboard&Mouse";
                 Debug.Log("Switch to Keyboard&Mouse");
             }
