@@ -125,7 +125,7 @@ O OnGameOver()
 
 O SpawnPlayers
 	NextLevel
-		O En posición aleatoria	(dentro del navMesh)
+		X En posición aleatoria	(dentro del navMesh)
 		X Crea los players
 	ReplayLevel
 		X al repetir nivel, crea a todos los jugadores
@@ -133,7 +133,7 @@ O SpawnPlayers
 O SpawnEnemies
 	NextLevel
 		O De distinto tipo
-		O En posición aleatoria	(dentro del navMesh)
+		X En posición aleatoria	(dentro del navMesh)
 		X Crea los enemigos
 	ReplayLevel
 		X al repetir nivel, crea los enemigos que quedaban vivos
@@ -141,7 +141,7 @@ O SpawnEnemies
 
 7. Nivel:
 
-O Spawner 
+X Spawner 
 	izquierda - players
 	derecha - enemigos
 	en el medio - escudo

@@ -64,14 +64,13 @@ public class GameManager : MonoBehaviour
     public MainMenu _mainMenu;
     public MenuManager _menuManager;
 
+    private int _numOfEnemiesDestroyed;
+    private int _numOfDeaths;
 
-    private void Awake()
-    {
-        //_mainMenu = new MainMenu();
-        //_menuManager = new MenuManager();
-    }
     void Start()
     {
+        _numOfEnemiesDestroyed = 0;
+        _numOfDeaths = 0;
         _level = 1;
         record = 0;
         _width = mapGenerator.width;
@@ -118,6 +117,9 @@ public class GameManager : MonoBehaviour
         //Borro el player destruido de la lista de Players
         listOfPlayers.Remove(playerDestroyed);
 
+        if (_flagReplay == false)
+            _numOfDeaths++;
+
         //Compruebo si no quedan players para terminar la ronda
         if (listOfPlayers.Count == 0)
             OnPlayerRoundEnds();
@@ -139,6 +141,7 @@ public class GameManager : MonoBehaviour
         {
             //Debug.Log("Borrando enemy");
             listOfEnemies.Remove(enemyDestroyed);
+            _numOfEnemiesDestroyed++;
         }
         //Compruebo si no quedan enemigos para terminar la ronda
         if (listOfEnemies.Count == 0)
@@ -410,8 +413,16 @@ public class GameManager : MonoBehaviour
     //Para cuando mueren los players y no tienen más vidas
     void OnGameOver()
     {
-        Debug.Log($"Partida terminada en la ronda {currentLevel}");
-        //Guardar puntuación
+        //Debug.Log($"Partida terminada en la ronda {currentLevel}");
+
+        //Guardar el nº de enemigos eliminados
+        PlayerPrefs.SetInt("NumOfEnemiesDestroyed", _numOfEnemiesDestroyed);
+        //Guardar el nº de muertes
+        PlayerPrefs.SetInt("NumOfDeaths", _numOfDeaths);
+        //Guardar puntuación actual
+        PlayerPrefs.SetInt("CurrentLevel", currentLevel);
+
+        //Guardar puntuación record
         if (PlayerPrefs.GetInt("Record", 0) < currentLevel)
             PlayerPrefs.SetInt("Record", currentLevel);
 

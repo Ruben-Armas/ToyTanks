@@ -1,0 +1,32 @@
+using System.Collections;
+using System.Collections.Generic;
+using TMPro;
+using UnityEngine;
+using UnityEngine.InputSystem;
+
+//[RequireComponent(typeof(PlayerInput))]
+public class InGameOverView : MonoBehaviour
+{
+    public TextMeshProUGUI currentLevel;
+    public TextMeshProUGUI record;
+    public TextMeshProUGUI enemyDestroyed;
+    public TextMeshProUGUI deaths;
+
+
+    private void Awake()
+    {
+        int getCurrentLevel = PlayerPrefs.GetInt("CurrentLevel", 0);
+        int getRecord = PlayerPrefs.GetInt("Record", 0);
+        int getEnemyDestroyed = PlayerPrefs.GetInt("NumOfEnemiesDestroyed", 0);
+        int getDeaths = PlayerPrefs.GetInt("NumOfDeaths", 0);
+
+        currentLevel.text = $"Current Level: <color=red><b>{getCurrentLevel}</b>";
+        record.text = $"Record: <color=red><b>{getRecord}</b>";
+        enemyDestroyed.text = $"Enemies destroyed: <color=red><b>{getEnemyDestroyed}</b>";
+        deaths.text = $"Deaths: <color=red><b>{getDeaths}</b>";
+    }
+
+    void Update()
+    {
+    }
+}
