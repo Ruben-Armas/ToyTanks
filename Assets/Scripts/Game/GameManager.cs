@@ -29,6 +29,7 @@ public class GameManager : MonoBehaviour
     [Header("Enemigos")]
     public int minAmountEnemies = 1;
     public int maxAmountEnemies = 4;
+    public List<Vector3> listEnemyStartPositions = new List<Vector3>();
 
     [Header("Escudos")]
     public int minAmountShields = 1;
@@ -39,7 +40,6 @@ public class GameManager : MonoBehaviour
 
     private Vector3 _player1StartPosition;
     private Vector3 _player2StartPosition;
-    private Vector3 _enemyStartPosition;
     private Vector3 _shield1StartPosition;
     private Vector3 _shield2StartPosition;
     private List<Vector3> _listEnemyStartPositions = new List<Vector3>();
@@ -158,8 +158,6 @@ public class GameManager : MonoBehaviour
 
     void PlayGame()
     {
-        //Debug.Log($"Nivel -> {_level}");
-        //Debug.Log($"Nº de vidas -> {currentLives}");
         currentLevel = _level;
         if (currentLevel > record)
             record = currentLevel;
@@ -169,9 +167,6 @@ public class GameManager : MonoBehaviour
         
         //Instanciar Player,etc.. en MapGenerator
         //StartCoroutine(mapGenerator.InstantiatePlayerAndEnemies(playerPrefab, enemyPrefab));
-
-        //Escudos
-        //Instantiate(shieldPrefab, _shieldStartPosition, Quaternion.identity);
     }
 
     private IEnumerator SpawnObjectsWhenReady()
@@ -285,7 +280,7 @@ public class GameManager : MonoBehaviour
     {
         if (_level <= 2)
             for (int i = 0; i < _randNumEnemies; i++)
-                _listEnemyStartPositions.Add(new Vector3(24, 0, 0));
+                _listEnemyStartPositions.Add(listEnemyStartPositions[i]);
         else if (startingLevel)
         {
             //Enemies
