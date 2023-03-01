@@ -30,6 +30,8 @@ public class GameManager : MonoBehaviour
     private Vector3 _enemyStartPosition;
     private Vector3 _shieldStartPosition;
     private List<Vector3> _listEnemyStartPositions;
+    private int _width;
+    private int _height;
 
     private List<Player> listOfPlayers = new List<Player>();
     private List<Enemy> listOfEnemies = new List<Enemy>();  //Lista que controlará la cantidad de enemigos vivos en la escena
@@ -63,7 +65,7 @@ public class GameManager : MonoBehaviour
     }
     void Start()
     {
-        _level = 1;
+        _level = 2;
         record = 0;
         //Temporal
         //_initialNumPlayers = 0;
@@ -223,6 +225,9 @@ public class GameManager : MonoBehaviour
 
     private void setPositions()
     {
+        _width = mapGenerator.width;
+        _height = mapGenerator.height;
+
         if (_level <= 2)
         {
             _player1StartPosition = new Vector3(-27, 0, 5);
@@ -234,11 +239,11 @@ public class GameManager : MonoBehaviour
         {
             //Players
             if (_initialNumPlayers == 1)
-                _player1StartPosition = setLeftRightPosition(true);
+                _player1StartPosition = SetLeftRightPosition(true);
             else
             {
-                _player1StartPosition = setLeftRightPosition(true);
-                _player2StartPosition = setLeftRightPosition(true);
+                _player1StartPosition = SetLeftRightPosition(true);
+                _player2StartPosition = SetLeftRightPosition(true);
             }
 
             //Enemies
@@ -247,51 +252,67 @@ public class GameManager : MonoBehaviour
                 _listEnemyStartPositions.Clear();
                 foreach (EnemyData enemyData in listOfEnemiesDataTemp)
                 {
-                    _listEnemyStartPositions.Add(setLeftRightPosition(false));
+                    _listEnemyStartPositions.Add(SetLeftRightPosition(false));
                 }
             }
 
             //Shield
-            /*freePositions = mapGenerator.freePositions; //Obtengo la lista
-
-            int randomIndex = Random.Range(0, freePositions.Count); // genera un número aleatorio
-
-            // obtiene la posición del índice aleatorio
-            _playerStartPosition = freePositions[randomIndex];
-            // elimina la posición usada
-            freePositions.RemoveAt(randomIndex);*/
+            _shieldStartPosition = SetMiddlePosition();
 
             startingLevel = false;
         }
     }
-    private Vector3 setLeftRightPosition(bool left)
+    private Vector3 SetMiddlePosition()
     {
         freePositions = mapGenerator.freePositions; //Obtengo la lista
 
-        // Obtener la mitad del ancho de la cuadrícula
-        int halfWidth = mapGenerator.width / 4;
+        // Crear una lista con las posiciones libres de la mitad del mapa
+        List<Vector3> middleFreePositions = new List<Vector3>();
+        foreach (Vector3 pos in freePositions)
+        {
+            if (MarginZ(pos) && pos.x > -_width / 2 && pos.x < _width / 2)
+            {
+                middleFreePositions.Add(pos);
+                //Instantiate(cube1Prefab, pos, Quaternion.identity);
+            }
+        }
+        // nº aleatorio entre 0 y el número de posiciones libres de la parte izquierda/derecha del mapa
+        int randomIndex = Random.Range(0, middleFreePositions.Count);
+        // Obtengo la posición de la lista de posiciones
+        Vector3 newPos = middleFreePositions[randomIndex];
+        Vector3 newPosFixed = new Vector3(newPos.x, 0, newPos.z);
+        Debug.Log($"pos middle to spawn --> {newPosFixed}");
+
+        // elimina la posición usada
+        freePositions.RemoveAt(randomIndex);
+
+        return newPosFixed;
+    }
+    private Vector3 SetLeftRightPosition(bool left)
+    {
+        freePositions = mapGenerator.freePositions; //Obtengo la lista
 
         // Crear una lista con las posiciones libres de la parte izquierda/derecha del mapa
         List<Vector3> leftRightFreePositions = new List<Vector3>();
         foreach (Vector3 pos in freePositions)
         {
-            //if (left)
-            //{
-                if (pos.x < halfWidth)
+            if (left)
+            {
+                if (pos.x < -_width /2 && MarginZ(pos))
+                //if (pos.x < 0)
                 {
                     leftRightFreePositions.Add(pos);
-                    Instantiate(cube1Prefab, pos, Quaternion.identity);
-                }
-                    
-            //}
+                    //Instantiate(cube1Prefab, pos, Quaternion.identity);
+                }                    
+            }
             else
             {
-                if (pos.x > halfWidth)
+                if (pos.x > _width /2 && MarginZ(pos))
+                //if (pos.x > 0)
                 {
                     leftRightFreePositions.Add(pos);
-                    Instantiate(cube2Prefab, pos, Quaternion.identity);
-                }
-                    
+                    //Instantiate(cube2Prefab, pos, Quaternion.identity);
+                }                    
             }            
         }
         // nº aleatorio entre 0 y el número de posiciones libres de la parte izquierda/derecha del mapa
@@ -305,6 +326,13 @@ public class GameManager : MonoBehaviour
         freePositions.RemoveAt(randomIndex);
 
         return newPosFixed;
+    }
+    private bool MarginZ(Vector3 pos)
+    {
+        if (pos.z < _height && pos.z > -_height)
+            return true;
+        else
+            return false;
     }
 
     void CreateEnemies()
@@ -367,6 +395,7 @@ public class GameManager : MonoBehaviour
         _level++;
         if(_level % 2 == 0)
             currentLives++;
+        startingLevel = true;
 
         _flagReplay = false;
         listOfEnemies.Clear();
