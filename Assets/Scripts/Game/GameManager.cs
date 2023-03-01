@@ -65,10 +65,8 @@ public class GameManager : MonoBehaviour
     }
     void Start()
     {
-        _level = 2;
+        _level = 1;
         record = 0;
-        //Temporal
-        //_initialNumPlayers = 0;
         getInitialNumOfPlayers();
         getInputPlayer1();
 
@@ -170,6 +168,8 @@ public class GameManager : MonoBehaviour
 
         setPositions();
 
+        SpawnShield();
+
         SpawnPlayers();
 
         SpawnEnemies();
@@ -183,6 +183,10 @@ public class GameManager : MonoBehaviour
         }*/
     }
 
+    void SpawnShield()
+    {
+        Instantiate(shieldPrefab, _shieldStartPosition, Quaternion.identity);
+    }
     void SpawnPlayers()
     {
         Vector3 offset = new Vector3(0, 0, 1);

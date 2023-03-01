@@ -231,3 +231,4 @@ O el ratón no apunta bien
 O Hay ángulos en los que la bala choca contra la pared, en los que no rebota
 O los cubos generados se "Sobreescriben"/colocan unos dentro de otros
 	Comprobar si la Pos está ocupada peta Unity
+O La malla también aparece en los "techos"

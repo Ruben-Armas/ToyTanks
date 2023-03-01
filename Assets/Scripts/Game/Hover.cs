@@ -16,6 +16,10 @@ public class Hover : MonoBehaviour
         */
         //Lo más correcto es hacerlo con la Pos, sino puede haber errores de reondeo
         float localHeight = (float)Mathf.Sin(Time.time * hoverSpeed) * hoverDistance;
-        transform.localPosition = new Vector3(0, localHeight, 0);
+        //transform.localPosition.y = localHeight;
+
+        Vector3 newPosition = transform.localPosition;
+        newPosition.y = localHeight; 
+        transform.localPosition = newPosition;
     }
 }
