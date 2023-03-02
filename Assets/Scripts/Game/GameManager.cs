@@ -566,25 +566,25 @@ public class GameManager : MonoBehaviour
             _inputPlayer1 = 2;
         else
             _inputPlayer1 = inputP1;
-        Debug.Log($"------Input-->{inputP1}------");
+        //Debug.Log($"------Input-->{inputP1}------");
     }
     private void SetInputPlayer1(Player player)
     {
         _playerInput = player.GetComponent<PlayerInput>();
-        Debug.Log($"PlayerInput --> {_playerInput}");
+        //Debug.Log($"PlayerInput --> {_playerInput}");
         if (_playerInput != null)
         {
             if (_inputPlayer1 == 0)
             {
                 _playerInput.SwitchCurrentControlScheme("Keyboard&Mouse", Keyboard.current, Mouse.current);
                 //_playerInput.defaultControlScheme = "Keyboard&Mouse";
-                Debug.Log("Switch to Keyboard&Mouse");
+                //Debug.Log("Switch to Keyboard&Mouse");
             }
             else
             {
                 _playerInput.SwitchCurrentControlScheme("Gamepad", Gamepad.current);
                 //_playerInput.defaultControlScheme = "Gamepad";
-                Debug.Log("Switch to Gamepad");
+                //Debug.Log("Switch to Gamepad");
             }
         }        
     }    

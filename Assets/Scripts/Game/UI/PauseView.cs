@@ -14,10 +14,21 @@ public class PauseView : MonoBehaviour
     //public InputActionAsset uiInputAsset;
     //private TankControls tankControls => GameInputManager.tankControls;
 
-    /*private void Awake()
+    //SUSCRIPCIÓN al EVENTO
+    void OnEnable()
     {
-        GameInputManager.ToggleActionMap(tankControls.UI);
-    }*/
+        InGameView.onSelectButton += OnSelectButton;
+    }
+    //DESUSCRIPCIÓN al EVENTO
+    void OnDisable()
+    {
+        InGameView.onSelectButton -= OnSelectButton;
+    }
+    //DELEGADOS
+    private void OnSelectButton()
+    {
+        EventSystem.current.SetSelectedGameObject(firstSelectedButton.gameObject);
+    }
 
     public void ResumeGame()
     {

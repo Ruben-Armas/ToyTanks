@@ -7,6 +7,10 @@ using UnityEngine.InputSystem;
 //[RequireComponent(typeof(PlayerInput))]
 public class InGameView : MonoBehaviour
 {
+    //EVENTO (DELEGADO)   --> Para cambiar el Foco al botón ResumeButton
+    public delegate void SelectButton();
+    public static event SelectButton onSelectButton;    //(EVENTO)
+
     public MenuManager menuManager;
     public MenuView pauseView;
 
@@ -60,6 +64,11 @@ public class InGameView : MonoBehaviour
         Time.timeScale = 0; //Todo lo que depende de la física se para
         //Time.timeScale = 0.5f;  //Cámara lenta
         //Time.timeScale = 10;  //Cámara rápida
+
+        
+        //Evento --> Cambiar Foco al botón ResumeButton
+        if (onSelectButton != null)
+            onSelectButton();
 
         menuManager.OpenView(pauseView);
     }
