@@ -217,8 +217,10 @@ public class GameManager : MonoBehaviour
         else
         {
             Player player = Instantiate(playerPrefab, _player1StartPosition + offset, Quaternion.Euler(0, 90, 0)).GetComponent<Player>();
-            //SetInputPlayer1(player);
-            Instantiate(player2Prefab, _player2StartPosition + offset, Quaternion.Euler(0, 90, 0));
+            SetInputPlayer1(player);
+            Player player2 = Instantiate(player2Prefab, _player2StartPosition + offset, Quaternion.Euler(0, 90, 0)).GetComponent<Player>();
+            //SetInputPlayer2(player2);
+
         }
     }
     void SpawnEnemies()
@@ -586,8 +588,18 @@ public class GameManager : MonoBehaviour
                 //_playerInput.defaultControlScheme = "Gamepad";
                 //Debug.Log("Switch to Gamepad");
             }
-        }        
-    }    
+        }
+    }
+    private void SetInputPlayer2(Player player)
+    {
+        _playerInput = player.GetComponent<PlayerInput>();
+        //Debug.Log($"PlayerInput --> {_playerInput}");
+        if (_playerInput != null)
+        {
+            _playerInput.SwitchCurrentControlScheme("Gamepad", Gamepad.current);
+            //Debug.Log("Switch to Gamepad");
+        }
+    }
     /*private void GetSchemes(Player player)
     {
         _playerInput = player.GetComponent<PlayerInput>();
