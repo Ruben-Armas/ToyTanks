@@ -42,7 +42,7 @@ public class MapGenerator : MonoBehaviour
         cuadricula = new GameObject[width, height];
         //Debug.Log($"width -> {width}");
         //Debug.Log($"height -> {height}");
-        _gridOffset = new Vector3(-width * cubeSize / 2 + 1.5f, 1.75f, -height * cubeSize / 2 + 1.5f);
+        _gridOffset = new Vector3(-width * cubeSize / 2 + 1.5f, 0, -height * cubeSize / 2 + 1.5f);
 
     }
     /*void Start()
@@ -318,7 +318,7 @@ public class MapGenerator : MonoBehaviour
                 GameObject cube = Instantiate(cubePrefab, wall.transform);
                 cube.transform.position = new Vector3(
                     (pos.x - width / 2) * cubeSize,
-                    1.75f,
+                    0,
                     (pos.y - height / 2) * cubeSize
                 );
                 usedPositions.Add(pos);
