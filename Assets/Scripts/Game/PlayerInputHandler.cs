@@ -28,6 +28,8 @@ public class PlayerInputHandler : MonoBehaviour
     //[SerializeField]
     //private Aim _aim;
 
+    public LayerMask layer;
+
     private void OnValidate()
     {
         _movement = GetComponent<Movement>();
@@ -58,14 +60,26 @@ public class PlayerInputHandler : MonoBehaviour
 
     public void OnLookMouse(InputValue value)
     {
-        Vector2 mousePosition = value.Get<Vector2>();
+        Vector3 mousePosition = value.Get<Vector2>();
+        //Distancia entre la camara y el transform
+        Ray ray = Camera.main.ScreenPointToRay(mousePosition);
+        if (Physics.Raycast(ray, out var hit, Mathf.Infinity, layer))
+        {
+            Vector3 towardsWorldPoint = hit.point - turret.position;
+            turret.forward = towardsWorldPoint.normalized;
+        }
+
+        /*//Antiguo Sin apaño (de Raycast a un layer sobre el suelo) pero desviado
+        Vector3 mousePosition = value.Get<Vector2>();
         //Punto del ratón en el mundo
         Vector2 tankScreenPosition = Camera.main.WorldToScreenPoint(transform.position);
         //Vector dirección (diferencia de dónde estoy y donde está el punto al que miro)
-        Vector2 towardsMouse = (mousePosition - tankScreenPosition).normalized;
+        Vector3 towardsScreenMouse = (mousePosition - tankScreenPosition).normalized;
+        Vector3 worldPoint
         //Apunta el forward en los ejes X Z
-        turret.forward = new Vector3 (towardsMouse.x, 0, towardsMouse.y);     // Mira derecha|izquierda
+        turret.forward = new Vector3 (towardsScreenMouse.x, 0, towardsScreenMouse.y);     // Mira derecha|izquierda
         //Debug.Log($"Look{mousePosition}");
+        */
     }
 
     public void OnLookJoystick(InputValue value)

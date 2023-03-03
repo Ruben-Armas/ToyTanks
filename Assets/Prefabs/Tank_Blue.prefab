@@ -620,6 +620,9 @@ MonoBehaviour:
   turnSensitivity: 10
   lookSpeed: 10
   _movement: {fileID: 4834055819713867427}
+  layer:
+    serializedVersion: 2
+    m_Bits: 128
 --- !u!114 &4834055819713867427
 MonoBehaviour:
   m_ObjectHideFlags: 0
