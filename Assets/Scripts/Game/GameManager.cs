@@ -72,7 +72,7 @@ public class GameManager : MonoBehaviour
         _numOfEnemiesDestroyed = 0;
         _numOfDeaths = 0;
         currentLives = startLives;
-        _level = 1;
+        _level = 2;
         record = 0;
         _width = mapGenerator.width;
         _height = mapGenerator.height;
