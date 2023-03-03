@@ -4,6 +4,13 @@ using UnityEngine;
 
 public class Bullet : MonoBehaviour
 {
+    //EVENTO (DELEGADO)   --> activar sonido dispararse
+    public delegate void BulletSFXShoot();
+    public static event BulletSFXShoot onBulletSFXShoot;  //(EVENTO)
+    //EVENTO (DELEGADO)   --> activar sonido al rebotar
+    public delegate void BulletSFXBounce();
+    public static event BulletSFXBounce onBulletSFXBounce;  //(EVENTO)
+
     public float speed;
 
     public Rigidbody rigidbody;
@@ -24,6 +31,10 @@ public class Bullet : MonoBehaviour
     {//No hace falta el deltaTime porque solo se usa cuando "se suma"
         rigidbody.velocity = transform.forward * speed;
         contBounces = 0;
+
+        //Evento Sonido Disparo
+        if (onBulletSFXShoot != null)
+            onBulletSFXShoot();
     }
 
     private void FixedUpdate()
@@ -39,6 +50,10 @@ public class Bullet : MonoBehaviour
                 //Debug.Log("Wall");
                 if (checkIfSelfDestroy() == false)
                 {
+                    //Evento Sonido Rebote
+                    if (onBulletSFXBounce != null)
+                        onBulletSFXBounce();
+
                     // Calcula la normal de la superficie de la pared con la que chocando
                     Vector3 normal = hit.normal;
                     //Debug.Log($"contact hit normal -> {normal}");
