@@ -103,6 +103,18 @@ TextureImporter:
     overridden: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Android
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
     sprites:
@@ -1777,8 +1789,7 @@ TextureImporter:
     secondaryTextures: []
     nameFileIdTable:
       barHorizontal_shadow_left.png: 8059031996740169545
-      dotGreen.png: -3593662490327120354
-      dotRed.png: 5361608372777384671
+      barHorizontal_yellow_mid.png: 5092465360557244699
       metalPanel.png: -5726981757712580897
       barHorizontal_blue_mid.png: 111871062959079792
       squareBlue.png: 5493862710743486332
@@ -1843,17 +1854,18 @@ TextureImporter:
       crossair_black.png: 9031528203904607648
       barHorizontal_green_left.png: -8742755998404283625
       glassPanel.png: -1904017679909121594
-      crossair_whiteOutline.png: 3828651210535716076
+      cursor_pointerFlat_shadow.png: -780014012461125309
       crossair_blueOutline.png: 2455901844146974628
       dotBlue.png: -4404803638571296905
+      crossair_whiteOutline.png: 3828651210535716076
       barVertical_white_top.png: -2110935970376558024
+      dotRed.png: 5361608372777384671
       barHorizontal_white_right.png: -8901708904659188642
-      barHorizontal_yellow_mid.png: 5092465360557244699
       cursor_pointerFlat.png: -6096844363901722521
-      barVertical_red_mid.png: 2278475390449685438
-      barVertical_blue_mid.png: 8505523565165282906
-      cursor_pointerFlat_shadow.png: -780014012461125309
       barVertical_white_bottom.png: -2343016684010358554
+      dotGreen.png: -3593662490327120354
+      barVertical_blue_mid.png: 8505523565165282906
+      barVertical_red_mid.png: 2278475390449685438
       metalPanel_blueCorner.png: 2404942513113283656
   spritePackingTag: 
   pSDRemoveMatte: 0
