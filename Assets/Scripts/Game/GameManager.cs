@@ -9,6 +9,9 @@ public class GameManager : MonoBehaviour
 {
     public int startLives;
 
+    [Range(0f, 10f)]
+    public float timeToStartLevel = 3f;
+
     [Header("Referencias")]
     public MapGenerator mapGenerator;
     public InGameView inGameView;
@@ -66,6 +69,9 @@ public class GameManager : MonoBehaviour
     private GameObject _obstacles;
     private List<Vector3> freePositions;    // referencia a la lista de posiciones libres
     private bool startingLevel = true;
+
+    private Player _player;
+    private Player _player2;
 
     void Start()
     {
@@ -211,16 +217,16 @@ public class GameManager : MonoBehaviour
         Vector3 offset = new Vector3(0, 0, 1);
         if (_initialNumPlayers == 1)
         {
-            Player player = Instantiate(playerPrefab, _player1StartPosition + offset, Quaternion.Euler(0, 90, 0)).GetComponent<Player>();
+            _player = Instantiate(playerPrefab, _player1StartPosition + offset, Quaternion.Euler(0, 90, 0)).GetComponent<Player>();
             //GetSchemes(player);
-            SetInputPlayer1(player);
+            SetInputPlayer1(_player);
         }
         else
         {
-            Player player = Instantiate(playerPrefab, _player1StartPosition + offset, Quaternion.Euler(0, 90, 0)).GetComponent<Player>();
-            SetInputPlayer1(player);
-            Player player2 = Instantiate(player2Prefab, _player2StartPosition + offset, Quaternion.Euler(0, 90, 0)).GetComponent<Player>();
-            //SetInputPlayer2(player2);
+            _player = Instantiate(playerPrefab, _player1StartPosition + offset, Quaternion.Euler(0, 90, 0)).GetComponent<Player>();
+            SetInputPlayer1(_player);
+            _player2 = Instantiate(player2Prefab, _player2StartPosition + offset, Quaternion.Euler(0, 90, 0)).GetComponent<Player>();
+            //SetInputPlayer2(_player2);
 
         }
     }
@@ -436,11 +442,13 @@ public class GameManager : MonoBehaviour
         ClearSceneItems();
         yield return StartCoroutine(ClearEnemies());
 
+        yield return StartCoroutine(WaitNextReplayLevel());
+
+
         PlayGame();
     }
     IEnumerator DoNextLevel()
     {
-        ClearObstaclesPrefab();
         _level++;
         if(_level+1 % 2 == 0)
             currentLives++;
@@ -451,6 +459,10 @@ public class GameManager : MonoBehaviour
 
         DeactivateAllShields();
         ClearSceneItems();
+
+        yield return StartCoroutine(WaitNextReplayLevel());
+        //Empieza el siguiente nivel (después de esperar)
+        ClearObstacles();
 
         yield return StartCoroutine(ClearPlayers());
         listOfEnemiesDataTemp.Clear();
@@ -476,20 +488,19 @@ public class GameManager : MonoBehaviour
         //Borrar las balas y las minas y los escudos
         DestroyGameObjectsWithTag("Bullet");
         DestroyGameObjectsWithTag("Shield");
-
-        //Limpiar procedural
-        if (_level > 2)
-        {
-            DestroyGameObjectsWithTag("Obstacles");
-            //Debug.Log("Destruyendo Obstáculos");
-        }
     }
-    private void ClearObstaclesPrefab()
+    private void ClearObstacles()
     {
         if (_level == 1 || _level == 2)
         {
             Destroy(_obstacles);
             //Debug.Log("Destruyendo Obstáculos --Prefabs--");
+        }
+        //Limpiar procedural
+        else if (_level > 2)
+        {
+            DestroyGameObjectsWithTag("Obstacles");
+            //Debug.Log("Destruyendo Obstáculos");
         }
     }
 
@@ -505,7 +516,8 @@ public class GameManager : MonoBehaviour
             }
             listOfPlayers.Clear();
         }
-        yield return new WaitForSeconds(1f);
+        yield return 0;
+        //yield return new WaitForSeconds(1f);
     }
     //Borro los enemigos que quedaban para instanciarlos después (y no den error al generar el navMesh)
     IEnumerator ClearEnemies()
@@ -524,6 +536,14 @@ public class GameManager : MonoBehaviour
         }
         listOfEnemies.Clear();
         yield return new WaitForSeconds(1f);
+    }
+
+    IEnumerator WaitNextReplayLevel()
+    {
+        //Desactivo los controles
+        DeactivatePayersInput();
+
+        yield return new WaitForSeconds(timeToStartLevel);
     }
 
     void DeactivateAllShields()
@@ -599,6 +619,25 @@ public class GameManager : MonoBehaviour
         {
             _playerInput.SwitchCurrentControlScheme("Gamepad", Gamepad.current);
             //Debug.Log("Switch to Gamepad");
+        }
+    }
+    private void DeactivatePayersInput()
+    {
+        if(_player != null)
+        {
+            _playerInput = _player.GetComponent<PlayerInput>();
+            if (_playerInput != null)
+                _playerInput.DeactivateInput();
+        }
+        
+        if(_initialNumPlayers == 2)
+        {
+            if(_player2 != null)
+            {
+                _playerInput = _player2.GetComponent<PlayerInput>();
+                if (_playerInput != null)
+                    _playerInput.DeactivateInput();
+            }            
         }
     }
     /*private void GetSchemes(Player player)
