@@ -419,67 +419,7 @@ public class MapGenerator : MonoBehaviour
             i += 2;
         }
     }*/
-
-    /*//Rellena todo
-    IEnumerator DoCreateCubes()
-    {
-        // Instancia los cubos en una cuadrícula
-        for (int x = 0; x < width; x++)
-        {
-            for (int y = 0; y < height; y++)
-            {
-                _position = new Vector3(Random.Range(0, width), 0, Random.Range(0, height)) * cubeSize + _gridOffset;
-
-                if (CanSpawnCube(_position))
-                {
-                    Instantiate(cubePrefab, _position, Quaternion.identity);
-
-                    if (Random.value < spawnChance)
-                    {
-                        // Check adjacent positions and try to spawn a cube
-                        Vector3[] adjacentOffsets = new Vector3[]
-                        {
-                    Vector3.forward,
-                    Vector3.right,
-                    Vector3.back,
-                    Vector3.left
-                        };
-
-                        foreach (Vector3 adjacentOffset in adjacentOffsets)
-                        {
-                            Vector3 adjacentPosition = _position + adjacentOffset * cubeSize;
-
-                            if (CanSpawnCube(adjacentPosition) && Random.value < spawnChance)
-                            {
-                                Instantiate(cubePrefab, adjacentPosition, Quaternion.identity);
-                            }
-                        }
-                    }
-                }
-
-                //Vector3 position = new Vector3(x * cubeSize, 0, y * cubeSize) + _gridOffset;
-                //_nextCubePrefab = listCubePrefab[(x + y) % listCubePrefab.Count];
-                //Instantiate(_nextCubePrefab, position, Quaternion.identity);
-            }
-        }
-        yield return 0;
-    }
-
-    private bool CanSpawnCube(Vector3 position)
-    {
-        // Check if the position is valid and there's no other cube nearby
-        Collider[] colliders = Physics.OverlapSphere(position, cubeSize / 2);
-
-        foreach (Collider collider in colliders)
-        {
-            if (collider.CompareTag("Cube"))
-            {
-                return false;
-            }
-        }
-
-        return true;
-    }*/
+    
     /*
     IEnumerator DoCreateCubes()
     {

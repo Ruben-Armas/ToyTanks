@@ -163,6 +163,7 @@ public class GameManager : MonoBehaviour
             record = currentLevel;
 
         //---------------------
+        Debug.Log("----PLAY----");
         StartCoroutine(SpawnObjectsWhenReady());
         
         //Instanciar Player,etc.. en MapGenerator
@@ -373,7 +374,7 @@ public class GameManager : MonoBehaviour
         // Obtengo la posición de la lista de posiciones
         Vector3 newPos = leftRightFreePositions[randomIndex];
         Vector3 newPosFixed = new Vector3(newPos.x, 0, newPos.z);
-        Debug.Log($"pos to spawn --> {newPosFixed}");
+        //Debug.Log($"pos to spawn --> {newPosFixed}");
 
         // elimina la posición usada
         freePositions.RemoveAt(randomIndex);
