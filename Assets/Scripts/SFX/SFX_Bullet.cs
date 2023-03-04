@@ -6,9 +6,12 @@ public class SFX_Bullet : MonoBehaviour
 {
     public AudioClip bulletShoot;
     public AudioClip bulletBounce;
+    //public AudioClip bulletDestroy;
 
     public float pitchVariation = 11;
 
+    [SerializeField]
+    private AudioSource audioSourceStatic;
     [SerializeField]
     private AudioSource audioSource;
 
@@ -20,26 +23,32 @@ public class SFX_Bullet : MonoBehaviour
     {
         Bullet.onBulletSFXShoot += OnBulletSFXShoot;
         Bullet.onBulletSFXBounce += OnBulletSFXBounce;
+        //Bullet.onBulletSFXDestroy += OnBulletSFXDestroy;
     }
 
     private void OnDisable()
     {
         Bullet.onBulletSFXShoot -= OnBulletSFXShoot;
         Bullet.onBulletSFXBounce -= OnBulletSFXBounce;
+        //Bullet.onBulletSFXDestroy -= OnBulletSFXDestroy;
     }
 
 
     private void OnBulletSFXShoot()
     {
-        PlaySFX(bulletShoot, 0.1f);
+        PlaySFX(bulletShoot, false, 0);
     }
     private void OnBulletSFXBounce()
     {
-        PlaySFX(bulletBounce, 0.1f);
+        PlaySFX(bulletBounce, true, 0.1f);
+    }
+    private void OnBulletSFXDestroy()
+    {
+        PlaySFX(bulletBounce, true, 0.1f);
     }
 
     //Para evitar el acople
-    void PlaySFX(AudioClip clip, float pitchRange = 0)
+    void PlaySFX(AudioClip clip, bool changePitch, float pitchRange = 0)
     {
         //Compruebo si el audio es el mismo que el anterior y cuánto hace que lo reproduje
         if (clip == lastClip)
@@ -51,7 +60,12 @@ public class SFX_Bullet : MonoBehaviour
         lastClipStamp = Time.time;
 
         //Play
-        audioSource.pitch = Random.Range(1 - pitchRange, pitchVariation + pitchRange);
-        audioSource.PlayOneShot(clip);
+        if (changePitch)
+        {
+            audioSource.pitch = Random.Range(1 - pitchRange, pitchVariation + pitchRange);
+            audioSource.PlayOneShot(clip);
+        }
+        else
+            audioSourceStatic.PlayOneShot(clip);
     }
 }
