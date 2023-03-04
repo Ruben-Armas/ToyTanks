@@ -7,6 +7,7 @@ public class SFX_Bullet : MonoBehaviour
     public AudioClip bulletShoot;
     public AudioClip bulletBounce;
 
+    public float pitchVariation = 11;
 
     [SerializeField]
     private AudioSource audioSource;
@@ -50,7 +51,7 @@ public class SFX_Bullet : MonoBehaviour
         lastClipStamp = Time.time;
 
         //Play
-        audioSource.pitch = Random.Range(1 - pitchRange, 11 + pitchRange);
+        audioSource.pitch = Random.Range(1 - pitchRange, pitchVariation + pitchRange);
         audioSource.PlayOneShot(clip);
     }
 }

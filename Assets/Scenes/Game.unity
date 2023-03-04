@@ -11854,6 +11854,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   bulletShoot: {fileID: 8300000, guid: 93d7182456ddd2343a911771a91174ef, type: 3}
   bulletBounce: {fileID: 8300000, guid: 7bf1b23a6a1cddd419411b9ed6cb6e74, type: 3}
+  pitchVariation: 2
   audioSource: {fileID: 1274501721}
 --- !u!4 &1274501723
 Transform:
