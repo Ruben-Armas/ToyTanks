@@ -10,6 +10,12 @@ public class Enemy : MonoBehaviour
     //EVENTO (DELEGADO)   --> características a las que llama
     public delegate void EnemyDestroyed(Enemy enemyDestroyed, Vector3 position);
     public static event EnemyDestroyed onEnemyDestroyed;    //(EVENTO)
+    //EVENTO (DELEGADO)   --> Sound Destroy
+    public delegate void EnemySoundDestroy();
+    public static event EnemySoundDestroy onEnemySoundDestroy;    //(EVENTO)
+    //EVENTO (DELEGADO)   --> Effect Destroy
+    public delegate void EnemyEffectDestroy(Vector3 position);
+    public static event EnemyEffectDestroy onEnemyEffectDestroy;    //(EVENTO)
 
     public Vector3 startPosition { get; private set; }
 
@@ -25,7 +31,15 @@ public class Enemy : MonoBehaviour
     public void SetDestroyed()
     {
         //invulnerabilityTime = time;
-        //Evento
+
+        //Evento Sound Destroy
+        if (onEnemySoundDestroy != null)
+            onEnemySoundDestroy();
+        //Evento Effect Destroy
+        if (onEnemyEffectDestroy != null)
+            onEnemyEffectDestroy(transform.position);
+
+        //Evento Destroy
         if (onEnemyDestroyed != null)
             onEnemyDestroyed(this, transform.position);
         Destroy(gameObject);

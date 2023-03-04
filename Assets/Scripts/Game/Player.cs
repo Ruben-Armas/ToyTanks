@@ -4,12 +4,18 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
-    //EVENTO (DELEGADO)   --> características a las que llama
+    //EVENTO (DELEGADO)   --> Crear
     public delegate void PlayerCreated(Player player, Vector3 position);
     public static event PlayerCreated onPlayerCreated;        //(EVENTO)
-    //EVENTO (DELEGADO)   --> características a las que llama
+    //EVENTO (DELEGADO)   --> Destruir
     public delegate void PlayerDestroyed(Player player, Vector3 position);
     public static event PlayerDestroyed onPlayerDestroyed;    //(EVENTO)
+    //EVENTO (DELEGADO)   --> Sound Destroy
+    public delegate void PlayerSoundDestroy();
+    public static event PlayerSoundDestroy onPlayerSoundDestroy;    //(EVENTO)
+    //EVENTO (DELEGADO)   --> Effect Destroy
+    public delegate void PlayerEffectDestroy(Vector3 position);
+    public static event PlayerEffectDestroy onPlayerEffectDestroy;    //(EVENTO)
 
     public enum Colors
     {
@@ -24,7 +30,7 @@ public class Player : MonoBehaviour
     {
         startPosition = transform.position;
 
-        //Evento
+        //Evento Create
         if (onPlayerCreated != null)
             onPlayerCreated(this, transform.position);
     }
@@ -32,7 +38,15 @@ public class Player : MonoBehaviour
     public void SetDestroyed()
     {
         //invulnerabilityTime = time;
-        //Evento
+
+        //Evento Sound Destroy
+        if (onPlayerSoundDestroy != null)
+            onPlayerSoundDestroy();
+        //Evento Effect Destroy
+        if (onPlayerEffectDestroy != null)
+            onPlayerEffectDestroy(transform.position);
+
+        //Evento Destroy
         if (onPlayerDestroyed != null)
             onPlayerDestroyed(this, transform.position);
         Destroy(gameObject);
