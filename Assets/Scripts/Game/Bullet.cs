@@ -10,6 +10,9 @@ public class Bullet : MonoBehaviour
     //EVENTO (DELEGADO)   --> activar sonido al rebotar
     public delegate void BulletSFXBounce();
     public static event BulletSFXBounce onBulletSFXBounce;  //(EVENTO)
+    //EVENTO (DELEGADO)   --> activar sonido al rebotar
+    //public delegate void BulletSFXDestroy();
+    //public static event BulletSFXDestroy onBulletSFXDestroy;  //(EVENTO)
 
     public float speed;
 
@@ -109,16 +112,16 @@ public class Bullet : MonoBehaviour
             SetDestroyed();         //La bala se autodestruye
         }
 
-        /*if (bullet != null)
+        if (bullet != null)
         {
             //Debug.Log("Contact BULLET");
             bullet.SetDestroyed();  //Destruye al impactado
             SetDestroyed();         //La bala se autodestruye
-        }*/
+        }
     }
 
     /*//Antiguo collider más grande para destruir otras balas más facilmente
-    private void OnTriggerEnter(Collider other)*/
+    private void OnTriggerEnter(Collider other)
     private void OnTriggerStay(Collider other)
     {
         bullet = other.GetComponentInParent<Bullet>();
@@ -128,7 +131,7 @@ public class Bullet : MonoBehaviour
             bullet.SetDestroyed();  //Destruye al impactado
             SetDestroyed();         //La bala se autodestruye
         }
-    }
+    }*/
 
 
     private bool checkIfSelfDestroy()
@@ -144,6 +147,10 @@ public class Bullet : MonoBehaviour
 
     public void SetDestroyed()
     {
+        /*//Evento Sonido Destroy
+        if (onBulletSFXDestroy != null)
+            onBulletSFXDestroy();*/
+
         //invulnerabilityTime = time;
         Destroy(gameObject);         //La bala se autodestruye
     }
