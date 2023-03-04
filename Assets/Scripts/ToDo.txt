@@ -84,7 +84,7 @@ O PlayGame()
 
 	X Comprobar si hay una lista de enemigos, sino crearlos (nº aleatorio)
 		O Distintos tipos (aleatorio)
-		O En Posición aleatoria (lejos del jugador)
+		X En Posición aleatoria (lejos del jugador)
 		X Cantidad aleatoria
 
 X Lista de players
@@ -95,7 +95,7 @@ X Lista de enemigos
 
 O OnRoundEnds
 	X Guardar puntuación
-	O ¿deshabilitar inputs de tanque?
+	X ¿deshabilitar inputs de tanque?
 O OnPlayerRoundEnds
 	X Si no hay vidas -> OnGameOver()
 	X Quitar una vida
@@ -159,9 +159,9 @@ X Generación Procedural
 			X Cuando Player / Enemy NO muere
 			O Player / Enemy ...
 
-O Cada nivel tiene su disposición de obstáculos, enemigos, escudos (si los hay) y a los jugadores.
+X Cada nivel tiene su disposición de obstáculos, enemigos, escudos (si los hay) y a los jugadores.
 X Al comenzar el nivel, si uno de los dos jugadores estaba destruido, reaparece.
-O Cada dos niveles superados se añade una vida.
+X Cada dos niveles superados se añade una vida.
 X Al no superar el nivel se quita una vida.
 
 
@@ -196,17 +196,17 @@ X Trail de las orugas
 X Partículas de humo
 	O Más partículas cuando acelere (Emission)
 
-O Al morir/explotar un tanque
+X Al morir/explotar un tanque
 
 O Explosión de una mina
 
 
 10. UFX (sonidos)
-O Al disparar la bala
-O Al rebotar la bala
+X Al disparar la bala
+X Al rebotar la bala
 O Exploxión de bala
 
-O Al morir/explotar un tanque
+X Al morir/explotar un tanque
  
 O Al colocar una mina
 O Al explotar una mina
@@ -214,7 +214,7 @@ O Al explotar una mina
 
 11. Puntuación
 
-O Ronda máx
+X Ronda máx
 
 O Total= Total + ContActual * nº nivel
 O   ContActual = puntos tanques enemigos
