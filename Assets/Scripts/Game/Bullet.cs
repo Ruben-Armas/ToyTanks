@@ -77,12 +77,13 @@ public class Bullet : MonoBehaviour
         }
     }
 
-    private void OnCollisionEnter(Collision collision)
+    private void OnTriggerEnter(Collider other)
+    //private void OnCollisionEnter(Collision collision)
     {
         // Comprueba si la colisión es con un jugador, un enemigo o una bala
-        enemy = collision.collider.GetComponentInParent<Enemy>();
-        player = collision.collider.GetComponent<Player>();
-        bullet = collision.collider.GetComponentInParent<Bullet>();
+        enemy = other.GetComponentInParent<Enemy>();
+        player = other.GetComponent<Player>();
+        bullet = other.GetComponentInParent<Bullet>();
 
         if (enemy != null)
         {
@@ -108,14 +109,17 @@ public class Bullet : MonoBehaviour
             SetDestroyed();         //La bala se autodestruye
         }
 
-        if (bullet != null)
+        /*if (bullet != null)
         {
             //Debug.Log("Contact BULLET");
             bullet.SetDestroyed();  //Destruye al impactado
             SetDestroyed();         //La bala se autodestruye
-        }
+        }*/
     }
-    private void OnTriggerEnter(Collider other)
+
+    /*//Antiguo collider más grande para destruir otras balas más facilmente
+    private void OnTriggerEnter(Collider other)*/
+    private void OnTriggerStay(Collider other)
     {
         bullet = other.GetComponentInParent<Bullet>();
         if (bullet != null)
@@ -124,7 +128,6 @@ public class Bullet : MonoBehaviour
             bullet.SetDestroyed();  //Destruye al impactado
             SetDestroyed();         //La bala se autodestruye
         }
-
     }
 
 

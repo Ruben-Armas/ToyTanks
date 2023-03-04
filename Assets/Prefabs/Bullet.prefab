@@ -157,7 +157,6 @@ GameObject:
   - component: {fileID: 7337640511938777106}
   - component: {fileID: 8834511180156643592}
   - component: {fileID: 648091011080755866}
-  - component: {fileID: 2671474021758684970}
   - component: {fileID: 6851514946375686369}
   m_Layer: 0
   m_Name: Bullet
@@ -256,7 +255,7 @@ CapsuleCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4469929602459003721}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 1
   m_Radius: 0.04
   m_Height: 0.3
@@ -277,19 +276,6 @@ MonoBehaviour:
   speed: 10
   rigidbody: {fileID: 7337640511938777106}
   numBounces: 3
---- !u!114 &2671474021758684970
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4469929602459003721}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1a94899d7056343429730b2754ac77ee, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  timeToLife: 5
 --- !u!136 &6851514946375686369
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -300,7 +286,7 @@ CapsuleCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 1
   m_Enabled: 1
-  m_Radius: 0.06
+  m_Radius: 0.1
   m_Height: 0.35
   m_Direction: 2
   m_Center: {x: 0, y: 0, z: 0.135}
