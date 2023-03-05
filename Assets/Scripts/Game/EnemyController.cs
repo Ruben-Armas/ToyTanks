@@ -28,6 +28,8 @@ public class EnemyController : MonoBehaviour
         FocusTarget
     }
     [Header("Type Of Traking")]
+    [Range(1f, 5f)]
+    public float coolDownTime = 3f;
     [SerializeField]
     public SelectedTraking traking;
 
@@ -240,7 +242,6 @@ public class EnemyController : MonoBehaviour
     {
         //Punto de entrada
         //Debug.Log("Entrando en Cooldown...");
-        float coolDownTime = 5f;
         float elapsedTime = 0;
 
         _animator.SetBool("Forward", false);

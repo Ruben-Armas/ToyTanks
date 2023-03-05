@@ -18,6 +18,7 @@ public class Enemy : MonoBehaviour
     public static event EnemyEffectDestroy onEnemyEffectDestroy;    //(EVENTO)
 
     public Vector3 startPosition { get; private set; }
+    public GameObject prefab;
 
     private void Awake()
     {

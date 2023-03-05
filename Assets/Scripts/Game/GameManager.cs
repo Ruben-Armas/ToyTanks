@@ -32,6 +32,7 @@ public class GameManager : MonoBehaviour
     [Header("Enemigos")]
     public int minAmountEnemies = 1;
     public int maxAmountEnemies = 4;
+    public List<GameObject> listEnemyType = new List<GameObject>();
     public List<Vector3> listEnemyStartPositions = new List<Vector3>();
 
     [Header("Escudos")]
@@ -40,6 +41,8 @@ public class GameManager : MonoBehaviour
 
     private int _numOfEnemiesDestroyed;
     private int _numOfDeaths;
+    private int _numOfDeathsPlayer1;
+    private int _numOfDeathsPlayer2;
 
     private Vector3 _player1StartPosition;
     private Vector3 _player2StartPosition;
@@ -72,11 +75,14 @@ public class GameManager : MonoBehaviour
 
     private Player _player;
     private Player _player2;
+    private GameObject _nextEnemy;
 
     void Start()
     {
         _numOfEnemiesDestroyed = 0;
         _numOfDeaths = 0;
+        _numOfDeathsPlayer1 = 0;
+        _numOfDeathsPlayer2 = 0;
         currentLives = startLives;
         _level = 1;
         record = 0;
@@ -125,7 +131,20 @@ public class GameManager : MonoBehaviour
         listOfPlayers.Remove(playerDestroyed);
 
         if (_flagReplay == false)
+        {
             _numOfDeaths++;
+            Debug.Log(playerDestroyed.color);
+            if(playerDestroyed.color.ToString() == "blue")
+            {
+                _numOfDeathsPlayer1++;
+                //Debug.Log($"P1 Death --> {_numOfDeathsPlayer1}");
+            }
+            else if (playerDestroyed.color.ToString() == "green")
+            {
+                _numOfDeathsPlayer2++;
+                //Debug.Log($"P2 Death --> {_numOfDeathsPlayer2}");
+            }
+        }
 
         //Compruebo si no quedan players para terminar la ronda
         if (listOfPlayers.Count == 0)
@@ -242,7 +261,7 @@ public class GameManager : MonoBehaviour
                 //enemy.GetComponent<NavMeshAgent>().enabled = true;
 
                 //Creo a los enemigos supervivientes (evita error al generar el navMesh)
-                Enemy newEnemy = Instantiate(enemyPrefab, enemyData.initPos, Quaternion.Euler(0, 270, 0)).GetComponent<Enemy>();
+                Enemy newEnemy = Instantiate(enemyData.prefab, enemyData.initPos, Quaternion.Euler(0, 270, 0)).GetComponent<Enemy>();
                 //Asigna el objetivo
                 newEnemy.GetComponent<EnemyController>().traking = enemyData.traking;
 
@@ -261,7 +280,9 @@ public class GameManager : MonoBehaviour
 
         for (int i = 0; i < _randNumEnemies; i++)
         {
-            Enemy newEnemy = Instantiate(enemyPrefab, _listEnemyStartPositions[i], Quaternion.Euler(0, 270, 0)).GetComponent<Enemy>();
+            _nextEnemy = listEnemyType[i % listEnemyType.Count];
+            Enemy newEnemy = Instantiate(_nextEnemy, _listEnemyStartPositions[i], Quaternion.Euler(0, 270, 0)).GetComponent<Enemy>();
+            newEnemy.prefab = _nextEnemy;
             listOfEnemies.Add(newEnemy);
         }
     }
@@ -423,6 +444,16 @@ public class GameManager : MonoBehaviour
         PlayerPrefs.SetInt("NumOfEnemiesDestroyed", _numOfEnemiesDestroyed);
         //Guardar el nº de muertes
         PlayerPrefs.SetInt("NumOfDeaths", _numOfDeaths);
+        //Guardar el nº de muertes
+        PlayerPrefs.SetInt("NumOfDeathsPlayer1", _numOfDeathsPlayer1);
+        if(_initialNumPlayers == 2)
+        {
+            //Guardar el nº de muertes
+            PlayerPrefs.SetInt("NumOfDeathsPlayer2", _numOfDeathsPlayer2);
+        }
+        else
+            PlayerPrefs.SetInt("NumOfDeathsPlayer2", -1);
+
         //Guardar puntuación actual
         PlayerPrefs.SetInt("CurrentLevel", currentLevel);
 
@@ -450,8 +481,10 @@ public class GameManager : MonoBehaviour
     IEnumerator DoNextLevel()
     {
         _level++;
-        if(_level+1 % 2 == 0)
+        if(_level % 2 == 0 && currentLives < 3)
             currentLives++;
+        if (_level > 4 && _level % 2 == 0 && maxAmountEnemies <= 10)
+            maxAmountEnemies++;
 
         startingLevel = true;
         _flagReplay = false;
