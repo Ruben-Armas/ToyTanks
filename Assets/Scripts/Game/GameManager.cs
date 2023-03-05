@@ -169,7 +169,7 @@ public class GameManager : MonoBehaviour
             record = currentLevel;
 
         //---------------------
-        Debug.Log("----PLAY----");
+        //Debug.Log("----PLAY----");
         StartCoroutine(SpawnObjectsWhenReady());
         
         //Instanciar Player,etc.. en MapGenerator
