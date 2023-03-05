@@ -424,6 +424,7 @@ GameObject:
   m_Component:
   - component: {fileID: 43938426}
   - component: {fileID: 43938427}
+  - component: {fileID: 43938428}
   m_Layer: 5
   m_Name: Slider
   m_TagString: Untagged
@@ -498,13 +499,38 @@ MonoBehaviour:
   m_FillRect: {fileID: 581869052}
   m_HandleRect: {fileID: 810253636}
   m_Direction: 0
-  m_MinValue: 0
+  m_MinValue: 0.0001
   m_MaxValue: 1
   m_WholeNumbers: 0
-  m_Value: 0
+  m_Value: 1
   m_OnValueChanged:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 43938428}
+        m_TargetAssemblyTypeName: SFX_MixerController, Assembly-CSharp
+        m_MethodName: EffectsControll
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &43938428
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 43938425}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 189f7ae7bb055d246bfdaea5e314ddc3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  audioMixer: {fileID: 24100000, guid: 8e30f51e1940763448c86002a89e5d4c, type: 2}
 --- !u!1 &57966374
 GameObject:
   m_ObjectHideFlags: 0
@@ -25312,6 +25338,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1823857411}
   - component: {fileID: 1823857412}
+  - component: {fileID: 1823857413}
   m_Layer: 5
   m_Name: Slider
   m_TagString: Untagged
@@ -25386,13 +25413,38 @@ MonoBehaviour:
   m_FillRect: {fileID: 795800765}
   m_HandleRect: {fileID: 711783488}
   m_Direction: 0
-  m_MinValue: 0
+  m_MinValue: 0.0001
   m_MaxValue: 1
   m_WholeNumbers: 0
-  m_Value: 0
+  m_Value: 1
   m_OnValueChanged:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1823857413}
+        m_TargetAssemblyTypeName: SFX_MixerController, Assembly-CSharp
+        m_MethodName: MusicControll
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &1823857413
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1823857410}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 189f7ae7bb055d246bfdaea5e314ddc3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  audioMixer: {fileID: 24100000, guid: 8e30f51e1940763448c86002a89e5d4c, type: 2}
 --- !u!1 &1827248738
 GameObject:
   m_ObjectHideFlags: 0
@@ -27577,6 +27629,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2037650977}
   - component: {fileID: 2037650978}
+  - component: {fileID: 2037650979}
   m_Layer: 5
   m_Name: Slider
   m_TagString: Untagged
@@ -27651,13 +27704,38 @@ MonoBehaviour:
   m_FillRect: {fileID: 510187840}
   m_HandleRect: {fileID: 1888261009}
   m_Direction: 0
-  m_MinValue: 0
+  m_MinValue: 0.0001
   m_MaxValue: 1
   m_WholeNumbers: 0
-  m_Value: 0
+  m_Value: 1
   m_OnValueChanged:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 2037650979}
+        m_TargetAssemblyTypeName: SFX_MixerController, Assembly-CSharp
+        m_MethodName: MasterControll
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &2037650979
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2037650976}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 189f7ae7bb055d246bfdaea5e314ddc3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  audioMixer: {fileID: 24100000, guid: 8e30f51e1940763448c86002a89e5d4c, type: 2}
 --- !u!1001 &2039188356
 PrefabInstance:
   m_ObjectHideFlags: 0
