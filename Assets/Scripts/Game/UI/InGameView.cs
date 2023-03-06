@@ -28,15 +28,13 @@ public class InGameView : MonoBehaviour
 
     private void Awake()
     {
-        //_playerInput = GetComponent<PlayerInput>();
-        //GameInputManager.ToggleActionMap(tankControls.Player);
-        //tankControls = new TankControls();
+        //PlayerPrefs.DeleteAll();  //Borra todo
 
-        PlayerPrefs.DeleteAll();  //Borra todo
         /*//Si nunca se ha guardado una puntuación - que aparezca otro texto
         if (PlayerPrefs.GetInt("Record", -1) == -1)
             record.text = "Keep Playing!!";
         else*/
+
         //Si no tiene puntos se queda a 0
         record.text = $"Record: <color=red><b>{PlayerPrefs.GetInt("Record", 0)}</b>";   //- Forma 1
     }

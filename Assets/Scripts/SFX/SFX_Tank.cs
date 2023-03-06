@@ -7,12 +7,12 @@ public class SFX_Tank : MonoBehaviour
     public AudioClip tankDestroy;
     //public AudioClip tank;
 
-    public float pitchVariation = 11;
+    //public float pitchVariation = 2;
 
     [SerializeField]
     private AudioSource audioSourceStatic;
-    [SerializeField]
-    private AudioSource audioSource;
+    //[SerializeField]
+    //private AudioSource audioSource;
 
     private AudioClip lastClip;
     private float lastClipStamp;
@@ -57,12 +57,12 @@ public class SFX_Tank : MonoBehaviour
         lastClipStamp = Time.time;
 
         //Play
-        if (changePitch)
+        /*if (changePitch)
         {
             audioSource.pitch = Random.Range(1 - pitchRange, pitchVariation + pitchRange);
             audioSource.PlayOneShot(clip);
         }
-        else
+        else*/
             audioSourceStatic.PlayOneShot(clip);
     }
 }

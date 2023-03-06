@@ -48,6 +48,7 @@ public class GameManager : MonoBehaviour
     private Vector3 _player2StartPosition;
     private Vector3 _shield1StartPosition;
     private Vector3 _shield2StartPosition;
+    private List<Vector3> _listShieldStartPositions = new List<Vector3>();
     private List<Vector3> _listEnemyStartPositions = new List<Vector3>();
     private int _randNumEnemies;
     private int _randNumShields;
@@ -76,6 +77,7 @@ public class GameManager : MonoBehaviour
     private Player _player;
     private Player _player2;
     private GameObject _nextEnemy;
+    private Vector3 _offset;
 
     void Start()
     {
@@ -90,6 +92,8 @@ public class GameManager : MonoBehaviour
         _height = mapGenerator.height;
         GetInitialNumOfPlayers();
         GetInputPlayer1();
+
+        _offset = new Vector3(0, 0, 1.5f);
 
         if (_level == 1)
         {
@@ -133,7 +137,7 @@ public class GameManager : MonoBehaviour
         if (_flagReplay == false)
         {
             _numOfDeaths++;
-            Debug.Log(playerDestroyed.color);
+            //Debug.Log(playerDestroyed.color);
             if(playerDestroyed.color.ToString() == "blue")
             {
                 _numOfDeathsPlayer1++;
@@ -213,30 +217,41 @@ public class GameManager : MonoBehaviour
 
         GetShieldPositions();
 
-        if(_randNumShields == 1)
-            Instantiate(shieldPrefab, _shield1StartPosition, Quaternion.identity);
+        if(_level <= 2)
+        {
+            if (_randNumShields == 1)
+                Instantiate(shieldPrefab, _listShieldStartPositions[0], Quaternion.identity);
+            else
+            {
+                Instantiate(shieldPrefab, _listShieldStartPositions[0], Quaternion.identity);
+                Instantiate(shieldPrefab, _listShieldStartPositions[1], Quaternion.identity);
+            }
+        }
         else
         {
-            Instantiate(shieldPrefab, _shield1StartPosition, Quaternion.identity);
-            Instantiate(shieldPrefab, _shield2StartPosition, Quaternion.identity);
-        }            
+            for (int i = 0; i < _randNumShields; i++)
+            {
+                Instantiate(shieldPrefab, _listShieldStartPositions[i], Quaternion.identity);
+            }
+        }
+
+                   
     }
     void SpawnPlayers()
     {
         GetPlayerPositions();
 
-        Vector3 offset = new Vector3(0, 0, 1);
         if (_initialNumPlayers == 1)
         {
-            _player = Instantiate(playerPrefab, _player1StartPosition + offset, Quaternion.Euler(0, 90, 0)).GetComponent<Player>();
+            _player = Instantiate(playerPrefab, _player1StartPosition + _offset, Quaternion.Euler(0, 90, 0)).GetComponent<Player>();
             //GetSchemes(player);
             SetInputPlayer1(_player);
         }
         else
         {
-            _player = Instantiate(playerPrefab, _player1StartPosition + offset, Quaternion.Euler(0, 90, 0)).GetComponent<Player>();
+            _player = Instantiate(playerPrefab, _player1StartPosition + _offset, Quaternion.Euler(0, 90, 0)).GetComponent<Player>();
             SetInputPlayer1(_player);
-            _player2 = Instantiate(player2Prefab, _player2StartPosition + offset, Quaternion.Euler(0, 90, 0)).GetComponent<Player>();
+            _player2 = Instantiate(player2Prefab, _player2StartPosition + _offset, Quaternion.Euler(0, 90, 0)).GetComponent<Player>();
             //SetInputPlayer2(_player2);
 
         }
@@ -279,7 +294,7 @@ public class GameManager : MonoBehaviour
             else
                 _nextEnemy = listEnemyType[Random.Range(0, listEnemyType.Count)];
 
-            Enemy newEnemy = Instantiate(_nextEnemy, _listEnemyStartPositions[i], Quaternion.Euler(0, 270, 0)).GetComponent<Enemy>();
+            Enemy newEnemy = Instantiate(_nextEnemy, _listEnemyStartPositions[i] - _offset, Quaternion.Euler(0, 270, 0)).GetComponent<Enemy>();
             newEnemy.SetPrefab(_nextEnemy);
             listOfEnemies.Add(newEnemy);
         }
@@ -326,19 +341,23 @@ public class GameManager : MonoBehaviour
     {
         if (_level <= 2)
         {
-            _shield1StartPosition = new Vector3(0, 0, 0);
-            _shield2StartPosition = new Vector3(0, 0, 0);
+            _listShieldStartPositions.Add(new Vector3(0, 0, 0));
+            _listShieldStartPositions.Add(new Vector3(-15, 0, 0));
         }
         else if (startingLevel)
         {
             //Shield
-            if (_randNumShields == 1)
+            for (int i = 0; i < _randNumShields; i++)
+            {
+                _listShieldStartPositions.Add(SetMiddlePosition());
+            }
+            /*if (_randNumShields == 1)
                 _shield1StartPosition = SetMiddlePosition();
             else
             {
                 _shield1StartPosition = SetMiddlePosition();
                 _shield2StartPosition = SetMiddlePosition();
-            }
+            }*/
         }
     }
     private Vector3 SetMiddlePosition()
@@ -472,6 +491,7 @@ public class GameManager : MonoBehaviour
         _flagReplay = false;
         listOfEnemies.Clear();
 
+        _listShieldStartPositions.Clear();
         DeactivateAllShields();
         ClearSceneItems();
 

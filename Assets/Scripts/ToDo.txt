@@ -248,3 +248,5 @@ O los cubos generados se "Sobreescriben"/colocan unos dentro de otros
 	Comprobar si la Pos está ocupada peta Unity
 O La malla también aparece en los "techos"
 O Jugador 2 --> GamePad no puede navegar por la pausa
+
+O El Escudo suena que se rompe al limpiar la escena
