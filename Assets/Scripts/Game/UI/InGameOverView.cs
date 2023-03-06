@@ -21,8 +21,8 @@ public class InGameOverView : MonoBehaviour
     {
         int getCurrentLevel = PlayerPrefs.GetInt("CurrentLevel", 0);
         int getRecord = PlayerPrefs.GetInt("Record", 0);
-        int getTotalKills = PlayerPrefs.GetInt("NumOfEnemiesDestroyed", 0);
-        int getTotalDeaths = PlayerPrefs.GetInt("NumOfDeaths", 0);
+        int getTotalKills = PlayerPrefs.GetInt("TotalKills", 0);
+        int getTotalDeaths = PlayerPrefs.GetInt("TotalDeaths", 0);
         int getDeathsP1 = PlayerPrefs.GetInt("NumOfDeathsPlayer1", 0);
         int getDeathsP2 = PlayerPrefs.GetInt("NumOfDeathsPlayer2", -1);
         int getkillsP1 = PlayerPrefs.GetInt("NumOfkillsPlayer1", 0);
@@ -39,9 +39,5 @@ public class InGameOverView : MonoBehaviour
             deathsP2.text = $"<color=red><b>Not</b>";
             killsP2.text = $"<color=red><b>Playing</b>";
         }
-    }
-
-    void Update()
-    {
     }
 }
