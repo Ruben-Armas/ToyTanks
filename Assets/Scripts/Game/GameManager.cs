@@ -351,13 +351,6 @@ public class GameManager : MonoBehaviour
             {
                 _listShieldStartPositions.Add(SetMiddlePosition());
             }
-            /*if (_randNumShields == 1)
-                _shield1StartPosition = SetMiddlePosition();
-            else
-            {
-                _shield1StartPosition = SetMiddlePosition();
-                _shield2StartPosition = SetMiddlePosition();
-            }*/
         }
     }
     private Vector3 SetMiddlePosition()
@@ -442,6 +435,7 @@ public class GameManager : MonoBehaviour
         }
         else
         {
+            _flagReplay = true;
             StartCoroutine(DoReplayLevel());
         }
     }
