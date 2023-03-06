@@ -473,6 +473,8 @@ public class GameManager : MonoBehaviour
             currentLives++;
         if (_level > 4 && _level % 2 == 0 && maxAmountEnemies <= 10)
             maxAmountEnemies++;
+        if (_level > 4 && _level % 2 == 0 && maxAmountShields <= 6)
+            maxAmountShields++;
 
         startingLevel = true;
         _flagReplay = false;
