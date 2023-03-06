@@ -8,7 +8,8 @@ public class GameInputManager
     //Cambiar entre controles
     public static void ToggleActionMap(InputActionMap inputActionMap)
     {
-        tankControls.Disable();
-        inputActionMap.Enable();
+        tankControls.Player.Disable();
+        tankControls.UI.Disable();
+        //inputActionMap.Enable();
     }
 }

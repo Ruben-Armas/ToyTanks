@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.InputSystem;
 using UnityEngine.UI;
 
 public class PauseView : MonoBehaviour
@@ -34,6 +35,13 @@ public class PauseView : MonoBehaviour
     {
         Time.timeScale = 1;
         //GameInputManager.ToggleActionMap(tankControls.Player);
+
+        PlayerInput[] playerInputs = FindObjectsOfType<PlayerInput>();
+        foreach (var playerInput in playerInputs)
+        {
+            playerInput.SwitchCurrentActionMap("Player");
+        }
+
         menuManager.OpenView(ingameView);
     }
 
