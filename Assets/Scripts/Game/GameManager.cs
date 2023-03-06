@@ -205,14 +205,6 @@ public class GameManager : MonoBehaviour
         SpawnEnemies();
 
         startingLevel = false;
-
-        /*
-        //Instancia un enemigo aleatorio de una lista   
-        foreach (var spawnPoint in enemySpawnPoints)
-        {
-            //public List<Transform> enemySpawnPoints;
-            //Instantiate(enemyPrefabs[Random.Range(0, enemyPrefabs.Count)], spawnPoint.position, spawnPoint.rotation);
-        }*/
     }
 
     void SpawnShields()
