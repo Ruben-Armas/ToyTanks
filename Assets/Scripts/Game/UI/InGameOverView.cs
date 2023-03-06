@@ -9,28 +9,36 @@ public class InGameOverView : MonoBehaviour
 {
     public TextMeshProUGUI currentLevel;
     public TextMeshProUGUI record;
-    public TextMeshProUGUI enemyDestroyed;
-    public TextMeshProUGUI deaths;
+    public TextMeshProUGUI totalKills;
+    public TextMeshProUGUI totalDeaths;
     public TextMeshProUGUI deathsP1;
     public TextMeshProUGUI deathsP2;
+    public TextMeshProUGUI killsP1;
+    public TextMeshProUGUI killsP2;
 
 
     private void Awake()
     {
         int getCurrentLevel = PlayerPrefs.GetInt("CurrentLevel", 0);
         int getRecord = PlayerPrefs.GetInt("Record", 0);
-        int getEnemyDestroyed = PlayerPrefs.GetInt("NumOfEnemiesDestroyed", 0);
-        int getDeaths = PlayerPrefs.GetInt("NumOfDeaths", 0);
+        int getTotalKills = PlayerPrefs.GetInt("NumOfEnemiesDestroyed", 0);
+        int getTotalDeaths = PlayerPrefs.GetInt("NumOfDeaths", 0);
         int getDeathsP1 = PlayerPrefs.GetInt("NumOfDeathsPlayer1", 0);
-
         int getDeathsP2 = PlayerPrefs.GetInt("NumOfDeathsPlayer2", -1);
+        int getkillsP1 = PlayerPrefs.GetInt("NumOfkillsPlayer1", 0);
+        int getkillsP2 = PlayerPrefs.GetInt("NumOfkillsPlayer2", -1);
 
-        currentLevel.text = $"Current Level: <color=red><b>{getCurrentLevel}</b>";
+        currentLevel.text = $"Level: <color=red><b>{getCurrentLevel}</b>";
         record.text = $"Record: <color=red><b>{getRecord}</b>";
-        enemyDestroyed.text = $"Enemies destroyed: <color=red><b>{getEnemyDestroyed}</b>";
-        deaths.text = $"Deaths: <color=red><b>{getDeaths}</b>";
-        deathsP1.text = $"P1 Deaths: <color=red><b>{getDeathsP1}</b>";
-        deathsP2.text = $"P2 Deaths: <color=red><b>{getDeathsP2}</b>";
+        totalKills.text = $"<color=red><b>{getTotalKills}</b>";
+        totalDeaths.text = $"<color=red><b>{getTotalDeaths}</b>";
+        deathsP1.text = $"<color=red><b>{getDeathsP1}</b>";
+        killsP1.text = $"<color=red><b>{getkillsP1}</b>";
+        if (getDeathsP2 == -1 || getkillsP2 == -1)
+        {
+            deathsP2.text = $"<color=red><b>Not</b>";
+            killsP2.text = $"<color=red><b>Playing</b>";
+        }
     }
 
     void Update()

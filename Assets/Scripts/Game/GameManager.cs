@@ -441,9 +441,9 @@ public class GameManager : MonoBehaviour
         //Debug.Log($"Partida terminada en la ronda {currentLevel}");
 
         //Guardar el nº de enemigos eliminados
-        PlayerPrefs.SetInt("NumOfEnemiesDestroyed", _numOfEnemiesDestroyed);
+        PlayerPrefs.SetInt("TotalKills", _numOfEnemiesDestroyed);
         //Guardar el nº de muertes
-        PlayerPrefs.SetInt("NumOfDeaths", _numOfDeaths);
+        PlayerPrefs.SetInt("TotalDeaths", _numOfDeaths);
         //Guardar el nº de muertes
         PlayerPrefs.SetInt("NumOfDeathsPlayer1", _numOfDeathsPlayer1);
         if(_initialNumPlayers == 2)
