@@ -10,9 +10,12 @@ public class Bullet : MonoBehaviour
     //EVENTO (DELEGADO)   --> activar sonido al rebotar
     public delegate void BulletSFXBounce();
     public static event BulletSFXBounce onBulletSFXBounce;  //(EVENTO)
-    //EVENTO (DELEGADO)   --> activar sonido al rebotar
+    //EVENTO (DELEGADO)   --> activar sonido al Destruirse
     public delegate void BulletSFXDestroy();
     public static event BulletSFXDestroy onBulletSFXDestroy;  //(EVENTO)
+    //EVENTO (DELEGADO)   --> activar el Efecto Fx al Destruirse
+    public delegate void BulletFXDestroy(Vector3 position);
+    public static event BulletFXDestroy onBulletFXDestroy;  //(EVENTO)
 
     public float speed;
 
@@ -150,6 +153,9 @@ public class Bullet : MonoBehaviour
         //Evento Sonido Destroy
         if (onBulletSFXDestroy != null)
             onBulletSFXDestroy();
+        //Evento Efecto Destroy
+        if (onBulletFXDestroy != null)
+            onBulletFXDestroy(transform.position);
 
         //invulnerabilityTime = time;
         Destroy(gameObject);         //La bala se autodestruye

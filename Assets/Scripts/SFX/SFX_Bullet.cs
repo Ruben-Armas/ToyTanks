@@ -45,7 +45,6 @@ public class SFX_Bullet : MonoBehaviour
     private void OnBulletSFXDestroy()
     {
         PlaySFX(bulletDestroy, false, 0.1f);
-        Debug.Log("SOUND");
     }
 
     //Para evitar el acople
