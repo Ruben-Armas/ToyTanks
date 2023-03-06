@@ -66,6 +66,7 @@ public class PlayerInputHandler : MonoBehaviour
         if (Physics.Raycast(ray, out var hit, Mathf.Infinity, layer))
         {
             Vector3 towardsWorldPoint = hit.point - turret.position;
+            towardsWorldPoint.y = 0;
             turret.forward = towardsWorldPoint.normalized;
         }
 
