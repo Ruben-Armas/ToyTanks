@@ -50,15 +50,19 @@ public class InGameView : MonoBehaviour
 
     public void PauseGame()
     {
-        tankControls.Player.Disable();
-        GameInputManager.ToggleActionMap(tankControls.UI);
+        //tankControls.Player.Disable();
+        //GameInputManager.ToggleActionMap(tankControls.UI);
 
         //tankControls.Player.Disable();
         //tankControls.UI.Enable();
 
         //InputSystem.DisableAllEnabledActions();
         //playerInput.SwitchCurrentActionMap("UI");
-
+        PlayerInput[] playerInputs = FindObjectsOfType<PlayerInput>();
+        foreach (var playerInput in playerInputs)
+        {
+            playerInput.SwitchCurrentActionMap("UI");
+        }
 
         //Parar el tiempo   también para los menus que se deberían generar(no los genera)
         Time.timeScale = 0; //Todo lo que depende de la física se para
