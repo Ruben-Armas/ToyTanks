@@ -21261,6 +21261,7 @@ MonoBehaviour:
   maxAmountEnemies: 4
   listEnemyType:
   - {fileID: 8665461898255977889, guid: b457d6d0f852573488c50e39475d7e4b, type: 3}
+  - {fileID: 8665461898255977889, guid: 438da18daffc73e46a68f2f48c5a3e61, type: 3}
   - {fileID: 8665461898255977889, guid: 8af8dd45d0e6de24fa14a983ac248091, type: 3}
   listEnemyStartPositions:
   - {x: 25, y: 0, z: 3}

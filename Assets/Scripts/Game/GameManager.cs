@@ -280,9 +280,15 @@ public class GameManager : MonoBehaviour
 
         for (int i = 0; i < _randNumEnemies; i++)
         {
-            _nextEnemy = listEnemyType[i % listEnemyType.Count];
+            if (_level == 1)
+                _nextEnemy = listEnemyType[Random.Range(0, 1)];
+            else if (_level >= 2 && _level <= 3)
+                _nextEnemy = listEnemyType[Random.Range(0, 2)];
+            else
+                _nextEnemy = listEnemyType[Random.Range(0, listEnemyType.Count)];
+
             Enemy newEnemy = Instantiate(_nextEnemy, _listEnemyStartPositions[i], Quaternion.Euler(0, 270, 0)).GetComponent<Enemy>();
-            newEnemy.prefab = _nextEnemy;
+            newEnemy.SetPrefab(_nextEnemy);
             listOfEnemies.Add(newEnemy);
         }
     }
@@ -440,26 +446,8 @@ public class GameManager : MonoBehaviour
     {
         //Debug.Log($"Partida terminada en la ronda {currentLevel}");
 
-        //Guardar el nº de enemigos eliminados
-        PlayerPrefs.SetInt("TotalKills", _numOfEnemiesDestroyed);
-        //Guardar el nº de muertes
-        PlayerPrefs.SetInt("TotalDeaths", _numOfDeaths);
-        //Guardar el nº de muertes
-        PlayerPrefs.SetInt("NumOfDeathsPlayer1", _numOfDeathsPlayer1);
-        if(_initialNumPlayers == 2)
-        {
-            //Guardar el nº de muertes
-            PlayerPrefs.SetInt("NumOfDeathsPlayer2", _numOfDeathsPlayer2);
-        }
-        else
-            PlayerPrefs.SetInt("NumOfDeathsPlayer2", -1);
-
-        //Guardar puntuación actual
-        PlayerPrefs.SetInt("CurrentLevel", currentLevel);
-
-        //Guardar puntuación record
-        if (PlayerPrefs.GetInt("Record", 0) < currentLevel)
-            PlayerPrefs.SetInt("Record", currentLevel);
+        //Guarda la puntuación, muertes, etc
+        SaveStats();
 
         mainMenu.LoadScene("Scenes/UIGameOver");
         //menuManager.OpenView("Scenes/UIMainMenu");
@@ -596,6 +584,30 @@ public class GameManager : MonoBehaviour
         GameObject[] objects = GameObject.FindGameObjectsWithTag(tag);
         for (int i = 0; i < objects.Length; i++)    //Destruimos los GameObjects uno a uno
             Destroy(objects[i]);
+    }
+
+    private void SaveStats()
+    {
+        //Guardar el nº de enemigos eliminados
+        PlayerPrefs.SetInt("TotalKills", _numOfEnemiesDestroyed);
+        //Guardar el nº de muertes
+        PlayerPrefs.SetInt("TotalDeaths", _numOfDeaths);
+        //Guardar el nº de muertes
+        PlayerPrefs.SetInt("NumOfDeathsPlayer1", _numOfDeathsPlayer1);
+        if (_initialNumPlayers == 2)
+        {
+            //Guardar el nº de muertes
+            PlayerPrefs.SetInt("NumOfDeathsPlayer2", _numOfDeathsPlayer2);
+        }
+        else
+            PlayerPrefs.SetInt("NumOfDeathsPlayer2", -1);
+
+        //Guardar puntuación actual
+        PlayerPrefs.SetInt("CurrentLevel", currentLevel);
+
+        //Guardar puntuación record
+        if (PlayerPrefs.GetInt("Record", 0) < currentLevel)
+            PlayerPrefs.SetInt("Record", currentLevel);
     }
 
     private void GetInitialNumOfPlayers()
