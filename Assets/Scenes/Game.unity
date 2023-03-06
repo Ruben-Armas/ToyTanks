@@ -3385,7 +3385,7 @@ GameObject:
   - component: {fileID: 403133881}
   - component: {fileID: 403133882}
   m_Layer: 5
-  m_Name: MusicSlider
+  m_Name: MusicHolder
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -6128,7 +6128,7 @@ GameObject:
   - component: {fileID: 625342813}
   - component: {fileID: 625342814}
   m_Layer: 5
-  m_Name: EffectsSlider
+  m_Name: EffectsHolder
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -10095,7 +10095,7 @@ GameObject:
   - component: {fileID: 1009346753}
   - component: {fileID: 1009346754}
   m_Layer: 5
-  m_Name: MasterSlider
+  m_Name: MasterHolder
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

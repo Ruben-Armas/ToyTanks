@@ -134,7 +134,7 @@ GameObject:
   - component: {fileID: 29949245}
   - component: {fileID: 29949246}
   m_Layer: 5
-  m_Name: EffectsSlider
+  m_Name: EffectsHolder
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -382,7 +382,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Exit
+  m_text: Exit Game
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 5fd500133db0916418959cd2a9236e41, type: 2}
   m_sharedMaterial: {fileID: 8192416644950961900, guid: 5fd500133db0916418959cd2a9236e41, type: 2}
@@ -409,12 +409,12 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 100
-  m_fontSizeBase: 24
+  m_fontSize: 80
+  m_fontSizeBase: 80
   m_fontWeight: 400
   m_enableAutoSizing: 1
   m_fontSizeMin: 18
-  m_fontSizeMax: 100
+  m_fontSizeMax: 80
   m_fontStyle: 0
   m_HorizontalAlignment: 2
   m_VerticalAlignment: 512
@@ -445,7 +445,7 @@ MonoBehaviour:
   m_VertexBufferAutoSizeReduction: 0
   m_useMaxVisibleDescender: 1
   m_pageToDisplay: 1
-  m_margin: {x: 10, y: 0, z: 5, w: 0}
+  m_margin: {x: 30, y: 0, z: 20, w: 0}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_hasFontAssetChanged: 0
@@ -881,9 +881,8 @@ GameObject:
   m_Component:
   - component: {fileID: 106168123}
   - component: {fileID: 106168125}
-  - component: {fileID: 106168124}
   m_Layer: 5
-  m_Name: Slider
+  m_Name: EffectsSlider
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -912,20 +911,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 400, y: 90}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &106168124
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 106168122}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 189f7ae7bb055d246bfdaea5e314ddc3, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  audioMixer: {fileID: 24100000, guid: 8e30f51e1940763448c86002a89e5d4c, type: 2}
-  value: {fileID: 1251549513}
 --- !u!114 &106168125
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -977,7 +962,7 @@ MonoBehaviour:
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 106168124}
+      - m_Target: {fileID: 1331086201}
         m_TargetAssemblyTypeName: SFX_MixerController, Assembly-CSharp
         m_MethodName: EffectsControll
         m_Mode: 0
@@ -2234,12 +2219,12 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 100
+  m_fontSize: 90
   m_fontSizeBase: 24
   m_fontWeight: 400
   m_enableAutoSizing: 1
   m_fontSizeMin: 18
-  m_fontSizeMax: 100
+  m_fontSizeMax: 90
   m_fontStyle: 0
   m_HorizontalAlignment: 2
   m_VerticalAlignment: 512
@@ -2270,7 +2255,7 @@ MonoBehaviour:
   m_VertexBufferAutoSizeReduction: 0
   m_useMaxVisibleDescender: 1
   m_pageToDisplay: 1
-  m_margin: {x: 10, y: 0, z: 5, w: 0}
+  m_margin: {x: 30, y: 0, z: 20, w: 0}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_hasFontAssetChanged: 0
@@ -3003,7 +2988,7 @@ GameObject:
   - component: {fileID: 531099529}
   - component: {fileID: 531099530}
   m_Layer: 5
-  m_Name: MasterSlider
+  m_Name: MasterHolder
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3494,7 +3479,7 @@ GameObject:
   - component: {fileID: 719504497}
   - component: {fileID: 719504496}
   m_Layer: 5
-  m_Name: SlideHolder
+  m_Name: SlidesHolder
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4088,7 +4073,7 @@ MonoBehaviour:
     m_Mode: 4
     m_WrapAround: 0
     m_SelectOnUp: {fileID: 106168125}
-    m_SelectOnDown: {fileID: 1566219954}
+    m_SelectOnDown: {fileID: 1164552326}
     m_SelectOnLeft: {fileID: 0}
     m_SelectOnRight: {fileID: 0}
   m_Transition: 1
@@ -4863,7 +4848,7 @@ GameObject:
   - component: {fileID: 1050801145}
   - component: {fileID: 1050801144}
   m_Layer: 5
-  m_Name: Text (TMP)
+  m_Name: EffectsLabel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5355,12 +5340,12 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 100
+  m_fontSize: 80
   m_fontSizeBase: 24
   m_fontWeight: 400
   m_enableAutoSizing: 1
   m_fontSizeMin: 18
-  m_fontSizeMax: 100
+  m_fontSizeMax: 80
   m_fontStyle: 0
   m_HorizontalAlignment: 2
   m_VerticalAlignment: 512
@@ -5391,7 +5376,7 @@ MonoBehaviour:
   m_VertexBufferAutoSizeReduction: 0
   m_useMaxVisibleDescender: 1
   m_pageToDisplay: 1
-  m_margin: {x: 10, y: 0, z: 5, w: 0}
+  m_margin: {x: 30, y: 0, z: 20, w: 0}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_hasFontAssetChanged: 0
@@ -5463,14 +5448,14 @@ MonoBehaviour:
     m_WrapAround: 0
     m_SelectOnUp: {fileID: 882864998}
     m_SelectOnDown: {fileID: 2107766051}
-    m_SelectOnLeft: {fileID: 1566219954}
+    m_SelectOnLeft: {fileID: 0}
     m_SelectOnRight: {fileID: 0}
   m_Transition: 1
   m_Colors:
     m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
     m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
     m_PressedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
-    m_SelectedColor: {r: 0.8509936, g: 1, b: 0.6367924, a: 1}
+    m_SelectedColor: {r: 1, g: 0.529491, b: 0.4009434, a: 1}
     m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
     m_ColorMultiplier: 1
     m_FadeDuration: 0.1
@@ -5576,7 +5561,7 @@ GameObject:
   - component: {fileID: 1172439339}
   - component: {fileID: 1172439338}
   m_Layer: 5
-  m_Name: Text (TMP)
+  m_Name: MasterLabel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5923,7 +5908,7 @@ GameObject:
   - component: {fileID: 1203479697}
   - component: {fileID: 1203479698}
   m_Layer: 5
-  m_Name: MusicSlider
+  m_Name: MusicHolder
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -6056,7 +6041,7 @@ GameObject:
   - component: {fileID: 1251549514}
   - component: {fileID: 1251549513}
   m_Layer: 5
-  m_Name: TextNum (TMP)
+  m_Name: EffectsVal
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -6548,9 +6533,8 @@ GameObject:
   m_Component:
   - component: {fileID: 1314293567}
   - component: {fileID: 1314293569}
-  - component: {fileID: 1314293568}
   m_Layer: 5
-  m_Name: Slider
+  m_Name: MusicSlider
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -6579,20 +6563,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 400, y: 90}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &1314293568
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1314293566}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 189f7ae7bb055d246bfdaea5e314ddc3, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  audioMixer: {fileID: 24100000, guid: 8e30f51e1940763448c86002a89e5d4c, type: 2}
-  value: {fileID: 1937595103}
 --- !u!114 &1314293569
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6644,7 +6614,7 @@ MonoBehaviour:
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1314293568}
+      - m_Target: {fileID: 1331086201}
         m_TargetAssemblyTypeName: SFX_MixerController, Assembly-CSharp
         m_MethodName: MusicControll
         m_Mode: 0
@@ -6748,6 +6718,7 @@ GameObject:
   - component: {fileID: 1331086198}
   - component: {fileID: 1331086200}
   - component: {fileID: 1331086199}
+  - component: {fileID: 1331086201}
   m_Layer: 5
   m_Name: VolumeHolder
   m_TagString: Untagged
@@ -6815,6 +6786,25 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1331086197}
   m_CullTransparentMesh: 1
+--- !u!114 &1331086201
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1331086197}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 189f7ae7bb055d246bfdaea5e314ddc3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  audioMixer: {fileID: 24100000, guid: 8e30f51e1940763448c86002a89e5d4c, type: 2}
+  valueMaster: {fileID: 1892590102}
+  valueMusic: {fileID: 1937595103}
+  valueEffects: {fileID: 1251549513}
+  sliderMaster: {fileID: 2107766051}
+  sliderMusic: {fileID: 1314293569}
+  sliderEffects: {fileID: 106168125}
 --- !u!1 &1350740908
 GameObject:
   m_ObjectHideFlags: 0
@@ -7534,7 +7524,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 1164552329}
+      - m_Target: {fileID: 2107766054}
         m_TargetAssemblyTypeName: SelectButton, Assembly-CSharp
         m_MethodName: OnSelectButton
         m_Mode: 1
@@ -7895,7 +7885,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &1566219954
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8018,9 +8008,9 @@ RectTransform:
   m_Father: {fileID: 873105739}
   m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 265, y: -65}
   m_SizeDelta: {x: 320, y: 130}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &1575769921
@@ -8656,7 +8646,7 @@ GameObject:
   - component: {fileID: 1734971123}
   - component: {fileID: 1734971122}
   m_Layer: 5
-  m_Name: Text (TMP)
+  m_Name: MusicLabel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -9683,7 +9673,7 @@ MonoBehaviour:
   m_fontWeight: 400
   m_enableAutoSizing: 1
   m_fontSizeMin: 18
-  m_fontSizeMax: 100
+  m_fontSizeMax: 80
   m_fontStyle: 0
   m_HorizontalAlignment: 2
   m_VerticalAlignment: 512
@@ -9740,7 +9730,7 @@ GameObject:
   - component: {fileID: 1892590103}
   - component: {fileID: 1892590102}
   m_Layer: 5
-  m_Name: TextNum (TMP)
+  m_Name: MasterVal
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -9984,7 +9974,7 @@ GameObject:
   - component: {fileID: 1937595104}
   - component: {fileID: 1937595103}
   m_Layer: 5
-  m_Name: TextNum (TMP)
+  m_Name: MusicVal
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -10801,9 +10791,9 @@ GameObject:
   m_Component:
   - component: {fileID: 2107766053}
   - component: {fileID: 2107766051}
-  - component: {fileID: 2107766052}
+  - component: {fileID: 2107766054}
   m_Layer: 5
-  m_Name: Slider
+  m_Name: MasterSlider
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -10824,7 +10814,7 @@ MonoBehaviour:
   m_Navigation:
     m_Mode: 4
     m_WrapAround: 0
-    m_SelectOnUp: {fileID: 1566219954}
+    m_SelectOnUp: {fileID: 1164552326}
     m_SelectOnDown: {fileID: 1314293569}
     m_SelectOnLeft: {fileID: 0}
     m_SelectOnRight: {fileID: 0}
@@ -10860,7 +10850,7 @@ MonoBehaviour:
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 2107766052}
+      - m_Target: {fileID: 1331086201}
         m_TargetAssemblyTypeName: SFX_MixerController, Assembly-CSharp
         m_MethodName: MasterControll
         m_Mode: 0
@@ -10872,20 +10862,6 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
---- !u!114 &2107766052
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2107766050}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 189f7ae7bb055d246bfdaea5e314ddc3, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  audioMixer: {fileID: 24100000, guid: 8e30f51e1940763448c86002a89e5d4c, type: 2}
-  value: {fileID: 1892590102}
 --- !u!224 &2107766053
 RectTransform:
   m_ObjectHideFlags: 0
@@ -10909,6 +10885,18 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 400, y: 90}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &2107766054
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2107766050}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2688828eb25d0aa4aa8e09e11a5cf39d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &2135010679
 GameObject:
   m_ObjectHideFlags: 0
