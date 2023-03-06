@@ -390,7 +390,12 @@ public class EnemyController : MonoBehaviour
     }
     private void MoveForward()
     {
-        _towardsDirection = (_path.corners[1] - transform.position).normalized;
+        //Si player está dentro del mapa va a por él, sino lo "busca"
+        if (_path.corners.Length > 0)
+            _towardsDirection = (_path.corners[1] - transform.position).normalized;
+        else
+            ChangeState(State.Cooldown);
+
         _animator.SetBool("Right", false);
         _animator.SetBool("Left", false);
 
