@@ -32,13 +32,13 @@ public class InGameView : MonoBehaviour
         //GameInputManager.ToggleActionMap(tankControls.Player);
         //tankControls = new TankControls();
 
-        //PlayerPrefs.DeleteAll();  //Borra todo
-        //Si nunca se ha guardado una puntuación - que aparezca otro texto
+        PlayerPrefs.DeleteAll();  //Borra todo
+        /*//Si nunca se ha guardado una puntuación - que aparezca otro texto
         if (PlayerPrefs.GetInt("Record", -1) == -1)
             record.text = "Keep Playing!!";
-        else
-            //Si no tiene puntos se queda a 0   (IMPORTANTE ver que tiene el mismo nombre que en el Manager)
-            record.text = $"Record: <color=red><b>{PlayerPrefs.GetInt("Record", 0)}</b>";   //- Forma 1
+        else*/
+        //Si no tiene puntos se queda a 0
+        record.text = $"Record: <color=red><b>{PlayerPrefs.GetInt("Record", 0)}</b>";   //- Forma 1
     }
 
     void Update()
