@@ -11,8 +11,8 @@ public class Bullet : MonoBehaviour
     public delegate void BulletSFXBounce();
     public static event BulletSFXBounce onBulletSFXBounce;  //(EVENTO)
     //EVENTO (DELEGADO)   --> activar sonido al rebotar
-    //public delegate void BulletSFXDestroy();
-    //public static event BulletSFXDestroy onBulletSFXDestroy;  //(EVENTO)
+    public delegate void BulletSFXDestroy();
+    public static event BulletSFXDestroy onBulletSFXDestroy;  //(EVENTO)
 
     public float speed;
 
@@ -92,7 +92,7 @@ public class Bullet : MonoBehaviour
         {
             //Debug.Log("Contact ENEMY");
             enemy.SetDestroyed();   //Destruye al impactado
-            SetDestroyed();         //La bala se autodestruye
+            SetDestroyedWithEvent();         //La bala se autodestruye
         }
 
         if (player != null)
@@ -109,14 +109,14 @@ public class Bullet : MonoBehaviour
             else   
                 player.SetDestroyed();  //Destruye al impactado
 
-            SetDestroyed();         //La bala se autodestruye
+            SetDestroyedWithEvent();         //La bala se autodestruye
         }
 
         if (bullet != null)
         {
             //Debug.Log("Contact BULLET");
-            bullet.SetDestroyed();  //Destruye al impactado
-            SetDestroyed();         //La bala se autodestruye
+            bullet.SetDestroyedWithEvent();  //Destruye al impactado
+            SetDestroyedWithEvent();         //La bala se autodestruye
         }
     }
 
@@ -139,18 +139,24 @@ public class Bullet : MonoBehaviour
         contBounces++;
         if (contBounces >= numBounces)
         {
-            Destroy(gameObject);
+            SetDestroyedWithEvent();
             return true;
         }
         return false;
     }
 
+    public void SetDestroyedWithEvent()
+    {
+        //Evento Sonido Destroy
+        if (onBulletSFXDestroy != null)
+            onBulletSFXDestroy();
+
+        //invulnerabilityTime = time;
+        Destroy(gameObject);         //La bala se autodestruye
+    }
+
     public void SetDestroyed()
     {
-        /*//Evento Sonido Destroy
-        if (onBulletSFXDestroy != null)
-            onBulletSFXDestroy();*/
-
         //invulnerabilityTime = time;
         Destroy(gameObject);         //La bala se autodestruye
     }

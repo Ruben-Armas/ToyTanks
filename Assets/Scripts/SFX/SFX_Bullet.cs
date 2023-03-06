@@ -6,7 +6,7 @@ public class SFX_Bullet : MonoBehaviour
 {
     public AudioClip bulletShoot;
     public AudioClip bulletBounce;
-    //public AudioClip bulletDestroy;
+    public AudioClip bulletDestroy;
 
     public float pitchVariation = 11;
 
@@ -23,14 +23,14 @@ public class SFX_Bullet : MonoBehaviour
     {
         Bullet.onBulletSFXShoot += OnBulletSFXShoot;
         Bullet.onBulletSFXBounce += OnBulletSFXBounce;
-        //Bullet.onBulletSFXDestroy += OnBulletSFXDestroy;
+        Bullet.onBulletSFXDestroy += OnBulletSFXDestroy;
     }
 
     private void OnDisable()
     {
         Bullet.onBulletSFXShoot -= OnBulletSFXShoot;
         Bullet.onBulletSFXBounce -= OnBulletSFXBounce;
-        //Bullet.onBulletSFXDestroy -= OnBulletSFXDestroy;
+        Bullet.onBulletSFXDestroy -= OnBulletSFXDestroy;
     }
 
 
@@ -44,7 +44,8 @@ public class SFX_Bullet : MonoBehaviour
     }
     private void OnBulletSFXDestroy()
     {
-        PlaySFX(bulletBounce, true, 0.1f);
+        PlaySFX(bulletDestroy, false, 0.1f);
+        Debug.Log("SOUND");
     }
 
     //Para evitar el acople
