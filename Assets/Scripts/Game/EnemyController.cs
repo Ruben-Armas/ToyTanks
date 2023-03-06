@@ -21,6 +21,10 @@ public class EnemyController : MonoBehaviour
     public float precisionFire = 0.97f;
     [Range(0.1f, 1f)]
     public float turretRotationSpeed = 0.7f;
+    [Range(0f, 50f)]
+    public float wallDistance = 20f;
+    [Range(0f, 100f)]
+    public float enemyDistance = 50f;
 
     public enum SelectedTraking
     {
@@ -285,7 +289,7 @@ public class EnemyController : MonoBehaviour
         bool freeEnemy = true;
         RaycastHit hitWall;
         RaycastHit hitEnemy;
-        if (Physics.Raycast(_weapon.transform.position, towardsTarget, out hitWall, 20)) // Comprueba si choca
+        if (Physics.Raycast(_weapon.transform.position, towardsTarget, out hitWall, wallDistance)) // Comprueba si choca
         {
             //Debug.DrawLine(_weapon.transform.position, hitWall.point, Color.green);
             // Comprueba si la colisión es con una pared
@@ -294,7 +298,7 @@ public class EnemyController : MonoBehaviour
                 freeWall = false;
             }
         }
-        if (Physics.Raycast(_weapon.transform.position, towardsTarget, out hitEnemy, 50)) // Comprueba si choca
+        if (Physics.Raycast(_weapon.transform.position, towardsTarget, out hitEnemy, enemyDistance)) // Comprueba si choca
         {
             //Debug.DrawLine(_weapon.transform.position, hitEnemy.point, Color.blue);
             // Comprueba si la colisión es con un enemigo "Aliado"
