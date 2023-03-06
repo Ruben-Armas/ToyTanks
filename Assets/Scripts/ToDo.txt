@@ -1,11 +1,12 @@
-0. Tanques
+0. Tanques----------------------------------------
 
 O Láser que no atraviese obstáculos
+O Láser, rojo si choca, verde si no
 
 
-1. Jugadores:
+1. Jugadores:----------------------------------------
 
-O Diferenciar los inputs para 2 jugadores
+X Diferenciar los inputs para 2 jugadores
 X ratón y teclado -> movimiento
 X ratón y teclado -> apuntado
 X gamepad -> movimiento
@@ -15,15 +16,17 @@ X Cada jugador tiene una vida por nivel, es decir, será destruido si le alcanzan
 O soltar minas
 
 
-2. Enemigos:
+2. Enemigos:----------------------------------------
 
 O Tipos
-	O Normal
+	X Normal
 	O Solo minas
-	O Balas lentas con más rebotes
+	X Balas lentas con más rebotes
 	O No se mueve y solo detecta en un rango -- balas rápidas
-- Los enemigos se mueven y disparan aleatoriamente, o hacia el jugador más cercano.
+X Los enemigos se mueven y disparan hacia el jugador
 X Selector de tipo de traking
+	X Más cercano
+	X Focus
 - Máquina de estados
 	X Rotar
 	X Moverse
@@ -35,7 +38,7 @@ X Selector de tipo de traking
 		X Rotar torreta a modo de búsqueda
 
 
-3. Balas:
+3. Balas:----------------------------------------
 
 X Son disparadas tanto por los jugadores como por los enemigos.
 X Pueden destruir a los jugadores, enemigos y a otras balas.
@@ -44,7 +47,7 @@ X Se destruyen al impactar con algo que no sea una pared
 X Pueden rebotar X veces en la pared, al siguiente impacto se destruyen.
 
 
-4. Minas: 
+4. Minas: ----------------------------------------
 
 O Crear Prefab
 O Asignar botón player input
@@ -57,7 +60,7 @@ O Se destruyen automáticamente al paso de 30 segundos.
 O Tiene un rango de explosión que alcanza a lo que esté cerca.
 
 
-5. Escudo:
+5. Escudo:----------------------------------------
 
 X Es un objeto que pueden recoger los jugadores del juego.
 X Tiene un movimiento Hover
@@ -68,7 +71,7 @@ O Resiste una Mina.
 X Hacer que si tengo uno, no lo coja y no desaparezca
 
 
-6. Partida:
+6. Partida:----------------------------------------
 
 X Guarda la puntuación récord.
 X Empieza con los contadores de puntuación a cero. 
@@ -93,10 +96,10 @@ X Lista de enemigos
 	X Eventos
 	X Refactorizar clases Enemy y EnemyController
 
-O OnRoundEnds
+X OnRoundEnds
 	X Guardar puntuación
 	X ¿deshabilitar inputs de tanque?
-O OnPlayerRoundEnds
+X OnPlayerRoundEnds
 	X Si no hay vidas -> OnGameOver()
 	X Quitar una vida
 X OnEnemyRoundEnds
@@ -123,23 +126,23 @@ O OnGameOver()
 		X Menú principal
 	O Cambiar controles a UI
 
-O SpawnPlayers
+X SpawnPlayers
 	NextLevel
 		X En posición aleatoria	(dentro del navMesh)
 		X Crea los players
 	ReplayLevel
 		X al repetir nivel, crea a todos los jugadores
 
-O SpawnEnemies
+X SpawnEnemies
 	NextLevel
-		O De distinto tipo
+		X De distinto tipo
 		X En posición aleatoria	(dentro del navMesh)
 		X Crea los enemigos
 	ReplayLevel
 		X al repetir nivel, crea los enemigos que quedaban vivos
 
 
-7. Nivel:
+7. Nivel:----------------------------------------
 
 X Spawner 
 	izquierda - players
@@ -151,7 +154,7 @@ X Generación Procedural
 		O Dejar pasillos de 2 Pos
 		O Los cubos atraviesan las paredes
 	X Bake de la malla
-		O No bakea todo (no conecta bien)
+		X No bakea todo (no conecta bien)
 		O Bakea en los techos de los obstáculos (mal)
 		X La malla anterior se solapa con la nueva (mal)
 			X Cubos /obstáculos
@@ -165,11 +168,11 @@ X Cada dos niveles superados se añade una vida.
 X Al no superar el nivel se quita una vida.
 
 
-8. UI:
+8. UI:----------------------------------------
 
 X Menú iniciar partida
 O Pausa
-	O Cambiar el Action Map a UI	Fix y Refactorizar (lo hace el InGameView y PauseView)
+	X Cambiar el Action Map a UI	Fix y Refactorizar (lo hace el InGameView y PauseView)
 	X Pausa al pulsar esc/start
 		X Resume
 		O Exit -> Vuelve a la pantalla de inicio, no al menú
@@ -184,11 +187,11 @@ X Indicador de nivel actual.
 X Indicador de Record --> Guardar en memoria
 X Vidas restantes para reintentar niveles cuando eliminan a todos los jugadores.
 
-O Nª de enemigos eliminados por el jugador 1.
-O Nª de enemigos eliminados por el jugador 2.
+X Nª de enemigos eliminados por el jugador 1.
+X Nª de enemigos eliminados por el jugador 2.
 
 
-9. FX (partículas)
+9. FX (partículas)----------------------------------------
 O Al disparar la bala
 O Al rebotar la bala
 X Trail de la bala
@@ -201,19 +204,21 @@ X Al morir/explotar un tanque
 O Explosión de una mina
 
 
-10. UFX (sonidos)
+10. UFX (sonidos)----------------------------------------
 X Al disparar la bala
 X Al rebotar la bala
 O Exploxión de bala
 
 X Al morir/explotar un tanque
+
+O Al recoger escudo
+O Al romper escudo
  
 O Al colocar una mina
 O Al explotar una mina
 
 
-11. Puntuación
-
+11. Puntuación----------------------------------------
 X Ronda máx
 
 O Total= Total + ContActual * nº nivel
@@ -222,11 +227,21 @@ O   Valor enemigo   ¿10?
 O pierdes una vida --> -5% ??
 
 
-12. Guardar juego
-O Puntuación
+12. Guardar juego----------------------------------------
+X Puntuación
+X Nº de Muertes
+	X Totales
+	X P1
+	X P2
+O Nº de Kills
+	X Totales
+	O P1
+	O P2
+X Configuración de sonido
+X Configuración FullScreen
 
 
-## BUGS ##
+## BUGS ##----------------------------------------
 X el ratón no apunta bien
 X Hay ángulos en los que la bala choca contra la pared, en los que no rebota
 O los cubos generados se "Sobreescriben"/colocan unos dentro de otros
