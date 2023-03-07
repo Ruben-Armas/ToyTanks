@@ -5,66 +5,86 @@ using UnityEngine.Pool;
 
 public class FXManager : MonoBehaviour
 {
-    public GameObject tankActivatedParticles;
-    private IObjectPool<ParticleSystem> _tankActivatedPool;
+    public GameObject tankDestroyActivatedParticles;
+    private IObjectPool<ParticleSystem> _tankDestroyActivatedPool;
 
-    public GameObject bulletActivatedParticles;
-    private IObjectPool<ParticleSystem> _bulletActivatedPool;
+    public GameObject bulletDestroyActivatedParticles;
+    private IObjectPool<ParticleSystem> _bulletDestroyActivatedPool;
 
+    public GameObject bulletBounceActivatedParticles;
+    private IObjectPool<ParticleSystem> _bulletBounceActivatedPool;
 
     private void Awake()
     {
-        _tankActivatedPool = new ObjectPool<ParticleSystem>(OnCreateTAP);
-        _bulletActivatedPool = new ObjectPool<ParticleSystem>(OnCreateBAP);
+        _tankDestroyActivatedPool = new ObjectPool<ParticleSystem>(OnCreateTDAP);
+        _bulletDestroyActivatedPool = new ObjectPool<ParticleSystem>(OnCreateBDAP);
+        _bulletBounceActivatedPool = new ObjectPool<ParticleSystem>(OnCreateBBAP);
     }
 
-    ParticleSystem OnCreateTAP()
+    ParticleSystem OnCreateTDAP()
     {
-        GameObject ps = Instantiate(tankActivatedParticles, Vector3.one * 1000, Quaternion.identity);
+        GameObject ps = Instantiate(tankDestroyActivatedParticles, Vector3.one * 1000, Quaternion.identity);
         ParticleSystem particleSystem = ps.GetComponent<ParticleSystem>();
         ReturnToPool rtp = ps.GetComponent<ReturnToPool>();
-        rtp.pool = _tankActivatedPool;
+        rtp.pool = _tankDestroyActivatedPool;
         return particleSystem;
     }
-    ParticleSystem OnCreateBAP()
+    ParticleSystem OnCreateBDAP()
     {
-        GameObject ps = Instantiate(bulletActivatedParticles, Vector3.one * 1000, Quaternion.identity);
+        GameObject ps = Instantiate(bulletDestroyActivatedParticles, Vector3.one * 1000, Quaternion.identity);
         ParticleSystem particleSystem = ps.GetComponent<ParticleSystem>();
         ReturnToPool rtp = ps.GetComponent<ReturnToPool>();
-        rtp.pool = _bulletActivatedPool;
+        rtp.pool = _bulletDestroyActivatedPool;
         return particleSystem;
     }
-
+    ParticleSystem OnCreateBBAP()
+    {
+        GameObject ps = Instantiate(bulletBounceActivatedParticles, Vector3.one * 1000, Quaternion.identity);
+        ParticleSystem particleSystem = ps.GetComponent<ParticleSystem>();
+        ReturnToPool rtp = ps.GetComponent<ReturnToPool>();
+        rtp.pool = _bulletBounceActivatedPool;
+        return particleSystem;
+    }
 
     //SUSCRIPCIÓN al EVENTO
     void OnEnable()
     {
-        Player.onPlayerEffectDestroy += OnEffectsDestroy;
-        Enemy.onEnemyEffectDestroy += OnEffectsDestroy;
+        Player.onPlayerEffectDestroy += OnTankFXDestroy;
+        Enemy.onEnemyEffectDestroy += OnTankFXDestroy;
         Bullet.onBulletFXDestroy += OnBulletFXDestroy;
+        Bullet.onBulletFXBounce += OnBulletFXBounce;
     }
     //DESUSCRIPCIÓN al EVENTO
     void OnDisable()
     {
-        Player.onPlayerEffectDestroy -= OnEffectsDestroy;
-        Enemy.onEnemyEffectDestroy -= OnEffectsDestroy;
+        Player.onPlayerEffectDestroy -= OnTankFXDestroy;
+        Enemy.onEnemyEffectDestroy -= OnTankFXDestroy;
         Bullet.onBulletFXDestroy -= OnBulletFXDestroy;
+        Bullet.onBulletFXBounce -= OnBulletFXBounce;
     }
     //DELEGADOS
-    private void OnEffectsDestroy(Vector3 position)
+    private void OnTankFXDestroy(Vector3 position)
     {
-        ParticleSystem ps = _tankActivatedPool.Get();
+        ParticleSystem ps = _tankDestroyActivatedPool.Get();
         ps.transform.position = position;
-        Debug.Log("position: " + position);
-        Debug.Log("Particle position: " + ps.transform.position);
+        //Debug.Log("position: " + position);
+        //Debug.Log("Particle position: " + ps.transform.position);
+        ps.Play();
+    }
+    private void OnBulletFXBounce(Vector3 position)
+    {
+        ParticleSystem ps = _bulletBounceActivatedPool.Get();
+        ps.transform.position = position;
+        //Debug.Log("position: " + position);
+        //Debug.Log("Particle bullet bounce position: " + ps.transform.position);
         ps.Play();
     }
     private void OnBulletFXDestroy(Vector3 position)
     {
-        ParticleSystem ps = _bulletActivatedPool.Get();
+        ParticleSystem ps = _bulletDestroyActivatedPool.Get();
         ps.transform.position = position;
-        Debug.Log("position: " + position);
-        Debug.Log("Particle bullet position: " + ps.transform.position);
+        //Debug.Log("position: " + position);
+        //Debug.Log("Particle bullet position: " + ps.transform.position);
         ps.Play();
     }
 }

@@ -10,6 +10,9 @@ public class Bullet : MonoBehaviour
     //EVENTO (DELEGADO)   --> activar sonido al rebotar
     public delegate void BulletSFXBounce();
     public static event BulletSFXBounce onBulletSFXBounce;  //(EVENTO)
+    //EVENTO (DELEGADO)   --> activar efecto FX al rebotar
+    public delegate void BulletFXBounce(Vector3 position);
+    public static event BulletFXBounce onBulletFXBounce;  //(EVENTO)
     //EVENTO (DELEGADO)   --> activar sonido al Destruirse
     public delegate void BulletSFXDestroy();
     public static event BulletSFXDestroy onBulletSFXDestroy;  //(EVENTO)
@@ -28,6 +31,7 @@ public class Bullet : MonoBehaviour
     private Bullet bullet;
     private Shield currentShield;
 
+    private float _offsetPosEffect;
 
     /*Si lo pongo en el FixedUpdate estaría siempre aplicando esa velocidad
      * por lo que no caería por la gravedad
@@ -41,6 +45,8 @@ public class Bullet : MonoBehaviour
         //Evento Sonido Disparo
         if (onBulletSFXShoot != null)
             onBulletSFXShoot();
+
+        _offsetPosEffect = 1.1f;
     }
 
     private void FixedUpdate()
@@ -59,6 +65,9 @@ public class Bullet : MonoBehaviour
                     //Evento Sonido Rebote
                     if (onBulletSFXBounce != null)
                         onBulletSFXBounce();
+                    //Evento Efecto FX Rebote
+                    if (onBulletFXBounce != null)   //Le sumo este valor para que el efecto toque con la pared
+                        onBulletFXBounce(transform.position + transform.forward * _offsetPosEffect);
 
                     // Calcula la normal de la superficie de la pared con la que chocando
                     Vector3 normal = hit.normal;
@@ -154,8 +163,8 @@ public class Bullet : MonoBehaviour
         if (onBulletSFXDestroy != null)
             onBulletSFXDestroy();
         //Evento Efecto Destroy
-        if (onBulletFXDestroy != null)
-            onBulletFXDestroy(transform.position);
+        if (onBulletFXDestroy != null)   //Le sumo este valor para que el efecto toque con la pared
+            onBulletFXDestroy(transform.position + transform.forward * _offsetPosEffect);
 
         //invulnerabilityTime = time;
         Destroy(gameObject);         //La bala se autodestruye

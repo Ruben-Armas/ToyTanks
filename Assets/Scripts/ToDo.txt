@@ -86,7 +86,7 @@ O PlayGame()
 		X Enemies
 
 	X Comprobar si hay una lista de enemigos, sino crearlos (nº aleatorio)
-		O Distintos tipos (aleatorio)
+		X Distintos tipos (aleatorio)
 		X En Posición aleatoria (lejos del jugador)
 		X Cantidad aleatoria
 
@@ -192,8 +192,9 @@ X Nª de enemigos eliminados por el jugador 2.
 
 
 9. FX (partículas)----------------------------------------
-O Al disparar la bala
-O Al rebotar la bala
+X Al disparar la bala
+X Al rebotar la bala
+X Al explotar la bala
 X Trail de la bala
 X Trail de las orugas
 X Partículas de humo
@@ -207,12 +208,12 @@ O Explosión de una mina
 10. UFX (sonidos)----------------------------------------
 X Al disparar la bala
 X Al rebotar la bala
-O Exploxión de bala
+X Exploxión de bala
 
 X Al morir/explotar un tanque
 
-O Al recoger escudo
-O Al romper escudo
+X Al recoger escudo
+X Al romper escudo
  
 O Al colocar una mina
 O Al explotar una mina
