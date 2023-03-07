@@ -8296,7 +8296,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   startLives: 1
-  timeToStartLevel: 3
+  timeToStartLevel: 2
   mapGenerator: {fileID: 251485939}
   inGameView: {fileID: 1157089632}
   mainMenu: {fileID: 1423864510}
