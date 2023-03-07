@@ -939,8 +939,8 @@ MonoBehaviour:
   cooldownFireRate: 4
   precisionFire: 0.97
   turretRotationSpeed: 0.95
-  wallDistance: 20
-  enemyDistance: 50
+  wallDistance: 40
+  enemyDistance: 70
   coolDownTime: 2
   traking: 0
 --- !u!195 &3657200478503351674
