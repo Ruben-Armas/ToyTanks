@@ -104,7 +104,7 @@ TrailRenderer:
       m_RotationOrder: 4
     colorGradient:
       serializedVersion: 2
-      key0: {r: 0.6187506, g: 0, b: 1, a: 1}
+      key0: {r: 1, g: 0.52119267, b: 0, a: 1}
       key1: {r: 1, g: 0.8684386, b: 0, a: 0.3529412}
       key2: {r: 0, g: 0, b: 0, a: 0}
       key3: {r: 0, g: 0, b: 0, a: 0}
@@ -159,7 +159,7 @@ GameObject:
   - component: {fileID: 648091011080755866}
   - component: {fileID: 6851514946375686369}
   m_Layer: 0
-  m_Name: Enemy_3_Bullet
+  m_Name: Enemy_1_Bullet
   m_TagString: Bullet
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -209,7 +209,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 65d248bd33c5b2040972caed8609c416, type: 2}
+  - {fileID: 2100000, guid: be2ef26c00fd5ac4fafddd4c30895e64, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -273,9 +273,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 870d67a4d2eebef4ca18bbba4549e285, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 20
+  speed: 10
   rigidbody: {fileID: 7337640511938777106}
-  numBounces: 4
+  numBounces: 3
 --- !u!136 &6851514946375686369
 CapsuleCollider:
   m_ObjectHideFlags: 0

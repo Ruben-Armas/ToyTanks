@@ -566,7 +566,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   muzzle: {fileID: 8275627078677208984}
-  bulletPrefab: {fileID: 648091011080755866, guid: a4988ce98215dcd4fbda7bff588026b7, type: 3}
+  bulletPrefab: {fileID: 648091011080755866, guid: 9cae2b840af59a649b5c98c8506bb4e8, type: 3}
 --- !u!1 &6675350575943695931
 GameObject:
   m_ObjectHideFlags: 0
@@ -699,7 +699,7 @@ GameObject:
   - component: {fileID: 3657200478503351674}
   - component: {fileID: 6987738626326265616}
   m_Layer: 0
-  m_Name: Enemy_Red
+  m_Name: Enemy_1
   m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -768,7 +768,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b34aa8a63fcbe09479f38f5184d57021, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  prefab: {fileID: 0}
 --- !u!114 &3787422810958176240
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -787,6 +786,8 @@ MonoBehaviour:
   cooldownFireRate: 3
   precisionFire: 0.97
   turretRotationSpeed: 0.9
+  wallDistance: 20
+  enemyDistance: 50
   coolDownTime: 2
   traking: 0
 --- !u!195 &3657200478503351674
