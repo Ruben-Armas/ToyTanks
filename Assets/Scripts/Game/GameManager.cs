@@ -78,7 +78,7 @@ public class GameManager : MonoBehaviour
 
     private Player _player;
     private Player _player2;
-    private GameObject _nextEnemy;
+    private GameObject _nextEnemyPrefab;
     private Vector3 _offset;
 
     void Start()
@@ -175,6 +175,7 @@ public class GameManager : MonoBehaviour
         {
             //Debug.Log("Borrando enemy");
             listOfEnemies.Remove(enemyDestroyed);
+
             _numOfEnemiesDestroyed++;
             if (destroyedById == 0)
                 _numOfEnemiesDestroyedByBlue++;
@@ -224,7 +225,6 @@ public class GameManager : MonoBehaviour
     {
         if(startingLevel)
             _randNumShields = Random.Range(minAmountShields, maxAmountShields + 1);
-        Debug.Log($"N Shield --> {_randNumShields}");
         GetShieldPositions();
 
         if(_level <= 2)
@@ -241,7 +241,6 @@ public class GameManager : MonoBehaviour
         {
             for (int i = 0; i < _randNumShields; i++)
             {
-                Debug.Log($"N Shield --> {_randNumShields}");
                 Instantiate(shieldPrefab, _listShieldStartPositions[i], Quaternion.identity);
             }
         }
@@ -280,6 +279,8 @@ public class GameManager : MonoBehaviour
 
                 //Creo a los enemigos supervivientes (evita error al generar el navMesh)
                 Enemy newEnemy = Instantiate(enemyData.prefab, enemyData.initPos, Quaternion.Euler(0, 270, 0)).GetComponent<Enemy>();
+                newEnemy.SetPrefab(enemyData.prefab);
+
                 //Asigna el objetivo
                 newEnemy.GetComponent<EnemyController>().traking = enemyData.traking;
 
@@ -299,14 +300,14 @@ public class GameManager : MonoBehaviour
         for (int i = 0; i < _randNumEnemies; i++)
         {
             if (_level == 1)
-                _nextEnemy = listEnemyType[Random.Range(0, 1)];
+                _nextEnemyPrefab = listEnemyType[Random.Range(0, 1)];
             else if (_level >= 2 && _level <= 3)
-                _nextEnemy = listEnemyType[Random.Range(0, 2)];
+                _nextEnemyPrefab = listEnemyType[Random.Range(0, 2)];
             else
-                _nextEnemy = listEnemyType[Random.Range(0, listEnemyType.Count)];
+                _nextEnemyPrefab = listEnemyType[Random.Range(0, listEnemyType.Count)];
 
-            Enemy newEnemy = Instantiate(_nextEnemy, _listEnemyStartPositions[i] - _offset, Quaternion.Euler(0, 270, 0)).GetComponent<Enemy>();
-            newEnemy.SetPrefab(_nextEnemy);
+            Enemy newEnemy = Instantiate(_nextEnemyPrefab, _listEnemyStartPositions[i] - _offset, Quaternion.Euler(0, 270, 0)).GetComponent<Enemy>();
+            newEnemy.SetPrefab(_nextEnemyPrefab);
             listOfEnemies.Add(newEnemy);
         }
     }
@@ -563,6 +564,7 @@ public class GameManager : MonoBehaviour
     IEnumerator ClearEnemies()
     {
         listOfEnemiesDataTemp.Clear();
+
         if (listOfEnemies.Count > 0)
         {
             //Debug.Log("------CLEAR ENEMIES------");
