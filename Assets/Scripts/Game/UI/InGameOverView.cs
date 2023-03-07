@@ -28,16 +28,16 @@ public class InGameOverView : MonoBehaviour
         int getkillsP1 = PlayerPrefs.GetInt("NumOfkillsPlayer1", 0);
         int getkillsP2 = PlayerPrefs.GetInt("NumOfkillsPlayer2", -1);
 
-        currentLevel.text = $"Level: <color=red><b>{getCurrentLevel}</b>";
-        record.text = $"Record: <color=red><b>{getRecord}</b>";
-        totalKills.text = $"<color=red><b>{getTotalKills}</b>";
-        totalDeaths.text = $"<color=red><b>{getTotalDeaths}</b>";
-        deathsP1.text = $"<color=red><b>{getDeathsP1}</b>";
-        killsP1.text = $"<color=red><b>{getkillsP1}</b>";
+        currentLevel.text = $"Level: <color=#e60000><b>{getCurrentLevel}</b>";
+        record.text = $"Record: <color=#e60000><b>{getRecord}</b>";
+        totalKills.text = $"<color=#e60000><b>{getTotalKills}</b>";
+        totalDeaths.text = $"<color=#e60000><b>{getTotalDeaths}</b>";
+        deathsP1.text = $"<color=#e60000><b>{getDeathsP1}</b>";
+        killsP1.text = $"<color=#e60000><b>{getkillsP1}</b>";
         if (getDeathsP2 == -1 || getkillsP2 == -1)
         {
-            deathsP2.text = $"<color=red><b>Not</b>";
-            killsP2.text = $"<color=red><b>Playing</b>";
+            deathsP2.text = $"<color=#e60000><b>Not</b>";
+            killsP2.text = $"<color=#e60000><b>Playing</b>";
         }
     }
 }

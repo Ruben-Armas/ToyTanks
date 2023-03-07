@@ -41,9 +41,9 @@ public class InGameView : MonoBehaviour
 
     void Update()
     {
-        lives.text = $"Lives: <color=green><b>{gameManager.currentLives}</b>";
-        level.text = $"Level: <color=red><b>{gameManager.currentLevel}</b>";
-        record.text = $"Record: <color=red><b>{PlayerPrefs.GetInt("Record", 0)}</b>";
+        lives.text = $"Lives: <color=#00e600><b>{gameManager.currentLives}</b>";
+        level.text = $"Level: <color=#e60000><b>{gameManager.currentLevel}</b>";
+        record.text = $"Record: <color=#e60000><b>{PlayerPrefs.GetInt("Record", 0)}</b>";
     }
 
     public void PauseGame()
