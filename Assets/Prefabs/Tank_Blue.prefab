@@ -372,6 +372,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4834055818243365493}
   - component: {fileID: 4834055818243365490}
+  - component: {fileID: 1069258314939201799}
   m_Layer: 0
   m_Name: Laser
   m_TagString: Untagged
@@ -447,7 +448,7 @@ LineRenderer:
       m_Curve:
       - serializedVersion: 3
         time: 0
-        value: 0.051271558
+        value: 0.1
         inSlope: 0
         outSlope: 0
         tangentMode: 0
@@ -497,6 +498,22 @@ LineRenderer:
   m_UseWorldSpace: 0
   m_Loop: 0
   m_ApplyActiveColorSpace: 1
+--- !u!114 &1069258314939201799
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4834055818243365492}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 83214ed38fb4d5a4fabe6b663b205f3c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  lineRenderer: {fileID: 4834055818243365490}
+  hitDistance: 10
+  freeColor: {r: 0, g: 0.9019608, b: 0, a: 1}
+  collisionColor: {r: 1, g: 0, b: 0, a: 1}
 --- !u!1 &4834055819713867425
 GameObject:
   m_ObjectHideFlags: 0
@@ -617,6 +634,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   weapon: {fileID: 6421683940042917583}
   turret: {fileID: 9163783729468572596}
+  ID: 0
   turnSensitivity: 10
   lookSpeed: 10
   _movement: {fileID: 4834055819713867427}
