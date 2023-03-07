@@ -186,6 +186,10 @@ public class GameManager : MonoBehaviour
         //Compruebo si no quedan enemigos para terminar la ronda
         if (listOfEnemies.Count == 0)
             OnEnemyRoundEnds();
+
+        Debug.Log($"ID --> {destroyedById}");
+        Debug.Log($"Blue --> {_numOfEnemiesDestroyedByBlue}");
+        Debug.Log($"Green --> {_numOfEnemiesDestroyedByGreen}");
     }
 
     private void OnPause()

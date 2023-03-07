@@ -254,3 +254,4 @@ O Al morir El player y enemigo a la vez da un null reference
 		Se repite el nivel, pero el Enemy ya se destruyó
 
 O El Escudo suena que se rompe al limpiar la escena
+O Player_2 No puede apuntar con el ratón

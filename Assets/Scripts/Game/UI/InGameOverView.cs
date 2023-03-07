@@ -39,5 +39,10 @@ public class InGameOverView : MonoBehaviour
             deathsP2.text = $"<color=#e60000><b>Not</b>";
             killsP2.text = $"<color=#e60000><b>Playing</b>";
         }
+        else
+        {
+            deathsP2.text = $"<color=#e60000><b>{getDeathsP2}</b>";
+            killsP2.text = $"<color=#e60000><b>{getkillsP2}</b>";
+        }
     }
 }

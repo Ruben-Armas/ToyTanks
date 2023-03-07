@@ -14,7 +14,8 @@ public class PlayerInputHandler : MonoBehaviour
     public Weapon weapon;
     public Transform turret;
     //public InGameView inGameView;
-    
+    public int ID;
+
     [Header("Torreta")]
     [Range(0f, 20f)]
     public float turnSensitivity = 10;
@@ -46,7 +47,7 @@ public class PlayerInputHandler : MonoBehaviour
     {
         if (weapon != null)
         {
-            weapon.Fire();
+            weapon.Fire(ID);
             //Debug.Log("PewPew");
         }
     }
