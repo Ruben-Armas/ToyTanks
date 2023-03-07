@@ -8305,8 +8305,8 @@ MonoBehaviour:
   player2Prefab: {fileID: 2818086229701906832, guid: a88587617d2cb54448de14c18100cf80, type: 3}
   enemyPrefab: {fileID: 8665461898255977889, guid: b457d6d0f852573488c50e39475d7e4b, type: 3}
   shieldPrefab: {fileID: 4862822824241569333, guid: b93b299e9ea2d6943abd32394768d469, type: 3}
-  obstaclesPrefab1: {fileID: 5576174412107695422, guid: c78fe7853f98bf24e9ca06d8034d3263, type: 3}
-  obstaclesPrefab2: {fileID: 6629110306118578421, guid: 7b0abe333186739479622bce6ed3c2c4, type: 3}
+  obstaclesPrefab1: {fileID: 7939927923849039976, guid: 35ef322da938cc543ae1ab396e538fc7, type: 3}
+  obstaclesPrefab2: {fileID: 3577923164561260456, guid: d286f9a1c01a1fa44a2d45bdc02c86b3, type: 3}
   cube1Prefab: {fileID: 98275983122370233, guid: f091743607f9fdd419f6e788e55a27dd, type: 3}
   cube2Prefab: {fileID: 98275983122370233, guid: fae614c2d53d66e4795dcd789335b977, type: 3}
   minAmountEnemies: 1

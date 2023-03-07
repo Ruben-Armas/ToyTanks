@@ -489,7 +489,6 @@ public class GameManager : MonoBehaviour
     }
     IEnumerator DoNextLevel()
     {
-        _level++;
         //Nº Vidas
         if(_level % 2 == 0)
             if (_initialNumPlayers == 1 && currentLives < 5)
@@ -519,6 +518,7 @@ public class GameManager : MonoBehaviour
         yield return StartCoroutine(ClearPlayers());
         listOfEnemiesDataTemp.Clear();
 
+        _level++;
         //Generar obstáculos
         if (_level == 2)
         {
