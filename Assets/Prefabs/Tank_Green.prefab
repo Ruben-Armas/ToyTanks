@@ -143,6 +143,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   color: 1
+  ID: 1
 --- !u!114 &6530781039375328610
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -206,6 +207,9 @@ MonoBehaviour:
   turnSensitivity: 10
   lookSpeed: 10
   _movement: {fileID: 6320811530867665003}
+  layer:
+    serializedVersion: 2
+    m_Bits: 0
 --- !u!114 &6320811530867665003
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -23,6 +23,7 @@ public class Player : MonoBehaviour
         green
     }
     public Colors color;
+    public int ID;
 
     public Vector3 startPosition { get; private set; }
 

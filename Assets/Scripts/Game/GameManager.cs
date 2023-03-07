@@ -40,6 +40,8 @@ public class GameManager : MonoBehaviour
     public int maxAmountShields = 2;
 
     private int _numOfEnemiesDestroyed;
+    private int _numOfEnemiesDestroyedByBlue;
+    private int _numOfEnemiesDestroyedByGreen;
     private int _numOfDeaths;
     private int _numOfDeathsPlayer1;
     private int _numOfDeathsPlayer2;
@@ -82,6 +84,8 @@ public class GameManager : MonoBehaviour
     void Start()
     {
         _numOfEnemiesDestroyed = 0;
+        _numOfEnemiesDestroyedByBlue = 0;
+        _numOfEnemiesDestroyedByGreen = 0;
         _numOfDeaths = 0;
         _numOfDeathsPlayer1 = 0;
         _numOfDeathsPlayer2 = 0;
@@ -164,7 +168,7 @@ public class GameManager : MonoBehaviour
             //Debug.Log("Creando enemy");
         }
     }
-    private void OnEnemyDestroyed(Enemy enemyDestroyed, Vector3 startPosition)
+    private void OnEnemyDestroyed(Enemy enemyDestroyed, Vector3 startPosition, int destroyedById)
     {
         //Borro el enemigo destruido de la lista de Enemigos
         if (_flagReplay == false)
@@ -172,6 +176,11 @@ public class GameManager : MonoBehaviour
             //Debug.Log("Borrando enemy");
             listOfEnemies.Remove(enemyDestroyed);
             _numOfEnemiesDestroyed++;
+            if (destroyedById == 0)
+                _numOfEnemiesDestroyedByBlue++;
+            if (destroyedById == 1)
+                _numOfEnemiesDestroyedByGreen++;
+
         }
         //Compruebo si no quedan enemigos para terminar la ronda
         if (listOfEnemies.Count == 0)
@@ -213,8 +222,9 @@ public class GameManager : MonoBehaviour
 
     void SpawnShields()
     {
-        _randNumShields = Random.Range(minAmountShields, maxAmountShields + 1);
-
+        if(startingLevel)
+            _randNumShields = Random.Range(minAmountShields, maxAmountShields + 1);
+        Debug.Log($"N Shield --> {_randNumShields}");
         GetShieldPositions();
 
         if(_level <= 2)
@@ -231,6 +241,7 @@ public class GameManager : MonoBehaviour
         {
             for (int i = 0; i < _randNumShields; i++)
             {
+                Debug.Log($"N Shield --> {_randNumShields}");
                 Instantiate(shieldPrefab, _listShieldStartPositions[i], Quaternion.identity);
             }
         }
@@ -596,12 +607,24 @@ public class GameManager : MonoBehaviour
 
     private void SaveStats()
     {
-        //Guardar el nº de enemigos eliminados
+        //Guardar el nº de enemigos eliminados  Totales
         PlayerPrefs.SetInt("TotalKills", _numOfEnemiesDestroyed);
-        //Guardar el nº de muertes
+        //De Player 1
+        PlayerPrefs.SetInt("NumOfkillsPlayer1", _numOfEnemiesDestroyedByBlue);
+        //De Player 2
+        if (_initialNumPlayers == 2)
+        {
+            //Guardar el nº de muertes
+            PlayerPrefs.SetInt("NumOfkillsPlayer2", _numOfEnemiesDestroyedByGreen);
+        }
+        else
+            PlayerPrefs.SetInt("NumOfkillsPlayer2", -1);
+
+        //Guardar el nº de muertes  Totales
         PlayerPrefs.SetInt("TotalDeaths", _numOfDeaths);
-        //Guardar el nº de muertes
+        //De Player 1
         PlayerPrefs.SetInt("NumOfDeathsPlayer1", _numOfDeathsPlayer1);
+        //De Player 2
         if (_initialNumPlayers == 2)
         {
             //Guardar el nº de muertes

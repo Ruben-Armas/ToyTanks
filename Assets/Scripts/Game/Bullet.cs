@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -10,6 +11,7 @@ public class Bullet : MonoBehaviour
     //EVENTO (DELEGADO)   --> activar sonido al rebotar
     public delegate void BulletSFXBounce();
     public static event BulletSFXBounce onBulletSFXBounce;  //(EVENTO)
+
     //EVENTO (DELEGADO)   --> activar efecto FX al rebotar
     public delegate void BulletFXBounce(Vector3 position);
     public static event BulletFXBounce onBulletFXBounce;  //(EVENTO)
@@ -32,6 +34,8 @@ public class Bullet : MonoBehaviour
     private Shield currentShield;
 
     private float _offsetPosEffect;
+
+    private int _ownerId;
 
     /*Si lo pongo en el FixedUpdate estaría siempre aplicando esa velocidad
      * por lo que no caería por la gravedad
@@ -103,7 +107,7 @@ public class Bullet : MonoBehaviour
         if (enemy != null)
         {
             //Debug.Log("Contact ENEMY");
-            enemy.SetDestroyed();   //Destruye al impactado
+            enemy.SetDestroyedBy(_ownerId);   //Destruye al impactado
             SetDestroyedWithEvent();         //La bala se autodestruye
         }
 
@@ -174,6 +178,11 @@ public class Bullet : MonoBehaviour
     {
         //invulnerabilityTime = time;
         Destroy(gameObject);         //La bala se autodestruye
+    }
+
+    public void SetOwnerId(int id)
+    {
+        _ownerId = id;
     }
 }
 

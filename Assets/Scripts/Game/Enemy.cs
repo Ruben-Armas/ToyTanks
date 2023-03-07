@@ -8,7 +8,7 @@ public class Enemy : MonoBehaviour
     public delegate void EnemyCreated(Enemy enemyCreated, Vector3 position);
     public static event EnemyCreated onEnemyCreated;        //(EVENTO)
     //EVENTO (DELEGADO)   --> características a las que llama
-    public delegate void EnemyDestroyed(Enemy enemyDestroyed, Vector3 position);
+    public delegate void EnemyDestroyed(Enemy enemyDestroyed, Vector3 position, int destroyedById);
     public static event EnemyDestroyed onEnemyDestroyed;    //(EVENTO)
     //EVENTO (DELEGADO)   --> Sound Destroy
     public delegate void EnemySoundDestroy();
@@ -34,7 +34,7 @@ public class Enemy : MonoBehaviour
         prefab = enemyPrefab;
     }
 
-    public void SetDestroyed()
+    public void SetDestroyedBy(int ownerId)
     {
         //invulnerabilityTime = time;
 
@@ -47,7 +47,7 @@ public class Enemy : MonoBehaviour
 
         //Evento Destroy
         if (onEnemyDestroyed != null)
-            onEnemyDestroyed(this, transform.position);
+            onEnemyDestroyed(this, transform.position, ownerId);
         Destroy(gameObject);
     }
 }
