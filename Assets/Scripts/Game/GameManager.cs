@@ -486,10 +486,17 @@ public class GameManager : MonoBehaviour
     IEnumerator DoNextLevel()
     {
         _level++;
-        if(_level % 2 == 0 && currentLives < 3)
+        //Nº Vidas
+        if(_level % 2 == 0)
+            if (_initialNumPlayers == 1 && currentLives < 5)
+                currentLives++;
+        else if (_initialNumPlayers == 2 && currentLives < 3)
             currentLives++;
+
+        //Nº Enemigos
         if (_level > 4 && _level % 2 == 0 && maxAmountEnemies <= 10)
             maxAmountEnemies++;
+        //Nº Escudos
         if (_level > 4 && _level % 2 == 0 && maxAmountShields <= 6)
             maxAmountShields++;
 
