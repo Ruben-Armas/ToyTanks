@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7313293781449846871}
   - component: {fileID: 598354603050900233}
+  - component: {fileID: 8272415914323204464}
   m_Layer: 0
   m_Name: Box_Green_A
   m_TagString: Untagged
@@ -46,6 +47,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1758ab536eec5d942913199c755bf464, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!65 &8272415914323204464
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1946856480732652071}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 3, y: 3.4, z: 3}
+  m_Center: {x: 0, y: 1.7, z: 0}
 --- !u!1 &2679109753654585312
 GameObject:
   m_ObjectHideFlags: 0
@@ -140,7 +154,6 @@ GameObject:
   - component: {fileID: 69179588295266326}
   - component: {fileID: 2155651889417735714}
   - component: {fileID: 8845799370977906358}
-  - component: {fileID: 1629061440528056956}
   m_Layer: 0
   m_Name: "\u0421TF_Box_Green"
   m_TagString: Untagged
@@ -213,16 +226,3 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &1629061440528056956
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5969847277344815682}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 0.3868169, y: 0.36614868, z: 0.38681683}
-  m_Center: {x: -0.00000002980232, y: 0.18307431, z: 0}

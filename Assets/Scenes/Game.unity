@@ -3770,6 +3770,7 @@ GameObject:
   - component: {fileID: 768770191}
   - component: {fileID: 768770190}
   - component: {fileID: 768770189}
+  - component: {fileID: 768770192}
   m_Layer: 0
   m_Name: Wall-Left
   m_TagString: Wall
@@ -3855,6 +3856,18 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 768770187}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &768770192
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 768770187}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1758ab536eec5d942913199c755bf464, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &772105151
 GameObject:
   m_ObjectHideFlags: 0
@@ -5274,7 +5287,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1014724607}
-  - component: {fileID: 1014724608}
   m_Layer: 0
   m_Name: Map
   m_TagString: Untagged
@@ -5308,18 +5320,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1014724608
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1014724606}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1758ab536eec5d942913199c755bf464, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1022988984
 GameObject:
   m_ObjectHideFlags: 0
@@ -6694,6 +6694,7 @@ GameObject:
   - component: {fileID: 1248971456}
   - component: {fileID: 1248971455}
   - component: {fileID: 1248971454}
+  - component: {fileID: 1248971457}
   m_Layer: 0
   m_Name: Wall-Right
   m_TagString: Untagged
@@ -6779,6 +6780,18 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1248971452}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &1248971457
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1248971452}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1758ab536eec5d942913199c755bf464, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &1268764529
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -10312,6 +10325,7 @@ GameObject:
   - component: {fileID: 1873247157}
   - component: {fileID: 1873247156}
   - component: {fileID: 1873247155}
+  - component: {fileID: 1873247158}
   m_Layer: 0
   m_Name: Wall_Bottom
   m_TagString: Untagged
@@ -10397,6 +10411,18 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1873247153}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &1873247158
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1873247153}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1758ab536eec5d942913199c755bf464, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1888261008
 GameObject:
   m_ObjectHideFlags: 0
@@ -10677,6 +10703,7 @@ GameObject:
   - component: {fileID: 1949779445}
   - component: {fileID: 1949779444}
   - component: {fileID: 1949779443}
+  - component: {fileID: 1949779446}
   m_Layer: 0
   m_Name: Wall-Top
   m_TagString: Untagged
@@ -10762,6 +10789,18 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1949779441}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &1949779446
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1949779441}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1758ab536eec5d942913199c755bf464, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &1966166641
 PrefabInstance:
   m_ObjectHideFlags: 0
