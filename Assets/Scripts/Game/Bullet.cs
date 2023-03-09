@@ -61,7 +61,7 @@ public class Bullet : MonoBehaviour
         if (Physics.Raycast(transform.position, rigidbody.velocity, out hit, 1)) // Comprueba si choca
         {
             // Comprueba si la colisión es con una pared
-            if (hit.collider.GetComponentInParent<Wall>() != null || hit.collider.GetComponent<Wall>() != null)
+            if (hit.collider.GetComponent<Wall>() != null)
             {
                 //Debug.Log("Wall");
                 if (checkIfSelfDestroy() == false)
@@ -133,6 +133,15 @@ public class Bullet : MonoBehaviour
             //Debug.Log("Contact BULLET");
             bullet.SetDestroyedWithEvent();  //Destruye al impactado
             SetDestroyedWithEvent();         //La bala se autodestruye
+        }
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.GetComponent<Wall>() != null)
+        {
+            Debug.Log("Exit");
+            SetDestroyedWithEvent();
         }
     }
 
